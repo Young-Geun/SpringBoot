@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.choi.web.dao.GuestbookDao">
+	
+	<select id="selectGuestbookList" resultType="com.choi.web.domain.GuestbookVo"> 
+		SELECT id, name, message
+		FROM GUESTBOOK 
+	</select>
+	
+</mapper>
