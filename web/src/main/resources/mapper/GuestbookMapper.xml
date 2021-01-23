@@ -1,10 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.choi.web.dao.GuestbookDao">
-	
-	<select id="selectGuestbookList" resultType="com.choi.web.domain.GuestbookVo"> 
+
+	<select id="selectGuestbookList" resultType="com.choi.web.domain.GuestbookVo">
 		SELECT id, name, message
-		FROM GUESTBOOK 
+		FROM guestbook
 	</select>
+
+	<select id="selectGuestbook" resultType="com.choi.web.domain.GuestbookVo" parameterType="Integer">
+		SELECT id, name, message
+		FROM guestbook
+		WHERE id = #{id}
+	</select>
+
+	<insert id="insertGuestbook" parameterType="com.choi.web.domain.GuestbookVo">
+		INSERT INTO guestbook (id, name, message)
+		VALUES (id_seq.nextval, #{name}, #{message})
+	</insert>
 	
+	<update id="updateGuestbook" parameterType="com.choi.web.domain.GuestbookVo">
+		UPDATE guestbook 
+		SET name = #{name},
+			message = #{message}
+		WHERE id = #{id}
+	</update>
+
+	<delete id="deleteGuestbook" parameterType="Integer">
+		DELETE FROM guestbook WHERE id = #{Id}
+	</delete>
+
 </mapper>
