@@ -1,0 +1,14 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Choi's WEB</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h2>Main Page</h2>
+
+	<ul th:each="menu : ${menuList}">
+		<li th:text="${menu}"></li>
+	</ul>
+</body>
+</html>
