@@ -33,7 +33,6 @@ public class GuestbookController {
 	
 	@PostMapping("/guestbook")
 	public void addMember(@RequestBody GuestbookVo guestbookVo) {
-		System.out.println(guestbookVo.getName() + " : " + guestbookVo.getMessage());
 		guestbookService.addGuestbook(guestbookVo);
 	}
 	
