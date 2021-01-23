@@ -25,25 +25,25 @@ public class GuestbookController {
 	public @ResponseBody List<GuestbookVo> getGuestbookList() {
 		return guestbookService.getGuestbookList();
 	}
-	
+
 	@GetMapping("/guestbook/{id}")
-	public @ResponseBody GuestbookVo getGuestbook(@PathVariable ("id") int guestbookId) {
+	public @ResponseBody GuestbookVo getGuestbook(@PathVariable("id") int guestbookId) {
 		return guestbookService.getGuestbook(guestbookId);
 	}
-	
+
 	@PostMapping("/guestbook")
 	public void addMember(@RequestBody GuestbookVo guestbookVo) {
 		guestbookService.addGuestbook(guestbookVo);
 	}
-	
+
 	@PutMapping("/guestbook/{id}")
-	public void modifyGuestbook(@PathVariable ("id") int guestbookId, @RequestBody GuestbookVo guestbookVo) {
+	public void modifyGuestbook(@PathVariable("id") int guestbookId, @RequestBody GuestbookVo guestbookVo) {
 		guestbookVo.setId(guestbookId);
 		guestbookService.modifyGuestbook(guestbookVo);
 	}
-	
+
 	@DeleteMapping("/guestbook/{id}")
-	public void removeGuestbook(@PathVariable ("id") int guestbookId) {
+	public void removeGuestbook(@PathVariable("id") int guestbookId) {
 		guestbookService.removeGuestbook(guestbookId);
 	}
 
