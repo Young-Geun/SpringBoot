@@ -1,2 +1,21 @@
+spring:
+  profiles: mac
+
 server:
-  port : 8071
+  port: 8071
+
+---
+
+spring:
+  profiles: window
+
+server:
+  port: 8072
+
+---
+
+spring:
+  profiles: cloud
+
+server:
+  port: 8073
