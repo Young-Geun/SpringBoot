@@ -2,22 +2,22 @@ package choi.web.springboot.domain;
 
 public class Board {
 
-    // °Ô½Ã¹° ¾ÆÀÌµğ
+    // ê²Œì‹œë¬¼ ì•„ì´ë””
     int boardId;
 
-    // Á¦¸ñ
+    // ì œëª©
     String title;
 
-    // ³»¿ë
+    // ë‚´ìš©
     String contents;
 
-    // µî·ÏÀÚ
+    // ë“±ë¡ì
     String regId;
 
-    // µî·ÏÀÏ½Ã
+    // ë“±ë¡ì¼ì‹œ
     String regDate;
 
-    // °øÁö°Ô½ÃÆÇ ¿©ºÎ
+    // ê³µì§€ê²Œì‹œíŒ ì—¬ë¶€
     String notiFlag;
 
     public int getBoardId() {

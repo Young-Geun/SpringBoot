@@ -344,40 +344,10 @@
                                 </div>
                                 <div class="list-wrapper">
                                     <ul class="d-flex flex-column-reverse text-white todo-list todo-list-custom">
-                                        <li>
-                                            <div class="form-check form-check-primary">
+                                        <li th:each="todo : ${todoList}">
+                                            <div th:classappend="${todo.completeFlag} == 'Y' ? 'completed'" class="form-check form-check-primary">
                                                 <label class="form-check-label">
-                                                    <input class="checkbox" type="checkbox"> Create invoice </label>
-                                            </div>
-                                            <i class="remove mdi mdi-close-box"></i>
-                                        </li>
-                                        <li>
-                                            <div class="form-check form-check-primary">
-                                                <label class="form-check-label">
-                                                    <input class="checkbox" type="checkbox"> Meeting with Alita </label>
-                                            </div>
-                                            <i class="remove mdi mdi-close-box"></i>
-                                        </li>
-                                        <li class="completed">
-                                            <div class="form-check form-check-primary">
-                                                <label class="form-check-label">
-                                                    <input class="checkbox" type="checkbox" checked> Prepare for
-                                                    presentation </label>
-                                            </div>
-                                            <i class="remove mdi mdi-close-box"></i>
-                                        </li>
-                                        <li>
-                                            <div class="form-check form-check-primary">
-                                                <label class="form-check-label">
-                                                    <input class="checkbox" type="checkbox"> Plan weekend outing
-                                                </label>
-                                            </div>
-                                            <i class="remove mdi mdi-close-box"></i>
-                                        </li>
-                                        <li>
-                                            <div class="form-check form-check-primary">
-                                                <label class="form-check-label">
-                                                    <input class="checkbox" type="checkbox"> Pick up kids from school
+                                                    <input class="checkbox" type="checkbox" th:text="${todo.contents}" th:checked="${todo.completeFlag} == 'Y'">
                                                 </label>
                                             </div>
                                             <i class="remove mdi mdi-close-box"></i>

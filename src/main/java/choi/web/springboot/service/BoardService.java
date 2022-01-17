@@ -8,13 +8,12 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-
 public class BoardService {
 
     @Autowired
     private BoardRepository boardRepository;
 
-    public List<Board> getGuestbookList() {
+    public List<Board> getBoardList() {
         return boardRepository.selectBoardList();
     }
 
