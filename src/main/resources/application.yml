@@ -1,5 +1,19 @@
 spring:
   profiles: mac
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:tcp://localhost/~/test
+    username: sa
+    password:
+  thymeleaf:
+    prefix: classpath:templates/
+    check-template-location: true
+    suffix: .html
+    mode: HTML
+    cache: false
+
+mybatis:
+  mapper-locations: mapper/*.xml
 
 server:
   port: 8071
@@ -8,6 +22,20 @@ server:
 
 spring:
   profiles: window
+  datasource:
+    driver-class-name: oracle.jdbc.OracleDriver
+    url: jdbc:oracle:thin:@localhost:1521/xe
+    username: scott
+    password: 1234
+  thymeleaf:
+    prefix: classpath:templates/
+    check-template-location: true
+    suffix: .html
+    mode: HTML
+    cache: false
+
+mybatis:
+  mapper-locations: mapper/*.xml
 
 server:
   port: 8072
@@ -16,6 +44,20 @@ server:
 
 spring:
   profiles: cloud
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/mysql?serverTimezone=UTC&characterEncoding=UTF-8
+    username: root
+    password: 12345678
+  thymeleaf:
+    prefix: classpath:templates/
+    check-template-location: true
+    suffix: .html
+    mode: HTML
+    cache: false
+
+mybatis:
+  mapper-locations: mapper/*.xml
 
 server:
   port: 8073

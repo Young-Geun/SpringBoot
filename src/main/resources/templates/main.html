@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -65,6 +65,22 @@
                         </li>
                     </ul>
                 </div>
+            </li>
+            <li class="nav-item menu-items">
+                <a class="nav-link" href="https://www.inflearn.com/">
+                    <span class="menu-icon">
+                        <i class="mdi mdi-leaf"></i>
+                    </span>
+                    <span class="menu-title">Inflearn</span>
+                </a>
+            </li>
+            <li class="nav-item menu-items">
+                <a class="nav-link" href="https://www.youtube.com/">
+                    <span class="menu-icon">
+                        <i class="mdi mdi-youtube"></i>
+                    </span>
+                    <span class="menu-title">YouTube</span>
+                </a>
             </li>
             <li class="nav-item menu-items">
                 <a class="nav-link" href="https://github.com/Young-Geun">
@@ -240,19 +256,13 @@
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">Slide</h4>
-                                <div class="owl-carousel owl-theme full-width owl-carousel-dash portfolio-carousel"
-                                     id="owl-carousel-basic">
-                                    <div class="item">
-                                        <img src="assets/images/dashboard/Rectangle.jpg" alt="">
-                                    </div>
-                                    <div class="item">
-                                        <img src="assets/images/dashboard/Img_5.jpg" alt="">
-                                    </div>
-                                    <div class="item">
-                                        <img src="assets/images/dashboard/img_6.jpg" alt="">
+                                <div class="owl-carousel owl-theme full-width owl-carousel-dash portfolio-carousel" id="owl-carousel-basic">
+                                    <div class="item" th:each="board : ${boardList}">
+                                        <img src="assets/images/dashboard/Rectangle.jpg">
+                                        <h6 class="preview-subject py-2" th:text="${board.title}">Title</h6>
+                                        <p class="text-muted" th:text="${board.contents}">Contents</p>
                                     </div>
                                 </div>
-                                <p class="text-muted">messages.</p>
                             </div>
                         </div>
                     </div>
