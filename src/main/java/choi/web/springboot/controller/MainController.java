@@ -21,6 +21,11 @@ public class MainController {
     MessagesService messagesService;
 
     @GetMapping("/")
+    public String login(Model model) {
+        return "login";
+    }
+
+    @GetMapping("/main")
     public String main(Model model) {
         model.addAttribute("boardList", boardService.getBoardList());
         model.addAttribute("todoList", todoService.getTodoList());

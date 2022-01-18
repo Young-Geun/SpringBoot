@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Choi's WEB</title>
+    <link rel="stylesheet" th:href="@{assets/vendors/mdi/css/materialdesignicons.min.css}">
+    <link rel="stylesheet" th:href="@{assets/vendors/css/vendor.bundle.base.css}">
+    <link rel="stylesheet" th:href="@{assets/vendors/jvectormap/jquery-jvectormap.css}">
+    <link rel="stylesheet" th:href="@{assets/vendors/flag-icon-css/css/flag-icon.min.css}">
+    <link rel="stylesheet" th:href="@{assets/vendors/owl-carousel-2/owl.carousel.min.css}">
+    <link rel="stylesheet" th:href="@{assets/vendors/owl-carousel-2/owl.theme.default.min.css}">
+    <link rel="stylesheet" th:href="@{assets/css/style.css}">
+
+    <script type="text/javascript" th:src="@{assets/vendors/js/vendor.bundle.base.js}"></script>
+    <script type="text/javascript" th:src="@{assets/vendors/chart.js/Chart.min.js}"></script>
+    <script type="text/javascript" th:src="@{assets/vendors/progressbar.js/progressbar.min.js}"></script>
+    <script type="text/javascript" th:src="@{assets/vendors/jvectormap/jquery-jvectormap.min.js}"></script>
+    <script type="text/javascript" th:src="@{assets/vendors/jvectormap/jquery-jvectormap-world-mill-en.js}"></script>
+    <script type="text/javascript" th:src="@{assets/vendors/owl-carousel-2/owl.carousel.min.js}"></script>
+    <script type="text/javascript" th:src="@{assets/js/off-canvas.js}"></script>
+    <script type="text/javascript" th:src="@{assets/js/hoverable-collapse.js}"></script>
+    <script type="text/javascript" th:src="@{assets/js/misc.js}"></script>
+    <script type="text/javascript" th:src="@{assets/js/settings.js}"></script>
+    <script type="text/javascript" th:src="@{assets/js/todolist.js}"></script>
+    <script type="text/javascript" th:src="@{assets/js/dashboard.js}"></script>
+</head>
+<body>
+<div class="container-scroller">
+    <div class="container-fluid page-body-wrapper full-page-wrapper">
+        <div class="row w-100 m-0">
+            <div class="content-wrapper full-page-wrapper d-flex align-items-center auth login-bg">
+                <div class="card col-lg-4 mx-auto">
+                    <div class="card-body px-5 py-5">
+                        <h3 class="card-title text-left mb-3">Login</h3>
+                        <form th:action="@{/main}">
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="text" class="form-control p_input">
+                            </div>
+                            <div class="form-group">
+                                <label>Password</label>
+                                <input type="text" class="form-control p_input">
+                            </div>
+                            <div class="form-group d-flex align-items-center justify-content-between">
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input type="checkbox" class="form-check-input"> Remember me
+                                    </label>
+                                </div>
+                                <a href="#" class="forgot-pass">Forgot password</a>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary btn-block enter-btn">Login</button>
+                            </div>
+                            <p class="sign-up">Don't have an Account?
+                                <a href="#"> Sign Up</a>
+                            </p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
