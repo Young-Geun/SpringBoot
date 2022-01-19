@@ -20,17 +20,12 @@ public class MainController {
     @Autowired
     MessagesService messagesService;
 
-    @GetMapping("/")
-    public String login(Model model) {
-        return "login";
-    }
-
     @GetMapping("/main")
     public String main(Model model) {
         model.addAttribute("boardList", boardService.getBoardList());
         model.addAttribute("todoList", todoService.getTodoList());
         model.addAttribute("messagesList", messagesService.getMessagesList());
-        
+
         return "main";
     }
 

@@ -1,16 +1,17 @@
 /* ORACLE, H2 */
 -- 사용자 테이블
+DROP TABLE user_info;
 CREATE TABLE user_info
 (
     user_id varchar2(100) NOT NULL,
     user_password varchar2(255) NOT NULL,
     user_name varchar2(100) NOT NULL,
-    user_stats varchar2(2),
+    user_status varchar2(2),
 
     PRIMARY KEY (user_id)
 );
-INSERT INTO user_info (user_id, user_password, user_name, user_stats) VALUES ('choi@gmail.com', '1234', '최자바', '1');
-INSERT INTO user_info (user_id, user_password, user_name, user_stats) VALUES ('younggeunn@naver.com', '1234', '최영근', '1');
+INSERT INTO user_info (user_id, user_password, user_name, user_status) VALUES ('choi@gmail.com', '1234', '최자바', '1');
+INSERT INTO user_info (user_id, user_password, user_name, user_status) VALUES ('younggeunn@naver.com', '1234', '최영근', '1');
 
 -- 메시지
 CREATE TABLE messages
@@ -61,15 +62,16 @@ INSERT INTO todo_list (todo_id, contents, reg_id, complete_flag) VALUES (2, '책 
 
 /* MySQL */
 -- 사용자 테이블
+DROP TABLE user_info;
 CREATE TABLE user_info (
                            user_id varchar(100) NOT NULL,
                            user_password varchar(255) NOT NULL,
                            user_name varchar(100) NOT NULL,
-                           user_stats varchar(2),
+                           user_status varchar(2),
                            PRIMARY KEY (user_id)
 );
-INSERT INTO user_info (user_id, user_password, user_name, user_stats) VALUES ('choi@gmail.com', '1234', '최자바', '1');
-INSERT INTO user_info (user_id, user_password, user_name, user_stats) VALUES ('younggeunn@naver.com', '1234', '최영근', '1');
+INSERT INTO user_info (user_id, user_password, user_name, user_status) VALUES ('choi@gmail.com', '1234', '최자바', '1');
+INSERT INTO user_info (user_id, user_password, user_name, user_status) VALUES ('younggeunn@naver.com', '1234', '최영근', '1');
 
 -- 메시지
 CREATE TABLE messages
