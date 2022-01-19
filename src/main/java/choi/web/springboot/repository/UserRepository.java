@@ -10,6 +10,8 @@ public interface UserRepository {
 
     User selectUser(User user);
 
+    User selectExistUser(User user);
+
     int registUser(User user);
 
 }

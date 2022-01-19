@@ -9,7 +9,28 @@
                user_name,
                user_status
         FROM user_info
-        WHERE user_id = #{userId}
+        <where>
+            <if test="userId != null and userId !=''">
+                and user_id = #{userId}
+            </if>
+            <if test="userPassword != null and userPassword !=''">
+                and user_password = #{userPassword}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectExistUser" resultType="choi.web.springboot.domain.User">
+        SELECT user_id,
+        user_password,
+        user_password user_password_cert,
+        user_name,
+        user_status
+        FROM user_info
+        <where>
+            <if test="userId != null and userId !=''">
+                and user_id = #{userId}
+            </if>
+        </where>
     </select>
 
     <insert id="registUser" parameterType="choi.web.springboot.domain.User">

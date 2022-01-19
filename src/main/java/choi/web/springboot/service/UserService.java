@@ -12,7 +12,7 @@ public class UserService {
     private UserRepository userRepository;
 
     public int registUser(User user) {
-        if (userRepository.selectUser(user) == null) {
+        if (userRepository.selectExistUser(user) == null) {
             return userRepository.registUser(user);
         } else {
             return -1;

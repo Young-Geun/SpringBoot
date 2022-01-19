@@ -18,6 +18,7 @@ public class LoginController {
 
     @GetMapping("/")
     public String signIn(Model model) {
+        model.addAttribute("user", new User("", "", "", "", ""));
         return "signIn";
     }
 
