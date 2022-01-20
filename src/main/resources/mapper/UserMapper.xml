@@ -9,14 +9,8 @@
                user_name,
                user_status
         FROM user_info
-        <where>
-            <if test="userId != null and userId !=''">
-                and user_id = #{userId}
-            </if>
-            <if test="userPassword != null and userPassword !=''">
-                and user_password = #{userPassword}
-            </if>
-        </where>
+        WHERE user_id = #{userId}
+        AND user_password = #{userPassword}
     </select>
 
     <select id="selectExistUser" resultType="choi.web.springboot.domain.User">
