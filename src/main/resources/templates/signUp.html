@@ -1,32 +1,6 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Choi's WEB</title>
-    <link rel="shortcut icon" th:href="@{assets/favicon.ico}">
-    <link rel="apple-touch-icon" th:href="@{assets/favicon.ico}">
-    <link rel="stylesheet" th:href="@{assets/vendors/mdi/css/materialdesignicons.min.css}">
-    <link rel="stylesheet" th:href="@{assets/vendors/css/vendor.bundle.base.css}">
-    <link rel="stylesheet" th:href="@{assets/vendors/jvectormap/jquery-jvectormap.css}">
-    <link rel="stylesheet" th:href="@{assets/vendors/flag-icon-css/css/flag-icon.min.css}">
-    <link rel="stylesheet" th:href="@{assets/vendors/owl-carousel-2/owl.carousel.min.css}">
-    <link rel="stylesheet" th:href="@{assets/vendors/owl-carousel-2/owl.theme.default.min.css}">
-    <link rel="stylesheet" th:href="@{assets/css/style.css}">
-
-    <script type="text/javascript" th:src="@{assets/vendors/js/vendor.bundle.base.js}"></script>
-    <script type="text/javascript" th:src="@{assets/vendors/chart.js/Chart.min.js}"></script>
-    <script type="text/javascript" th:src="@{assets/vendors/progressbar.js/progressbar.min.js}"></script>
-    <script type="text/javascript" th:src="@{assets/vendors/jvectormap/jquery-jvectormap.min.js}"></script>
-    <script type="text/javascript" th:src="@{assets/vendors/jvectormap/jquery-jvectormap-world-mill-en.js}"></script>
-    <script type="text/javascript" th:src="@{assets/vendors/owl-carousel-2/owl.carousel.min.js}"></script>
-    <script type="text/javascript" th:src="@{assets/js/off-canvas.js}"></script>
-    <script type="text/javascript" th:src="@{assets/js/hoverable-collapse.js}"></script>
-    <script type="text/javascript" th:src="@{assets/js/misc.js}"></script>
-    <script type="text/javascript" th:src="@{assets/js/settings.js}"></script>
-    <script type="text/javascript" th:src="@{assets/js/todolist.js}"></script>
-    <script type="text/javascript" th:src="@{assets/js/dashboard.js}"></script>
-</head>
+<head th:replace="fragments/head.html :: headFragment"></head>
 <body>
 <div class="container-scroller">
     <div class="container-fluid page-body-wrapper full-page-wrapper">
