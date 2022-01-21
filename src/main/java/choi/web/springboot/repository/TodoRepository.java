@@ -8,6 +8,6 @@ import java.util.List;
 @Mapper
 public interface TodoRepository {
 
-    List<Todo> selectTodoList();
+    List<Todo> selectTodoList(Todo todo);
 
 }

@@ -15,8 +15,8 @@
                             <span class="count bg-success"></span>
                         </div>
                         <div class="profile-name">
-                            <h5 class="mb-0 font-weight-normal">Choi Young-Geun</h5>
-                            <span>younggeunn@naver.com</span>
+                            <h5 class="mb-0 font-weight-normal" th:text="${session.loginUser.userName}">User Name</h5>
+                            <span th:text="${session.loginUser.userId}">User ID</span>
                         </div>
                     </div>
                 </div>

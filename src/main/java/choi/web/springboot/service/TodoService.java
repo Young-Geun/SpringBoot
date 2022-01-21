@@ -13,8 +13,8 @@ public class TodoService {
     @Autowired
     private TodoRepository todoRepository;
 
-    public List<Todo> getTodoList() {
-        return todoRepository.selectTodoList();
+    public List<Todo> getTodoList(Todo todo) {
+        return todoRepository.selectTodoList(todo);
     }
 
 }
