@@ -31,6 +31,29 @@ public class MainController {
     @Autowired
     private UserRepository userRepository;
 
+    @GetMapping("/main")
+    public String main(Model model, HttpSession session) {
+        User loginUser = (User) session.getAttribute("loginUser");
+        if (loginUser == null) {
+            model.addAttribute("result", "세션이 만료되었습니다.");
+
+            return "signIn";
+        } else {
+            // 메인화면 구성
+            model.addAttribute("boardList", boardService.getBoardList());
+
+            Todo todo = new Todo();
+            todo.setRegId(loginUser.getUserId());
+            model.addAttribute("todoList", todoService.getTodoList(todo));
+
+            Messages messages = new Messages();
+            messages.setRecvId(loginUser.getUserId());
+            model.addAttribute("messagesList", messagesService.getMessagesList(messages));
+
+            return "main";
+        }
+    }
+
     @PostMapping("/main")
     public String main(User user, Model model, HttpServletRequest request) {
         User loginUser = userRepository.selectUser(user);

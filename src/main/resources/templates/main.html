@@ -60,10 +60,12 @@
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">To do list</h4>
-                                <div class="add-items d-flex">
-                                    <input type="text" class="form-control todo-list-input" placeholder="Enter task...">
-                                    <button class="add btn btn-primary todo-list-add-btn">Add</button>
-                                </div>
+                                <form th:action="@{/addTodo}" th:method="post">
+                                    <div class="add-items d-flex">
+                                        <input type="text" name="contents" class="form-control todo-list-input" placeholder="Enter task...">
+                                        <button th:type="submit" class="add btn btn-primary">Add</button>
+                                    </div>
+                                </form>
                                 <div class="list-wrapper">
                                     <ul class="d-flex flex-column-reverse text-white todo-list todo-list-custom">
                                         <li th:each="todo : ${todoList}" th:classappend="${todo.completeFlag} == 'Y' ? 'completed'">
@@ -72,7 +74,7 @@
                                                     <input class="checkbox" type="checkbox" th:text="${todo.contents}" th:checked="${todo.completeFlag} == 'Y'">
                                                 </label>
                                             </div>
-                                            <i class="remove mdi mdi-close-circle-outline"></i>
+                                            <i th:onclick="|location.href='@{/deleteTodo}?todoId=${todo.todoId}'|" class="remove mdi mdi-close-circle-outline"></i>
                                         </li>
                                     </ul>
                                 </div>

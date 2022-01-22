@@ -17,4 +17,12 @@ public class TodoService {
         return todoRepository.selectTodoList(todo);
     }
 
+    public int addTodo(Todo todo) {
+        return todoRepository.insertTodo(todo);
+    }
+
+    public int deleteTodo(Todo todo) {
+        return todoRepository.deleteTodo(todo);
+    }
+
 }

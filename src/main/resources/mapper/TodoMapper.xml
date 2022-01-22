@@ -15,4 +15,29 @@
         </where>
     </select>
 
+    <insert id="insertTodo" parameterType="choi.web.springboot.domain.Todo">
+        INSERT INTO todo_list
+        (
+            todo_id,
+            contents,
+            reg_id,
+            complete_flag
+        )
+        VALUES
+        (  CASE WHEN (SELECT MAX(t1.todo_id) FROM todo_list t1 WHERE t1.reg_id = #{regId}) IS NULL
+                THEN 0
+                ELSE  (SELECT MAX(t2.todo_id) + 1 FROM todo_list t2 WHERE t2.reg_id = #{regId})
+           END,
+           #{contents},
+           #{regId},
+           'N'
+        )
+    </insert>
+
+    <insert id="deleteTodo" parameterType="choi.web.springboot.domain.Todo">
+        DELETE FROM todo_list
+        WHERE todo_id = #{todoId}
+        AND reg_id = #{regId}
+    </insert>
+
 </mapper>
