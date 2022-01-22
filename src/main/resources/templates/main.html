@@ -13,7 +13,7 @@
                     <div class="col-md-6 col-xl-4 grid-margin stretch-card">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Slide</h4>
+                                <h4 class="card-title">Notifications</h4>
                                 <div class="owl-carousel owl-theme full-width owl-carousel-dash portfolio-carousel" id="owl-carousel-basic">
                                     <div class="item" th:each="board : ${boardList}">
                                         <img src="assets/images/dashboard/Rectangle.jpg">
@@ -32,17 +32,23 @@
                                     <p class="text-muted mb-1 small">View all</p>
                                 </div>
                                 <div class="preview-list">
-                                    <div class="preview-item border-bottom" th:each="messages : ${messagesList}">
+                                    <div th:each="messages : ${messagesList}" class="preview-item border-bottom">
                                         <div class="preview-thumbnail">
                                             <img src="/assets/images/faces-clipart/pic-2.png" class="rounded-circle"/>
                                         </div>
                                         <div class="preview-item-content d-flex flex-grow">
                                             <div class="flex-grow">
                                                 <div class="d-flex d-md-block d-xl-flex justify-content-between">
-                                                    <h6 class="preview-subject" th:text="${messages.sendId}">Leonard</h6>
-                                                    <p class="text-muted text-small">5 minutes ago</p>
+                                                    <h6 class="preview-subject" th:text="${messages.sendId}">Sender</h6>
                                                 </div>
                                                 <p class="text-muted" th:text="${messages.messages}">Messages</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div th:if="${messagesList == null || messagesList.size() == 0}"class="preview-item border-bottom">
+                                        <div class="preview-item-content d-flex flex-grow">
+                                            <div class="flex-grow">
+                                                <p class="text-muted">받은 쪽지가 없습니다.</p>
                                             </div>
                                         </div>
                                     </div>
