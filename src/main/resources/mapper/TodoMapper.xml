@@ -24,9 +24,9 @@
             complete_flag
         )
         VALUES
-        (  CASE WHEN (SELECT MAX(t1.todo_id) FROM todo_list t1 WHERE t1.reg_id = #{regId}) IS NULL
-                THEN 0
-                ELSE  (SELECT MAX(t2.todo_id) + 1 FROM todo_list t2 WHERE t2.reg_id = #{regId})
+        (  CASE WHEN (SELECT MAX(t1.todo_id) FROM todo_list t1) IS NULL
+                THEN 1
+                ELSE (SELECT MAX(t2.todo_id) + 1 FROM todo_list t2)
            END,
            #{contents},
            #{regId},
