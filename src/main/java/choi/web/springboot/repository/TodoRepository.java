@@ -16,4 +16,6 @@ public interface TodoRepository {
 
     int deleteTodo(Todo todo);
 
+    int updateTodo(Todo todo);
+
 }

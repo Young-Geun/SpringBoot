@@ -71,7 +71,10 @@
                                         <li th:each="todo : ${todoList}" th:classappend="${todo.completeFlag} == 'Y' ? 'completed'">
                                             <div class="form-check form-check-primary">
                                                 <label class="form-check-label">
-                                                    <input class="checkbox" type="checkbox" th:text="${todo.contents}" th:checked="${todo.completeFlag} == 'Y'">
+                                                    <input class="checkbox" type="checkbox"
+                                                           th:onclick="updateTodo([[${todo.todoId}]], [[${todo.completeFlag}]])"
+                                                           th:text="${todo.contents}"
+                                                           th:checked="${todo.completeFlag} == 'Y'">
                                                 </label>
                                             </div>
                                             <i th:onclick="|location.href='@{/deleteTodo}?todoId=${todo.todoId}'|" class="remove mdi mdi-close-circle-outline"></i>
@@ -87,5 +90,10 @@
         </div>
     </div>
 </div>
+<script>
+    function updateTodo(todoId, completeFlag) {
+        location.href = '/updateTodo?todoId=' + todoId + '&completeFlag=' + completeFlag;
+    }
+</script>
 </body>
 </html>

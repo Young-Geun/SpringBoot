@@ -34,10 +34,17 @@
         )
     </insert>
 
-    <insert id="deleteTodo" parameterType="choi.web.springboot.domain.Todo">
+    <delete id="deleteTodo" parameterType="choi.web.springboot.domain.Todo">
         DELETE FROM todo_list
         WHERE todo_id = #{todoId}
         AND reg_id = #{regId}
-    </insert>
+    </delete>
+
+    <update id="updateTodo" parameterType="choi.web.springboot.domain.Todo">
+        UPDATE todo_list
+        SET complete_flag = #{completeFlag}
+        WHERE todo_id = #{todoId}
+        AND reg_id = #{regId}
+    </update>
 
 </mapper>

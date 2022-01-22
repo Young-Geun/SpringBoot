@@ -1,7 +1,6 @@
 package choi.web.springboot.controller;
 
 import choi.web.springboot.domain.Todo;
-import choi.web.springboot.domain.User;
 import choi.web.springboot.service.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,17 +17,19 @@ public class TodoController {
 
     @PostMapping("/addTodo")
     public String addTodo(Todo todo, HttpSession session) {
-        User loginUser = (User) session.getAttribute("loginUser");
-        todo.setRegId(loginUser.getUserId());
-        todoService.addTodo(todo);
+        todoService.addTodo(todo, session);
         return "redirect:/main";
     }
 
     @GetMapping("/deleteTodo")
     public String deleteTodo(Todo todo, HttpSession session) {
-        User loginUser = (User) session.getAttribute("loginUser");
-        todo.setRegId(loginUser.getUserId());
-        todoService.deleteTodo(todo);
+        todoService.deleteTodo(todo, session);
+        return "redirect:/main";
+    }
+
+    @GetMapping("/updateTodo")
+    public String updateTodo(Todo todo, HttpSession session) {
+        todoService.updateTodo(todo, session);
         return "redirect:/main";
     }
 
