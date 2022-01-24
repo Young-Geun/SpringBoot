@@ -1,5 +1,8 @@
 package choi.web.springboot.domain;
 
+import lombok.Data;
+
+@Data
 public class Board {
 
     // 게시물 아이디
@@ -19,53 +22,5 @@ public class Board {
 
     // 공지게시판 여부
     String notiFlag;
-
-    public int getBoardId() {
-        return boardId;
-    }
-
-    public void setBoardId(int boardId) {
-        this.boardId = boardId;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getContents() {
-        return contents;
-    }
-
-    public void setContents(String contents) {
-        this.contents = contents;
-    }
-
-    public String getRegId() {
-        return regId;
-    }
-
-    public void setRegId(String regId) {
-        this.regId = regId;
-    }
-
-    public String getRegDate() {
-        return regDate;
-    }
-
-    public void setRegDate(String regDate) {
-        this.regDate = regDate;
-    }
-
-    public String getNotiFlag() {
-        return notiFlag;
-    }
-
-    public void setNotiFlag(String notiFlag) {
-        this.notiFlag = notiFlag;
-    }
 
 }

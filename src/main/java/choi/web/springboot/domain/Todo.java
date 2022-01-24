@@ -1,5 +1,8 @@
 package choi.web.springboot.domain;
 
+import lombok.Data;
+
+@Data
 public class Todo {
 
     // 할일 아이디
@@ -20,30 +23,6 @@ public class Todo {
 
     public void setTodoId(int todoId) {
         this.todoId = todoId;
-    }
-
-    public String getContents() {
-        return contents;
-    }
-
-    public void setContents(String contents) {
-        this.contents = contents;
-    }
-
-    public String getRegId() {
-        return regId;
-    }
-
-    public void setRegId(String regId) {
-        this.regId = regId;
-    }
-
-    public String getCompleteFlag() {
-        return completeFlag;
-    }
-
-    public void setCompleteFlag(String completeFlag) {
-        this.completeFlag = completeFlag;
     }
 
 }
