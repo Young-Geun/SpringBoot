@@ -10,6 +10,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 public class LoginController {
 
@@ -45,6 +47,14 @@ public class LoginController {
             model.addAttribute("result", "가입이 완료되었습니다.");
             return "signIn";
         }
+    }
+
+    @GetMapping("/logout")
+    public String logout(Model model, HttpSession session) {
+        model.addAttribute("user", new User("", "", "", "", ""));
+        session.invalidate();
+
+        return "signIn";
     }
 
 }
