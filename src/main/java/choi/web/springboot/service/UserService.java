@@ -19,4 +19,8 @@ public class UserService {
         }
     }
 
+    public int editUser(User user) {
+        return userRepository.editUser(user);
+    }
+
 }

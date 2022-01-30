@@ -42,4 +42,11 @@
         )
     </insert>
 
+    <update id="editUser" parameterType="choi.web.springboot.domain.User">
+        UPDATE  user_info
+        SET user_name = #{userName},
+            user_password = #{userPassword}
+        WHERE user_id = #{userId}
+    </update>
+
 </mapper>

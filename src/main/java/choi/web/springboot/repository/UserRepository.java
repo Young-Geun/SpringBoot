@@ -14,4 +14,6 @@ public interface UserRepository {
 
     int registUser(User user);
 
+    int editUser(User user);
+
 }

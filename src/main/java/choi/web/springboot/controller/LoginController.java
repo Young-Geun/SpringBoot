@@ -57,4 +57,28 @@ public class LoginController {
         return "signIn";
     }
 
+    @GetMapping("/editUser")
+    public String editUser(Model model, HttpSession session) {
+        User loginUser = (User) session.getAttribute("loginUser");
+        model.addAttribute("user", loginUser);
+
+        return "user/edit";
+    }
+
+    @PostMapping("/editUser")
+    public String editUser(@Validated User user, BindingResult bindingResult, Model model, HttpSession session) {
+        if (bindingResult.hasErrors()) {
+            return "user/edit";
+        }
+
+        int result = userService.editUser(user);
+        if (result == 0) {
+            model.addAttribute("result", "수정에 실패하였습니다.");
+        } else {
+            model.addAttribute("result", "수정이 완료되었습니다.");
+            session.setAttribute("loginUser", user);
+        }
+        return "user/edit";
+    }
+
 }
