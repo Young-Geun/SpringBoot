@@ -4,25 +4,27 @@
 
     <select id="selectUser" resultType="choi.web.springboot.domain.User">
         SELECT user_id,
+               user_email,
                user_password,
                user_password user_password_cert,
                user_name,
                user_status
         FROM user_info
-        WHERE user_id = #{userId}
+        WHERE user_email = #{userEmail}
         AND user_password = #{userPassword}
     </select>
 
     <select id="selectExistUser" resultType="choi.web.springboot.domain.User">
         SELECT user_id,
-        user_password,
-        user_password user_password_cert,
-        user_name,
-        user_status
+               user_email,
+               user_password,
+               user_password user_password_cert,
+               user_name,
+               user_status
         FROM user_info
         <where>
-            <if test="userId != null and userId !=''">
-                and user_id = #{userId}
+            <if test="userEmail != null and userEmail !=''">
+                and user_email = #{userEmail}
             </if>
         </where>
     </select>
@@ -30,20 +32,22 @@
     <insert id="registUser" parameterType="choi.web.springboot.domain.User">
         INSERT INTO user_info (
             user_id,
+            user_email,
             user_password,
             user_name,
             user_status
         )
         VALUES (
-            #{userId},
+            (SELECT MAX(user_id) + 1 FROM user_info),
+            #{userEmail},
             #{userPassword},
             #{userName},
-            '1'
+            'Y'
         )
     </insert>
 
     <update id="editUser" parameterType="choi.web.springboot.domain.User">
-        UPDATE  user_info
+        UPDATE user_info
         SET user_name = #{userName},
             user_password = #{userPassword}
         WHERE user_id = #{userId}

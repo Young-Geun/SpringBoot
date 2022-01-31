@@ -6,23 +6,15 @@ import lombok.Data;
 public class Todo {
 
     // 할일 아이디
-    int todoId;
+    long todoId;
 
     // 내용
     String contents;
 
     // 등록자
-    String regId;
+    long regId;
 
-    // 완료 여부
-    String completeFlag;
-
-    public int getTodoId() {
-        return todoId;
-    }
-
-    public void setTodoId(int todoId) {
-        this.todoId = todoId;
-    }
+    // 상태(Y=완료, N=미완료)
+    String todoStatus;
 
 }

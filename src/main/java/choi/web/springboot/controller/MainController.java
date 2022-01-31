@@ -70,11 +70,11 @@ public class MainController {
             model.addAttribute("boardList", boardService.getBoardList());
 
             Todo todo = new Todo();
-            todo.setRegId(user.getUserId());
+            todo.setRegId(loginUser.getUserId());
             model.addAttribute("todoList", todoService.getTodoList(todo));
 
             Messages messages = new Messages();
-            messages.setRecvId(user.getUserId());
+            messages.setRecvId(loginUser.getUserId());
             model.addAttribute("messagesList", messagesService.getMessagesList(messages));
 
             return "main";

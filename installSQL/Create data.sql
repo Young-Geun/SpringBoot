@@ -3,114 +3,67 @@
 DROP TABLE user_info;
 CREATE TABLE user_info
 (
-    user_id varchar2(100) NOT NULL,
+    user_id number(10, 0) NOT NULL,
+    user_email varchar2(100) NOT NULL,
     user_password varchar2(255) NOT NULL,
     user_name varchar2(100) NOT NULL,
-    user_status varchar2(2),
+    user_status varchar2(1),
 
     PRIMARY KEY (user_id)
 );
-INSERT INTO user_info (user_id, user_password, user_name, user_status) VALUES ('choi@gmail.com', '1234', '최자바', '1');
-INSERT INTO user_info (user_id, user_password, user_name, user_status) VALUES ('younggeunn@naver.com', '1234', '최영근', '1');
+INSERT INTO user_info (user_id, user_email, user_password, user_name, user_status)
+VALUES (1, 'younggeunn@naver.com', '1234', '최영근', 'Y');
+INSERT INTO user_info (user_id, user_email, user_password, user_name, user_status)
+VALUES (2, 'choi@gmail.com', '1234', '최자바', 'Y');
 
 -- 메시지
+DROP TABLE messages;
 CREATE TABLE messages
 (
     messages_id number(10, 0) NOT NULL,
-    send_id varchar2(100) NOT NULL,
-    recv_id varchar2(100) NOT NULL,
+    send_id number(10, 0) NOT NULL,
+    recv_id number(10, 0) NOT NULL,
     messages varchar2(255),
+    send_date date,
 
     PRIMARY KEY (messages_id)
 );
-INSERT INTO messages (messages_id, send_id, recv_id, messages) VALUES (1, 'choi@gmail.com', 'younggeunn@naver.com', 'hello_1');
-INSERT INTO messages (messages_id, send_id, recv_id, messages) VALUES (2, 'choi@gmail.com', 'younggeunn@naver.com', 'hello_2');
-INSERT INTO messages (messages_id, send_id, recv_id, messages) VALUES (3, 'choi@gmail.com', 'younggeunn@naver.com', 'hello_3');
+INSERT INTO messages (messages_id, send_id, recv_id, messages, send_date)
+VALUES (1, 2, 1, 'hi choi~', SYSDATE);
+INSERT INTO messages (messages_id, send_id, recv_id, messages, send_date)
+VALUES (2, 2, 1, 'hello', SYSDATE);
+INSERT INTO messages (messages_id, send_id, recv_id, messages, send_date)
+VALUES (3, 1, 2, '안녕 최자바!', SYSDATE);
 
 -- 게시판
+DROP TABLE board;
 CREATE TABLE board
 (
     board_id number(10, 0) NOT NULL,
     title varchar2(100) NOT NULL,
     contents varchar2(255) NOT NULL,
-    reg_id varchar2(100) NOT NULL,
-    reg_date varchar2(14),
-    noti_flag varchar2(1),
+    reg_id number(10, 0) NOT NULL,
+    reg_date date,
 
     PRIMARY KEY (board_id)
 );
-INSERT INTO board (board_id, title, contents, reg_id, reg_date, noti_flag) VALUES (1, '공지사항 1', '내용입니다.', 'younggeunn@naver.com', '20220116105100', 'Y');
-INSERT INTO board (board_id, title, contents, reg_id, reg_date, noti_flag) VALUES (2, '공지사항 2', '내용입니다.', 'younggeunn@naver.com', '20220117105100', 'Y');
+INSERT INTO board (board_id, title, contents, reg_id, reg_date)
+VALUES (1, '홈페이지 오픈', '오픈했습니다', 1, SYSDATE);
+INSERT INTO board (board_id, title, contents, reg_id, reg_date)
+VALUES (2, '공지사항', '테스트입니다.', 1, SYSDATE);
 
 -- TODO LIST
+DROP TABLE todo_list;
 CREATE TABLE todo_list
 (
     todo_id number(10, 0) NOT NULL,
     contents varchar2(255) NOT NULL,
-    reg_id varchar2(100) NOT NULL,
-    complete_flag varchar2(1),
+    reg_id number(10, 0) NOT NULL,
+    todo_status varchar2(1),
 
     PRIMARY KEY (todo_id)
 );
-INSERT INTO todo_list (todo_id, contents, reg_id, complete_flag) VALUES (1, 'commit하기', 'younggeunn@naver.com', 'Y');
-INSERT INTO todo_list (todo_id, contents, reg_id, complete_flag) VALUES (2, '책 구매', 'younggeunn@naver.com', 'N');
-
-
-
-
-
-
-/* MySQL */
--- 사용자 테이블
-DROP TABLE user_info;
-CREATE TABLE user_info (
-                           user_id varchar(100) NOT NULL,
-                           user_password varchar(255) NOT NULL,
-                           user_name varchar(100) NOT NULL,
-                           user_status varchar(2),
-                           PRIMARY KEY (user_id)
-);
-INSERT INTO user_info (user_id, user_password, user_name, user_status) VALUES ('choi@gmail.com', '1234', '최자바', '1');
-INSERT INTO user_info (user_id, user_password, user_name, user_status) VALUES ('younggeunn@naver.com', '1234', '최영근', '1');
-
--- 메시지
-CREATE TABLE messages
-(
-    messages_id int(10) NOT NULL,
-    send_id varchar(100) NOT NULL,
-    recv_id varchar(100) NOT NULL,
-    messages varchar(255),
-
-    PRIMARY KEY (messages_id)
-);
-INSERT INTO messages (messages_id, send_id, recv_id, messages) VALUES (1, 'choi@gmail.com', 'younggeunn@naver.com', 'hello_1');
-INSERT INTO messages (messages_id, send_id, recv_id, messages) VALUES (2, 'choi@gmail.com', 'younggeunn@naver.com', 'hello_2');
-INSERT INTO messages (messages_id, send_id, recv_id, messages) VALUES (3, 'choi@gmail.com', 'younggeunn@naver.com', 'hello_3');
-
--- 게시판
-CREATE TABLE board
-(
-    board_id int(10) NOT NULL,
-    title varchar(100) NOT NULL,
-    contents varchar(255) NOT NULL,
-    reg_id varchar(100) NOT NULL,
-    reg_date varchar(14),
-    noti_flag varchar(1),
-
-    PRIMARY KEY (board_id)
-);
-INSERT INTO board (board_id, title, contents, reg_id, reg_date, noti_flag) VALUES (1, '공지사항 1', '내용입니다.', 'younggeunn@naver.com', '20220116105100', 'Y');
-INSERT INTO board (board_id, title, contents, reg_id, reg_date, noti_flag) VALUES (2, '공지사항 2', '내용입니다.', 'younggeunn@naver.com', '20220117105100', 'Y');
-
--- TODO LIST
-CREATE TABLE todo_list
-(
-    todo_id int(10) NOT NULL,
-    contents varchar(255) NOT NULL,
-    reg_id varchar(100) NOT NULL,
-    complete_flag varchar(1),
-
-    PRIMARY KEY (todo_id)
-);
-INSERT INTO todo_list (todo_id, contents, reg_id, complete_flag) VALUES (1, 'commit하기', 'younggeunn@naver.com', 'Y');
-INSERT INTO todo_list (todo_id, contents, reg_id, complete_flag) VALUES (2, '책 구매', 'younggeunn@naver.com', 'N');
+INSERT INTO todo_list (todo_id, contents, reg_id, todo_status)
+VALUES (1, '커밋하기', 1, 'N');
+INSERT INTO todo_list (todo_id, contents, reg_id, todo_status)
+VALUES (2, '오류 고치기', 1, 'N');

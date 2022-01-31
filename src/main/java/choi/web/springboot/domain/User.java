@@ -9,10 +9,13 @@ import javax.validation.constraints.NotBlank;
 @Data
 public class User {
 
-    // 사용자 아이디(이메일 형식)
-    @NotBlank(message = "아이디를 입력해주세요.")
+    // 사용자 아이디
+    long userId;
+
+    // 사용자 이메일
+    @NotBlank(message = "이메일을 입력해주세요.")
     @Email(message = "올바른 이메일 형식이 아닙니다.")
-    String userId;
+    String userEmail;
 
     // 사용자 비밀번호
     @NotBlank(message = "비밀번호를 입력해주세요.")
@@ -29,8 +32,8 @@ public class User {
     // 계정 상태
     String userStatus;
 
-    public User(String userId, String userPassword, String userPasswordCert, String userName, String userStatus) {
-        this.userId = userId;
+    public User(String userEmail, String userPassword, String userPasswordCert, String userName, String userStatus) {
+        this.userEmail = userEmail;
         this.userPassword = userPassword;
         this.userPasswordCert = userPasswordCert;
         this.userName = userName;

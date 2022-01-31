@@ -3,13 +3,12 @@ package choi.web.springboot.domain;
 import lombok.Data;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Data
 public class Board {
 
     // 게시물 아이디
-    int boardId;
+    long boardId;
 
     // 제목
     String title;
@@ -17,13 +16,13 @@ public class Board {
     // 내용
     String contents;
 
-    // 등록자
-    String regId;
+    // 등록자 아이디
+    long regId;
+
+    // 등록자 이름
+    String regName;
 
     // 등록일시
-    String regDate;
-
-    // 공지게시판 여부
-    String notiFlag;
+    LocalDateTime regDate;
 
 }

@@ -34,7 +34,7 @@ public class TodoService {
     public int updateTodo(Todo todo, HttpSession session) {
         User loginUser = (User) session.getAttribute("loginUser");
         todo.setRegId(loginUser.getUserId());
-        todo.setCompleteFlag("Y".equals(todo.getCompleteFlag()) ? "N" : "Y");
+        todo.setTodoStatus("Y".equals(todo.getTodoStatus()) ? "N" : "Y");
         return todoRepository.updateTodo(todo);
     }
 

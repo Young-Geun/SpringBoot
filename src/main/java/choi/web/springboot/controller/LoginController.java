@@ -20,13 +20,13 @@ public class LoginController {
 
     @GetMapping("/")
     public String signIn(Model model) {
-        model.addAttribute("user", new User("", "", "", "", ""));
+        model.addAttribute("user", new User("", "", "", "", "Y"));
         return "signIn";
     }
 
     @GetMapping("/signUp")
     public String signUp(Model model) {
-        model.addAttribute("user", new User("", "", "", "", ""));
+        model.addAttribute("user", new User("", "", "", "", "Y"));
         return "signUp";
     }
 
@@ -51,7 +51,7 @@ public class LoginController {
 
     @GetMapping("/logout")
     public String logout(Model model, HttpSession session) {
-        model.addAttribute("user", new User("", "", "", "", ""));
+        model.addAttribute("user", new User("", "", "", "", "Y"));
         session.invalidate();
 
         return "signIn";

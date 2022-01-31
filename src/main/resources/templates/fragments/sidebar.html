@@ -2,7 +2,7 @@
     <nav th:fragment="sidebarFragment" class="sidebar sidebar-offcanvas" id="sidebar">
         <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
             <a class="sidebar-brand brand-logo text-white text-decoration-none" href="/main">Choi's WEB</a>
-            <a class="sidebar-brand brand-logo-mini" href="/">
+            <a class="sidebar-brand brand-logo-mini" href="/main">
                 <img src="/assets/images/logo-mini.svg"/>
             </a>
         </div>
@@ -16,7 +16,7 @@
                         </div>
                         <div class="profile-name">
                             <h5 class="mb-0 font-weight-normal" th:text="${session.loginUser.userName}">User Name</h5>
-                            <span th:text="${session.loginUser.userId}">User ID</span>
+                            <span th:text="${session.loginUser.userEmail}">User Email</span>
                         </div>
                     </div>
                 </div>

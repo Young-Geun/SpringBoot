@@ -39,7 +39,7 @@
                                         <div class="preview-item-content d-flex flex-grow">
                                             <div class="flex-grow">
                                                 <div class="d-flex d-md-block d-xl-flex justify-content-between">
-                                                    <h6 class="preview-subject" th:text="${messages.sendId}">Sender</h6>
+                                                    <h6 class="preview-subject" th:text="${messages.sendName}">Sender</h6>
                                                 </div>
                                                 <p class="text-muted" th:text="${messages.messages}">Messages</p>
                                             </div>
@@ -68,13 +68,13 @@
                                 </form>
                                 <div class="list-wrapper">
                                     <ul class="d-flex flex-column-reverse text-white todo-list todo-list-custom">
-                                        <li th:each="todo : ${todoList}" th:classappend="${todo.completeFlag} == 'Y' ? 'completed'">
+                                        <li th:each="todo : ${todoList}" th:classappend="${todo.todoStatus} == 'Y' ? 'completed'">
                                             <div class="form-check form-check-primary">
                                                 <label class="form-check-label">
                                                     <input class="checkbox" type="checkbox"
-                                                           th:onclick="updateTodo([[${todo.todoId}]], [[${todo.completeFlag}]])"
+                                                           th:onclick="updateTodo([[${todo.todoId}]], [[${todo.todoStatus}]])"
                                                            th:text="${todo.contents}"
-                                                           th:checked="${todo.completeFlag} == 'Y'">
+                                                           th:checked="${todo.todoStatus} == 'Y'">
                                                 </label>
                                             </div>
                                             <i th:onclick="|location.href='@{/deleteTodo}?todoId=${todo.todoId}'|" class="remove mdi mdi-close-circle-outline"></i>
@@ -91,8 +91,8 @@
     </div>
 </div>
 <script>
-    function updateTodo(todoId, completeFlag) {
-        location.href = '/updateTodo?todoId=' + todoId + '&completeFlag=' + completeFlag;
+    function updateTodo(todoId, todoStatus) {
+        location.href = '/updateTodo?todoId=' + todoId + '&todoStatus=' + todoStatus;
     }
 </script>
 </body>

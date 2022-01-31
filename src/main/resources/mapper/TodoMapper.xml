@@ -6,7 +6,7 @@
         SELECT todo_id,
                contents,
                reg_id,
-               complete_flag
+               todo_status
         FROM todo_list
         <where>
             <if test="regId != null and regId !=''">
@@ -21,13 +21,10 @@
             todo_id,
             contents,
             reg_id,
-            complete_flag
+            todo_status
         )
         VALUES
-        (  CASE WHEN (SELECT MAX(t1.todo_id) FROM todo_list t1) IS NULL
-                THEN 1
-                ELSE (SELECT MAX(t2.todo_id) + 1 FROM todo_list t2)
-           END,
+        (  (SELECT MAX(todo_id) + 1 FROM todo_list),
            #{contents},
            #{regId},
            'N'
@@ -42,7 +39,7 @@
 
     <update id="updateTodo" parameterType="choi.web.springboot.domain.Todo">
         UPDATE todo_list
-        SET complete_flag = #{completeFlag}
+        SET todo_status = #{todoStatus}
         WHERE todo_id = #{todoId}
         AND reg_id = #{regId}
     </update>

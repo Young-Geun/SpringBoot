@@ -25,10 +25,8 @@
                                     <tr th:each="board : ${boardList}">
                                         <td th:text="${board.boardId}">No</td>
                                         <td th:text="${board.title}">제목</td>
-                                        <td th:text="${board.regId}">작성자</td>
-                                        <th:block th:with="sdf = ${new java.text.SimpleDateFormat('yyyyMMddHHmmss')}">
-                                            <td th:text="${#dates.format(sdf.parse(board.regDate), 'yyyy-MM-dd HH:mm:ss')}">작성일시</td>
-                                        </th:block>
+                                        <td th:text="${board.regName}">작성자</td>
+                                        <td th:text="${#temporals.format(board.regDate, 'yyyy-MM-dd HH:mm:ss')}">작성일시</td>
                                     </tr>
                                 </tbody>
                             </table>

@@ -7,8 +7,8 @@
                title,
                contents,
                reg_id,
-               reg_date,
-               noti_flag
+               (SELECT user_name FROM user_info WHERE user_id = reg_id) reg_name,
+               reg_date
         FROM board
     </select>
 
