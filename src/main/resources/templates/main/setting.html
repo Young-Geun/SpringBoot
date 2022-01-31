@@ -12,7 +12,7 @@
                     <div class="card-body">
                         <h4 class="card-title">회원정보 수정</h4>
                         <p class="text-danger" th:text="${result}"></p>
-                        <form th:action="@{/editUser}" th:object="${user}" th:method="post">
+                        <form th:action="@{/setting}" th:object="${user}" th:method="post">
                             <input th:field="*{userId}" type="hidden">
                             <div class="form-group">
                                 <label>Email</label>

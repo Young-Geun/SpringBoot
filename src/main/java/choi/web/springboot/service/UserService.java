@@ -11,6 +11,10 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+    public User selectUser(User user) {
+        return userRepository.selectUser(user);
+    }
+
     public int registUser(User user) {
         if (userRepository.selectExistUser(user) == null) {
             return userRepository.registUser(user);
