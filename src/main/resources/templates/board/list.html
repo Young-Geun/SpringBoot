@@ -23,7 +23,7 @@
                                 </thead>
                                 <tbody>
                                     <tr th:each="board : ${boardList}">
-                                        <td th:text="${board.boardId}">No</td>
+                                        <td th:text="${board.rowNo}">No</td>
                                         <td th:text="${board.title}">제목</td>
                                         <td th:text="${board.regName}">작성자</td>
                                         <td th:text="${#temporals.format(board.regDate, 'yyyy-MM-dd HH:mm:ss')}">작성일시</td>
@@ -33,13 +33,18 @@
                         </div>
                         <div class="text-right">
                             <div class="btn-group">
-                                <button type="button" class="btn btn-primary"><i class="mdi mdi-arrow-left"></i></button>
-                                <button type="button" class="btn btn-primary">1</button>
-                                <button type="button" class="btn btn-primary">2</button>
-                                <button type="button" class="btn btn-primary">3</button>
-                                <button type="button" class="btn btn-primary">4</button>
-                                <button type="button" class="btn btn-primary">5</button>
-                                <button type="button" class="btn btn-primary"><i class="mdi mdi-arrow-right"></i></button>
+                                <button th:onclick="search([[${page.startPage - 1}]], [[${page.range - 1}]])" th:if="${page.prev}" type="button" class="btn btn-outline-secondary">
+                                    <i class="mdi mdi-arrow-left"></i>
+                                </button>
+                                <th:block th:each="idx : ${#numbers.sequence(page.startPage, page.endPage)}">
+                                    <button type="button" class="btn"
+                                            th:classappend="${page.page == idx} ? 'btn-outline-secondary-selected' : 'btn-outline-secondary'"
+                                            th:onclick="search([[${idx}]], [[${page.range}]])"
+                                            th:text="${idx}" />
+                                </th:block>
+                                <button th:onclick="search([[${page.endPage + 1}]], [[${page.range + 1}]])" th:if="${page.next}" type="button" class="btn btn-outline-secondary">
+                                    <i class="mdi mdi-arrow-right"></i>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -49,5 +54,10 @@
         </div>
     </div>
 </div>
+<script>
+    function search(page, range) {
+        location.href = '/notiBoard?currentPage=' + page + '&currentRange=' + range;
+    }
+</script>
 </body>
 </html>

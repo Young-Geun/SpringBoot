@@ -9548,6 +9548,10 @@ fieldset:disabled .wizard > .actions a,
 .btn-outline-secondary, .editable-container.editable-inline .editableform .control-group .editable-buttons .editable-cancel {
   color: #e4eaec;
   border-color: #e4eaec; }
+.btn-outline-secondary-selected {
+  color: #212529;
+  background-color: #e4eaec;
+  border-color: #e4eaec; }
   .btn-outline-secondary:hover, .editable-container.editable-inline .editableform .control-group .editable-buttons .editable-cancel:hover {
     color: #212529;
     background-color: #e4eaec;

@@ -7,6 +7,9 @@ import java.time.LocalDateTime;
 @Data
 public class Board {
 
+    // 번호
+    int rowNo;
+
     // 게시물 아이디
     long boardId;
 

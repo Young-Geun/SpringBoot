@@ -2,14 +2,29 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="choi.web.springboot.repository.BoardRepository">
 
-    <select id="selectBoardList" resultType="choi.web.springboot.domain.Board">
-        SELECT board_id,
-               title,
-               contents,
-               reg_id,
-               (SELECT user_name FROM user_info WHERE user_id = reg_id) reg_name,
-               reg_date
+    <select id="selectTotalCount" resultType="int">
+        SELECT COUNT(1)
         FROM board
+    </select>
+
+    <select id="selectBoardList" resultType="choi.web.springboot.domain.Board" parameterType="int">
+        SELECT *
+        FROM (
+                 SELECT ROWNUM rowno,
+                        a.*
+                 FROM (
+                          SELECT board_id,
+                                 title,
+                                 contents,
+                                 reg_id,
+                                 (SELECT user_name FROM user_info WHERE user_id = reg_id) reg_name,
+                                 reg_date
+                          FROM board
+                          ORDER BY board_id DESC
+                      ) a
+             )
+        WHERE rowno <![CDATA[ > ]]> (#{currentPage} - 1) * 10
+        AND rowno <![CDATA[ <= ]]> (#{currentPage} * 10)
     </select>
 
 </mapper>

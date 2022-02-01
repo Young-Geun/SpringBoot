@@ -73,7 +73,7 @@ public class MainController {
             return "/main/signIn";
         } else {
             // 메인화면 구성
-            model.addAttribute("boardList", boardService.getBoardList());
+            model.addAttribute("boardList", boardService.getBoardList(1));
 
             Todo todo = new Todo();
             todo.setRegId(loginUser.getUserId());
@@ -100,7 +100,7 @@ public class MainController {
             session.setAttribute("loginUser", loginUser);
 
             // 메인화면 구성
-            model.addAttribute("boardList", boardService.getBoardList());
+            model.addAttribute("boardList", boardService.getBoardList(1));
 
             Todo todo = new Todo();
             todo.setRegId(loginUser.getUserId());
