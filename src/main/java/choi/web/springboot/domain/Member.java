@@ -32,16 +32,11 @@ public class Member {
     // 계정 상태
     String memberStatus;
 
-    public Member(String memberEmail, String memberPassword, String memberPasswordCert, String memberName, String memberStatus) {
-        this.memberEmail = memberEmail;
-        this.memberPassword = memberPassword;
-        this.memberPasswordCert = memberPasswordCert;
-        this.memberName = memberName;
-        this.memberStatus = memberStatus;
-    }
-
     @AssertTrue(message = "비밀번호가 일치하지 않습니다.")
     public boolean isSamePassword() {
+        if (memberPassword == null || memberPasswordCert == null) {
+            return true;
+        }
         return memberPassword.equals(memberPasswordCert);
     }
 }

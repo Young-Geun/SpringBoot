@@ -20,8 +20,7 @@ public class MemberController {
     MemberService memberService;
 
     @GetMapping("/member/insert")
-    public String insert(Model model) {
-        model.addAttribute("member", new Member("", "", "", "", "Y"));
+    public String insert(Member member) {
         return "member/insert";
     }
 

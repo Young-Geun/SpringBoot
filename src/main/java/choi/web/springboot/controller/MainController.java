@@ -32,16 +32,13 @@ public class MainController {
     MemberService memberService;
 
     @GetMapping("/")
-    public String signIn(Model model) {
-        model.addAttribute("member", new Member("", "", "", "", "Y"));
+    public String signIn(Member member) {
         return "main/login";
     }
 
     @GetMapping("/logout")
-    public String logout(Model model, HttpSession session) {
-        model.addAttribute("member", new Member("", "", "", "", "Y"));
+    public String logout(Member member, HttpSession session) {
         session.invalidate();
-
         return "main/login";
     }
 
