@@ -15,8 +15,8 @@
                             <span class="count bg-success"></span>
                         </div>
                         <div class="profile-name">
-                            <h5 class="mb-0 font-weight-normal" th:text="${session.loginUser.userName}">User Name</h5>
-                            <span th:text="${session.loginUser.userEmail}">User Email</span>
+                            <h5 class="mb-0 font-weight-normal" th:text="${session.loginMember.memberName}">Name</h5>
+                            <span th:text="${session.loginMember.memberEmail}">Email</span>
                         </div>
                     </div>
                 </div>
@@ -32,21 +32,13 @@
                 <div class="collapse" id="ui-basic">
                     <ul class="nav flex-column sub-menu">
                         <li class="nav-item">
-                            <a class="nav-link" th:href="@{/notiBoard}">공지사항</a>
+                            <a class="nav-link" th:href="@{/board/list}">공지사항</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Sub Menu</a>
                         </li>
                     </ul>
                 </div>
-            </li>
-            <li class="nav-item menu-items">
-                <a class="nav-link" th:href="@{/shortcut}">
-                    <span class="menu-icon">
-                        <i class="mdi mdi-link-variant"></i>
-                    </span>
-                    <span class="menu-title">Shortcut</span>
-                </a>
             </li>
             <li class="nav-item menu-items">
                 <a class="nav-link" th:href="@{https://github.com/Young-Geun}">

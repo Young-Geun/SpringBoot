@@ -18,12 +18,12 @@ public class BoardController {
     @Autowired
     BoardService boardService;
 
-    @GetMapping("/notiBoard")
-    public String main(Model model, HttpServletRequest request) {
+    @GetMapping("/board/list")
+    public String list(Model model, HttpServletRequest request) {
         int currentPage = request.getParameter("currentPage") == null ? 1 : Integer.parseInt(request.getParameter("currentPage"));
         int currentRange = request.getParameter("currentRange") == null ? 1 : Integer.parseInt(request.getParameter("currentRange"));
-        int totalCount = boardService.getTotalCount();
-        List<Board> list = boardService.getBoardList(currentPage);
+        int totalCount = boardService.selectCount();
+        List<Board> list = boardService.selectAll(currentPage);
         model.addAttribute("boardList", list);
 
         Pagination page = new Pagination();

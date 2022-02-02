@@ -60,7 +60,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">To do list</h4>
-                                <form th:action="@{/addTodo}" th:method="post">
+                                <form th:action="@{/todo/insert}" th:method="post">
                                     <div class="add-items d-flex">
                                         <input type="text" name="contents" class="form-control todo-list-input" placeholder="Enter task...">
                                         <button th:type="submit" class="add btn btn-primary">Add</button>
@@ -77,7 +77,7 @@
                                                            th:checked="${todo.todoStatus} == 'Y'">
                                                 </label>
                                             </div>
-                                            <i th:onclick="|location.href='@{/deleteTodo}?todoId=${todo.todoId}'|" class="remove mdi mdi-close-circle-outline"></i>
+                                            <i th:onclick="|location.href='@{/todo/delete}?todoId=${todo.todoId}'|" class="remove mdi mdi-close-circle-outline"></i>
                                         </li>
                                     </ul>
                                 </div>
@@ -92,7 +92,7 @@
 </div>
 <script>
     function updateTodo(todoId, todoStatus) {
-        location.href = '/updateTodo?todoId=' + todoId + '&todoStatus=' + todoStatus;
+        location.href = '/todo/update?todoId=' + todoId + '&todoStatus=' + todoStatus;
     }
 </script>
 </body>

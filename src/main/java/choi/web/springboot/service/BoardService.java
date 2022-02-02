@@ -13,12 +13,12 @@ public class BoardService {
     @Autowired
     private BoardRepository boardRepository;
 
-    public int getTotalCount() {
-        return boardRepository.selectTotalCount();
+    public int selectCount() {
+        return boardRepository.selectCount();
     }
 
-    public List<Board> getBoardList(int currentPage) {
-        return boardRepository.selectBoardList(currentPage);
+    public List<Board> selectAll(int currentPage) {
+        return boardRepository.selectAll(currentPage);
     }
 
 }

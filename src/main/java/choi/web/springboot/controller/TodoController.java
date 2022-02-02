@@ -15,21 +15,24 @@ public class TodoController {
     @Autowired
     TodoService todoService;
 
-    @PostMapping("/addTodo")
-    public String addTodo(Todo todo, HttpSession session) {
-        todoService.addTodo(todo, session);
+    @PostMapping("/todo/insert")
+    public String insert(Todo todo, HttpSession session) {
+        todoService.insert(todo, session);
+
         return "redirect:/main";
     }
 
-    @GetMapping("/deleteTodo")
-    public String deleteTodo(Todo todo, HttpSession session) {
-        todoService.deleteTodo(todo, session);
+    @GetMapping("/todo/update")
+    public String update(Todo todo, HttpSession session) {
+        todoService.update(todo, session);
+
         return "redirect:/main";
     }
 
-    @GetMapping("/updateTodo")
-    public String updateTodo(Todo todo, HttpSession session) {
-        todoService.updateTodo(todo, session);
+    @GetMapping("/todo/delete")
+    public String delete(Todo todo, HttpSession session) {
+        todoService.delete(todo, session);
+
         return "redirect:/main";
     }
 

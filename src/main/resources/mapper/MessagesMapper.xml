@@ -2,10 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="choi.web.springboot.repository.MessagesRepository">
 
-    <select id="selectMessagesList" resultType="choi.web.springboot.domain.Messages" parameterType="choi.web.springboot.domain.Messages">
+    <select id="selectAll" resultType="choi.web.springboot.domain.Messages" parameterType="choi.web.springboot.domain.Messages">
         SELECT messages_id,
                send_id,
-               (SELECT user_name FROM user_info WHERE user_id = send_id) send_name,
+               (SELECT member_name FROM member WHERE member_id = send_id) send_name,
                recv_id,
                messages,
                send_date

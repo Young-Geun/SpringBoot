@@ -2,12 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="choi.web.springboot.repository.TodoRepository">
 
-    <select id="selectTodoList" resultType="choi.web.springboot.domain.Todo" parameterType="choi.web.springboot.domain.Todo">
+    <select id="selectAll" resultType="choi.web.springboot.domain.Todo" parameterType="choi.web.springboot.domain.Todo">
         SELECT todo_id,
                contents,
                reg_id,
                todo_status
-        FROM todo_list
+        FROM todo
         <where>
             <if test="regId != null and regId !=''">
                 and reg_id = #{regId}
@@ -15,8 +15,8 @@
         </where>
     </select>
 
-    <insert id="insertTodo" parameterType="choi.web.springboot.domain.Todo">
-        INSERT INTO todo_list
+    <insert id="insert" parameterType="choi.web.springboot.domain.Todo">
+        INSERT INTO todo
         (
             todo_id,
             contents,
@@ -24,24 +24,24 @@
             todo_status
         )
         VALUES
-        (  (SELECT MAX(todo_id) + 1 FROM todo_list),
+        (  (SELECT MAX(todo_id) + 1 FROM todo),
            #{contents},
            #{regId},
            'N'
         )
     </insert>
 
-    <delete id="deleteTodo" parameterType="choi.web.springboot.domain.Todo">
-        DELETE FROM todo_list
+    <update id="update" parameterType="choi.web.springboot.domain.Todo">
+        UPDATE todo
+        SET todo_status = #{todoStatus}
+        WHERE todo_id = #{todoId}
+          AND reg_id = #{regId}
+    </update>
+
+    <delete id="delete" parameterType="choi.web.springboot.domain.Todo">
+        DELETE FROM todo
         WHERE todo_id = #{todoId}
         AND reg_id = #{regId}
     </delete>
-
-    <update id="updateTodo" parameterType="choi.web.springboot.domain.Todo">
-        UPDATE todo_list
-        SET todo_status = #{todoStatus}
-        WHERE todo_id = #{todoId}
-        AND reg_id = #{regId}
-    </update>
 
 </mapper>

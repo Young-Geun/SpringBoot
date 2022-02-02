@@ -8,6 +8,6 @@ import java.util.List;
 @Mapper
 public interface MessagesRepository {
 
-    List<Messages> selectMessagesList(Messages messages);
+    List<Messages> selectAll(Messages messages);
 
 }

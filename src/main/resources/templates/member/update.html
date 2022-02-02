@@ -12,26 +12,26 @@
                     <div class="card-body">
                         <h4 class="card-title">회원정보 수정</h4>
                         <p class="text-danger" th:text="${result}"></p>
-                        <form th:action="@{/setting}" th:object="${user}" th:method="post">
-                            <input th:field="*{userId}" type="hidden">
+                        <form th:action="@{/member/update}" th:object="${member}" th:method="post">
+                            <input th:field="*{memberId}" type="hidden">
                             <div class="form-group">
                                 <label>Email</label>
-                                <input th:field="*{userEmail}" type="text" class="form-control p_input" readonly="readonly">
-                                <p class="text-danger" th:if="${#fields.hasErrors('userEmail')}" th:errors="*{userEmail}"></p>
+                                <input th:field="*{memberEmail}" type="text" class="form-control p_input" readonly="readonly">
+                                <p class="text-danger" th:if="${#fields.hasErrors('memberEmail')}" th:errors="*{memberEmail}"></p>
                             </div>
                             <div class="form-group">
                                 <label>이름</label>
-                                <input th:field="*{userName}" type="text" class="form-control p_input">
-                                <p class="text-danger" th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}"></p>
+                                <input th:field="*{memberName}" type="text" class="form-control p_input">
+                                <p class="text-danger" th:if="${#fields.hasErrors('memberName')}" th:errors="*{memberName}"></p>
                             </div>
                             <div class="form-group">
                                 <label>패스워드</label>
-                                <input th:field="*{userPassword}" type="password" class="form-control p_input">
-                                <p class="text-danger" th:if="${#fields.hasErrors('userPassword')}" th:errors="*{userPassword}"></p>
+                                <input th:field="*{memberPassword}" type="password" class="form-control p_input">
+                                <p class="text-danger" th:if="${#fields.hasErrors('memberPassword')}" th:errors="*{memberPassword}"></p>
                             </div>
                             <div class="form-group">
                                 <label>패스워드 확인</label>
-                                <input th:field="*{userPasswordCert}" type="password" class="form-control p_input">
+                                <input th:field="*{memberPasswordCert}" type="password" class="form-control p_input">
                                 <p class="text-danger" th:if="${#fields.hasErrors('samePassword')}" th:errors="*{samePassword}"></p>
                             </div>
                             <div class="pt-4 text-center">

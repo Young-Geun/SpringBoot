@@ -13,8 +13,8 @@ public class MessagesService {
     @Autowired
     private MessagesRepository messagesRepository;
 
-    public List<Messages> getMessagesList(Messages messages) {
-        return messagesRepository.selectMessagesList(messages);
+    public List<Messages> selectAll(Messages messages) {
+        return messagesRepository.selectAll(messages);
     }
 
 }

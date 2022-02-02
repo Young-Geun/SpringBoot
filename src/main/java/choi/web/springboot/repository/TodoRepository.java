@@ -10,12 +10,12 @@ import java.util.List;
 @Transactional
 public interface TodoRepository {
 
-    List<Todo> selectTodoList(Todo todo);
+    List<Todo> selectAll(Todo todo);
 
-    int insertTodo(Todo todo);
+    int insert(Todo todo);
 
-    int deleteTodo(Todo todo);
+    int update(Todo todo);
 
-    int updateTodo(Todo todo);
+    int delete(Todo todo);
 
 }
