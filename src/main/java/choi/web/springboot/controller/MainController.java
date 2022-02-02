@@ -67,7 +67,7 @@ public class MainController {
 
     @PostMapping("/main")
     public String main(Member member, Model model, HttpServletRequest request) {
-        Member loginMember = memberService.selectOne(member);
+        Member loginMember = memberService.selectOne(member.getMemberEmail(), member.getMemberPassword());
         if (loginMember == null) {
             model.addAttribute("result", "아이디 또는 비밀번호를 확인해주세요.");
 

@@ -11,6 +11,7 @@
                         <h3 class="card-title text-left mb-3">Sign Up</h3>
                         <p class="text-danger" th:text="${result}"></p>
                         <form th:action="@{/member/insert}" th:object="${member}" th:method="post">
+                            <input type="hidden" name="memberStatus" value="Y">
                             <div class="form-group">
                                 <label>Email</label>
                                 <input th:field="*{memberEmail}" type="text" class="form-control p_input">
@@ -26,13 +27,9 @@
                                 <input th:field="*{memberPassword}" type="password" class="form-control p_input">
                                 <p class="text-danger" th:if="${#fields.hasErrors('memberPassword')}" th:errors="*{memberPassword}"></p>
                             </div>
-                            <div class="form-group">
-                                <label>패스워드 확인</label>
-                                <input th:field="*{memberPasswordCert}" type="password" class="form-control p_input">
-                                <p class="text-danger" th:if="${#fields.hasErrors('samePassword')}" th:errors="*{samePassword}"></p>
-                            </div>
                             <div class="pt-4 text-center">
                                 <button type="submit" class="btn btn-primary btn-block enter-btn">등록</button>
+                                <button type="button" th:onclick="|location.href='@{/}'|" class="btn btn-dark btn-block enter-btn">뒤로</button>
                             </div>
                         </form>
                     </div>

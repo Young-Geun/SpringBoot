@@ -64,6 +64,7 @@ public class MemberController {
             model.addAttribute("result", "수정이 완료되었습니다.");
             session.setAttribute("loginMember", member);
         }
+
         return "member/update";
     }
 

@@ -2,29 +2,43 @@ package choi.web.springboot.service;
 
 import choi.web.springboot.domain.Member;
 import choi.web.springboot.repository.MemberRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+@RequiredArgsConstructor
 @Service
 public class MemberService {
 
-    @Autowired
-    private MemberRepository memberRepository;
+    private final MemberRepository memberRepository;
 
-    public Member selectOne(Member member) {
-        return memberRepository.selectOne(member);
+    public Member selectOne(String email, String password) {
+        return memberRepository.findByMemberEmailAndMemberPassword(email, password);
     }
 
     public int insert(Member member) {
-        if (memberRepository.selectExistOne(member) == null) {
-            return memberRepository.insert(member);
+        int result = 1;
+        if (memberRepository.findByMemberEmail(member.getMemberEmail()) == null) {
+            try {
+                memberRepository.save(member);
+            } catch (Exception e) {
+                result = 0;
+            }
         } else {
-            return -1;
+            result = -1;
         }
+
+        return result;
     }
 
     public int update(Member member) {
-        return memberRepository.update(member);
+        int result = 1;
+        try {
+            memberRepository.save(member);
+        } catch (Exception e) {
+            result = 0;
+        }
+
+        return result;
     }
 
 }

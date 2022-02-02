@@ -2,14 +2,23 @@ package choi.web.springboot.domain;
 
 import lombok.Data;
 
-import javax.validation.constraints.AssertTrue;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
 @Data
+@Entity(name = "member")
+@SequenceGenerator(
+        name = "MEMBER_SEQ_GENERATOR", // 제너레이터명
+        sequenceName = "MEMBER_SEQ", // 시퀀스명
+        initialValue = 1, // 시작 값
+        allocationSize = 1 // 할당할 범위 사이즈
+)
 public class Member {
 
     // 사용자 아이디
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "MEMBER_SEQ_GENERATOR")
     long memberId;
 
     // 사용자 이메일
@@ -21,10 +30,6 @@ public class Member {
     @NotBlank(message = "비밀번호를 입력해주세요.")
     String memberPassword;
 
-    // 사용자 비밀번호(재확인)
-    @NotBlank(message = "재확인 비밀번호를 입력해주세요.")
-    String memberPasswordCert;
-
     // 사용자 이름
     @NotBlank(message = "사용자 이름을 입력해주세요.")
     String memberName;
@@ -32,11 +37,4 @@ public class Member {
     // 계정 상태
     String memberStatus;
 
-    @AssertTrue(message = "비밀번호가 일치하지 않습니다.")
-    public boolean isSamePassword() {
-        if (memberPassword == null || memberPasswordCert == null) {
-            return true;
-        }
-        return memberPassword.equals(memberPasswordCert);
-    }
 }

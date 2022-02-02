@@ -1,19 +1,12 @@
 package choi.web.springboot.repository;
 
 import choi.web.springboot.domain.Member;
-import org.apache.ibatis.annotations.Mapper;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-@Mapper
-@Transactional
-public interface MemberRepository {
+public interface MemberRepository extends JpaRepository<Member, Long> {
 
-    Member selectOne(Member member);
+    Member findByMemberEmail(String email);
 
-    Member selectExistOne(Member member);
-
-    int insert(Member member);
-
-    int update(Member member);
+    Member findByMemberEmailAndMemberPassword(String email, String Password);
 
 }
