@@ -5,11 +5,17 @@ import choi.web.springboot.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @Service
 public class MemberService {
 
     private final MemberRepository memberRepository;
+
+    public List<Member> selectList(String name) {
+        return memberRepository.findByMemberNameLike("%" + name + "%");
+    }
 
     public Member selectOne(String email, String password) {
         return memberRepository.findByMemberEmailAndMemberPassword(email, password);

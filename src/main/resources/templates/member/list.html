@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head.html :: headFragment"></head>
+<body>
+<div class="container-scroller">
+    <div class="container-fluid page-body-wrapper">
+        <div class="main-panel">
+            <div class="col-lg-12 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">사용자 정보</h4>
+                        <div class="table-responsive py-xl-5">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>이름</th>
+                                        <th>이메일</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="member : ${memberList}">
+                                        <td th:text="${member.memberName}">이름</td>
+                                        <td th:text="${member.memberEmail}">이메일</td>
+                                    </tr>
+                                    <tr th:if="${memberList == null || memberList.size() == 0}">
+                                        <td th:colspan="2" class="text-center">조회 결과가 없습니다.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

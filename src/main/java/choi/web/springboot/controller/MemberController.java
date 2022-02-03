@@ -12,12 +12,21 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 public class MemberController {
 
     @Autowired
     MemberService memberService;
+
+    @GetMapping("/member/list")
+    public String list(Member member, Model model) {
+        List<Member> memberList = memberService.selectList(member.getMemberName());
+        model.addAttribute("memberList", memberList);
+
+        return "member/list";
+    }
 
     @GetMapping("/member/insert")
     public String insert(Member member) {

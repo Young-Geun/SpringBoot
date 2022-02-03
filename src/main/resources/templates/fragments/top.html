@@ -11,8 +11,14 @@
             </button>
             <ul class="navbar-nav w-100">
                 <li class="nav-item w-100">
+                    <script>
+                        function memberSearch(obj) {
+                            window.open('/member/list?memberName=' + obj.value, 'member_list', 'width=800, height=600, left=100, top=50');
+                        }
+                    </script>
                     <form class="nav-link mt-2 mt-md-0 d-none d-lg-flex search">
-                        <input type="text" class="form-control" placeholder="Search">
+                        <input type="text" class="form-control" placeholder="사용자 검색"
+                               th:onkeypress="if (event.keyCode == 13) {memberSearch(this); return false;}">
                     </form>
                 </li>
             </ul>
