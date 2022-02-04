@@ -3,17 +3,17 @@ package choi.web.springboot.service;
 import choi.web.springboot.domain.Member;
 import choi.web.springboot.domain.Todo;
 import choi.web.springboot.repository.TodoRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
+@RequiredArgsConstructor
 @Service
 public class TodoService {
 
-    @Autowired
-    private TodoRepository todoRepository;
+    private final TodoRepository todoRepository;
 
     public List<Todo> selectAll(long regId) {
         return todoRepository.findByRegId(regId);
