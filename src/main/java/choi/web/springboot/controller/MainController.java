@@ -2,7 +2,6 @@ package choi.web.springboot.controller;
 
 import choi.web.springboot.domain.Member;
 import choi.web.springboot.domain.Messages;
-import choi.web.springboot.domain.Todo;
 import choi.web.springboot.service.BoardService;
 import choi.web.springboot.service.MemberService;
 import choi.web.springboot.service.MessagesService;
@@ -52,11 +51,7 @@ public class MainController {
         } else {
             // 메인화면 구성
             model.addAttribute("boardList", boardService.selectAll(1));
-
-            Todo todo = new Todo();
-            todo.setRegId(loginMember.getMemberId());
-            model.addAttribute("todoList", todoService.selectAll(todo));
-
+            model.addAttribute("todoList", todoService.selectAll(loginMember.getMemberId()));
             Messages messages = new Messages();
             messages.setRecvId(loginMember.getMemberId());
             model.addAttribute("messagesList", messagesService.selectAll(messages));
@@ -79,11 +74,7 @@ public class MainController {
 
             // 메인화면 구성
             model.addAttribute("boardList", boardService.selectAll(1));
-
-            Todo todo = new Todo();
-            todo.setRegId(loginMember.getMemberId());
-            model.addAttribute("todoList", todoService.selectAll(todo));
-
+            model.addAttribute("todoList", todoService.selectAll(loginMember.getMemberId()));
             Messages messages = new Messages();
             messages.setRecvId(loginMember.getMemberId());
             model.addAttribute("messagesList", messagesService.selectAll(messages));

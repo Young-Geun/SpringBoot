@@ -18,21 +18,18 @@ public class TodoController {
     @PostMapping("/todo/insert")
     public String insert(Todo todo, HttpSession session) {
         todoService.insert(todo, session);
-
         return "redirect:/main";
     }
 
     @GetMapping("/todo/update")
     public String update(Todo todo, HttpSession session) {
         todoService.update(todo, session);
-
         return "redirect:/main";
     }
 
     @GetMapping("/todo/delete")
     public String delete(Todo todo, HttpSession session) {
-        todoService.delete(todo, session);
-
+        todoService.delete(todo);
         return "redirect:/main";
     }
 

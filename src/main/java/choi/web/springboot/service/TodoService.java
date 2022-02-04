@@ -15,30 +15,26 @@ public class TodoService {
     @Autowired
     private TodoRepository todoRepository;
 
-    public List<Todo> selectAll(Todo todo) {
-        return todoRepository.selectAll(todo);
+    public List<Todo> selectAll(long regId) {
+        return todoRepository.findByRegId(regId);
     }
 
-    public int insert(Todo todo, HttpSession session) {
+    public void insert(Todo todo, HttpSession session) {
         Member loginMember = (Member) session.getAttribute("loginMember");
         todo.setRegId(loginMember.getMemberId());
-
-        return todoRepository.insert(todo);
+        todo.setTodoStatus("N");
+        todoRepository.save(todo);
     }
 
-    public int update(Todo todo, HttpSession session) {
+    public void update(Todo todo, HttpSession session) {
         Member loginMember = (Member) session.getAttribute("loginMember");
         todo.setRegId(loginMember.getMemberId());
         todo.setTodoStatus("Y".equals(todo.getTodoStatus()) ? "N" : "Y");
-
-        return todoRepository.update(todo);
+        todoRepository.save(todo);
     }
 
-    public int delete(Todo todo, HttpSession session) {
-        Member loginMember = (Member) session.getAttribute("loginMember");
-        todo.setRegId(loginMember.getMemberId());
-
-        return todoRepository.delete(todo);
+    public void delete(Todo todo) {
+        todoRepository.deleteById(todo.getTodoId());
     }
 
 }

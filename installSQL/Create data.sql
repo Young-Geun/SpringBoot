@@ -13,12 +13,12 @@ CREATE TABLE member
 );
 
 CREATE SEQUENCE MEMBER_SEQ
-    INCREMENT BY 1 --증감숫자 1
-    START WITH 1 --시작숫자 1
-    MINVALUE 1 --최소값 1
-    MAXVALUE 100000 --최대값 1000
-    NOCYCLE --순한하지않음
-    NOCACHE; --메모리에 시퀀스값 미리할당
+INCREMENT BY 1 --증감숫자 1
+START WITH 1 --시작숫자 1
+MINVALUE 1 --최소값 1
+MAXVALUE 100000 --최대값 1000
+NOCYCLE --순한하지않음
+NOCACHE; --메모리에 시퀀스값 미리할당
 
 INSERT INTO member (member_id, member_email, member_password, member_name, member_status)
 VALUES (1, 'choi', '1', '최영근', 'Y');
@@ -89,6 +89,14 @@ CREATE TABLE todo
 
     PRIMARY KEY (todo_id)
 );
+
+CREATE SEQUENCE TODO_SEQ
+INCREMENT BY 1
+START WITH 1
+MINVALUE 1
+MAXVALUE 100000
+NOCYCLE
+NOCACHE;
 
 INSERT INTO todo (todo_id, contents, reg_id, todo_status)
 VALUES (1, '커밋하기', 1, 'N');
