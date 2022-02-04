@@ -1,4 +1,3 @@
-/* ORACLE, H2 */
 -- 사용자 테이블
 DROP TABLE member;
 
@@ -22,9 +21,9 @@ CREATE SEQUENCE MEMBER_SEQ
     NOCACHE; --메모리에 시퀀스값 미리할당
 
 INSERT INTO member (member_id, member_email, member_password, member_name, member_status)
-VALUES (MEMBER_SEQ.NEXTVAL, 'younggeunn@naver.com', '1234', '최영근', 'Y');
+VALUES (1, 'choi', '1', '최영근', 'Y');
 INSERT INTO member (member_id, member_email, member_password, member_name, member_status)
-VALUES (MEMBER_SEQ.NEXTVAL, 'choi@gmail.com', '1234', '최자바', 'Y');
+VALUES (2, 'test1@naver.com', '1', '테스터1', 'Y');
 
 
 
@@ -49,7 +48,7 @@ VALUES (1, 2, 1, 'hi choi~', SYSDATE);
 INSERT INTO messages (messages_id, send_id, recv_id, messages, send_date)
 VALUES (2, 2, 1, 'hello', SYSDATE);
 INSERT INTO messages (messages_id, send_id, recv_id, messages, send_date)
-VALUES (3, 1, 2, '안녕 최자바!', SYSDATE);
+VALUES (3, 1, 2, '안녕 테스터1!', SYSDATE);
 
 
 

@@ -1,33 +1,9 @@
 spring:
   profiles: mac
   datasource:
-    driver-class-name: org.h2.Driver
-    url: jdbc:h2:tcp://localhost/~/test
-    username: sa
-    password:
-  thymeleaf:
-    prefix: classpath:templates/
-    check-template-location: true
-    suffix: .html
-    mode: HTML
-    cache: false
-
-mybatis:
-  mapper-locations: mapper/*.xml
-  configuration:
-    map-underscore-to-camel-case: true
-
-server:
-  port: 8071
-
----
-
-spring:
-  profiles: window
-  datasource:
     driver-class-name: oracle.jdbc.OracleDriver
-    url: jdbc:oracle:thin:@localhost:1521/xe
-    username: scott
+    url: jdbc:oracle:thin:@db202202032030_high?TNS_ADMIN=/Users/choi/dev/Wallet
+    username: admin
     password: 1234
   thymeleaf:
     prefix: classpath:templates/
@@ -42,17 +18,17 @@ mybatis:
     map-underscore-to-camel-case: true
 
 server:
-  port: 8072
+  port: 8084
 
 ---
 
 spring:
-  profiles: cloud
+  profiles: window
   datasource:
     driver-class-name: oracle.jdbc.OracleDriver
-    url: jdbc:oracle:thin:@db202202032030_high?TNS_ADMIN=/home/opc/dev/Wallet/
+    url: jdbc:oracle:thin:@db202202032030_high?TNS_ADMIN=C:\\dev\\Wallet
     username: admin
-    password: qwerASDF12#$
+    password: 1234
   thymeleaf:
     prefix: classpath:templates/
     check-template-location: true
@@ -66,4 +42,28 @@ mybatis:
     map-underscore-to-camel-case: true
 
 server:
-  port: 8073
+  port: 8084
+
+---
+
+spring:
+  profiles: cloud
+  datasource:
+    driver-class-name: oracle.jdbc.OracleDriver
+    url: jdbc:oracle:thin:@db202202032030_high?TNS_ADMIN=/home/opc/dev/Wallet/
+    username: admin
+    password: 1234
+  thymeleaf:
+    prefix: classpath:templates/
+    check-template-location: true
+    suffix: .html
+    mode: HTML
+    cache: false
+
+mybatis:
+  mapper-locations: mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+
+server:
+  port: 8084
