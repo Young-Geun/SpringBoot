@@ -2,19 +2,19 @@ package choi.web.springboot.service;
 
 import choi.web.springboot.domain.Messages;
 import choi.web.springboot.repository.MessagesRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@RequiredArgsConstructor
 @Service
 public class MessagesService {
 
-    @Autowired
-    private MessagesRepository messagesRepository;
+    private final MessagesRepository messagesRepository;
 
-    public List<Messages> selectAll(Messages messages) {
-        return messagesRepository.selectAll(messages);
+    public List<Messages> selectAll(long recvId) {
+        return messagesRepository.findByRecvId(recvId);
     }
 
 }

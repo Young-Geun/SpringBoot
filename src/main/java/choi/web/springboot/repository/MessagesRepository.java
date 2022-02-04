@@ -1,13 +1,12 @@
 package choi.web.springboot.repository;
 
 import choi.web.springboot.domain.Messages;
-import org.apache.ibatis.annotations.Mapper;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-@Mapper
-public interface MessagesRepository {
+public interface MessagesRepository extends JpaRepository<Messages, Long> {
 
-    List<Messages> selectAll(Messages messages);
+    List<Messages> findByRecvId(long recvId);
 
 }

@@ -43,6 +43,14 @@ CREATE TABLE messages
     PRIMARY KEY (messages_id)
 );
 
+CREATE SEQUENCE MESSAGES_SEQ
+INCREMENT BY 1
+START WITH 1
+MINVALUE 1
+MAXVALUE 100000
+NOCYCLE
+NOCACHE;
+
 INSERT INTO messages (messages_id, send_id, recv_id, messages, send_date)
 VALUES (1, 2, 1, 'hi choi~', SYSDATE);
 INSERT INTO messages (messages_id, send_id, recv_id, messages, send_date)
