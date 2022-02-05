@@ -22,10 +22,10 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    <tr th:each="board : ${boardList}">
-                                        <td th:text="${board.rowNo}">No</td>
+                                    <tr th:each="board : ${boardList.content}">
+                                        <td th:text="${board.boardId}">No</td>
                                         <td th:text="${board.title}">제목</td>
-                                        <td th:text="${board.regName}">작성자</td>
+                                        <td th:text="${board.poster.memberName}">작성자</td>
                                         <td th:text="${#temporals.format(board.regDate, 'yyyy-MM-dd HH:mm:ss')}">작성일시</td>
                                     </tr>
                                 </tbody>
@@ -33,16 +33,16 @@
                         </div>
                         <div class="text-right">
                             <div class="btn-group">
-                                <button th:onclick="search([[${page.startPage - 1}]], [[${page.range - 1}]])" th:if="${page.prev}" type="button" class="btn btn-outline-secondary">
+                                <button th:onclick="search([[${pages.startPage - 2}]], [[${pages.range - 1}]])" th:if="${pages.prev}" type="button" class="btn btn-outline-secondary">
                                     <i class="mdi mdi-arrow-left"></i>
                                 </button>
-                                <th:block th:each="idx : ${#numbers.sequence(page.startPage, page.endPage)}">
+                                <th:block th:each="idx : ${#numbers.sequence(pages.startPage, pages.endPage)}">
                                     <button type="button" class="btn"
-                                            th:classappend="${page.page == idx} ? 'btn-outline-secondary-selected' : 'btn-outline-secondary'"
-                                            th:onclick="search([[${idx}]], [[${page.range}]])"
+                                            th:classappend="${pages.page == idx} ? 'btn-outline-secondary-selected' : 'btn-outline-secondary'"
+                                            th:onclick="search([[${idx - 1}]], [[${pages.range}]])"
                                             th:text="${idx}" />
                                 </th:block>
-                                <button th:onclick="search([[${page.endPage + 1}]], [[${page.range + 1}]])" th:if="${page.next}" type="button" class="btn btn-outline-secondary">
+                                <button th:onclick="search([[${pages.endPage}]], [[${pages.range + 1}]])" th:if="${pages.next}" type="button" class="btn btn-outline-secondary">
                                     <i class="mdi mdi-arrow-right"></i>
                                 </button>
                             </div>
@@ -56,7 +56,7 @@
 </div>
 <script>
     function search(page, range) {
-        location.href = '/board/list?currentPage=' + page + '&currentRange=' + range;
+        location.href = '/board/list?page=' + page + '&range=' + range;
     }
 </script>
 </body>

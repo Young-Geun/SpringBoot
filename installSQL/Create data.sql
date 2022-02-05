@@ -76,6 +76,14 @@ CREATE TABLE board
     PRIMARY KEY (board_id)
 );
 
+CREATE SEQUENCE BOARD_SEQ
+INCREMENT BY 1
+START WITH 1
+MINVALUE 1
+MAXVALUE 100000
+NOCYCLE
+NOCACHE;
+
 INSERT INTO board (board_id, title, contents, reg_id, reg_date)
 VALUES (1, '홈페이지 오픈', '오픈했습니다', 1, SYSDATE);
 INSERT INTO board (board_id, title, contents, reg_id, reg_date)

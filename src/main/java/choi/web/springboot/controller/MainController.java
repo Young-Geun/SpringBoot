@@ -49,7 +49,7 @@ public class MainController {
             return "main/login";
         } else {
             // 메인화면 구성
-            model.addAttribute("boardList", boardService.selectAll(1));
+            model.addAttribute("boardList", boardService.selectAll(0));
             model.addAttribute("todoList", todoService.selectAll(loginMember.getMemberId()));
             model.addAttribute("messagesList", messagesService.selectAll(loginMember.getMemberId()));
 
@@ -70,7 +70,7 @@ public class MainController {
             session.setAttribute("loginMember", loginMember);
 
             // 메인화면 구성
-            model.addAttribute("boardList", boardService.selectAll(1));
+            model.addAttribute("boardList", boardService.selectAll(0));
             model.addAttribute("todoList", todoService.selectAll(loginMember.getMemberId()));
             model.addAttribute("messagesList", messagesService.selectAll(loginMember.getMemberId()));
 

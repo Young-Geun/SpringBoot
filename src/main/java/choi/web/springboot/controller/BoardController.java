@@ -5,12 +5,11 @@ import choi.web.springboot.common.Pagination;
 import choi.web.springboot.domain.Board;
 import choi.web.springboot.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-
-import javax.servlet.http.HttpServletRequest;
-import java.util.List;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class BoardController {
@@ -19,16 +18,15 @@ public class BoardController {
     BoardService boardService;
 
     @GetMapping("/board/list")
-    public String list(Model model, HttpServletRequest request) {
-        int currentPage = request.getParameter("currentPage") == null ? 1 : Integer.parseInt(request.getParameter("currentPage"));
-        int currentRange = request.getParameter("currentRange") == null ? 1 : Integer.parseInt(request.getParameter("currentRange"));
-        int totalCount = boardService.selectCount();
-        List<Board> list = boardService.selectAll(currentPage);
+    public String list(Model model,
+                       @RequestParam(required = false, defaultValue = "0", value = "page") int page,
+                       @RequestParam(required = false, defaultValue = "1", value = "range") int range) {
+        Page<Board> list = boardService.selectAll(page);
         model.addAttribute("boardList", list);
 
-        Pagination page = new Pagination();
-        page.pageInfo(currentPage, currentRange, totalCount);
-        model.addAttribute("page", page);
+        Pagination pagination = new Pagination();
+        pagination.pageInfo(page + 1, range, (int) list.getTotalElements());
+        model.addAttribute("pages", pagination);
 
         return "board/list";
     }

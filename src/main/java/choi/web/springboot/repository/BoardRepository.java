@@ -1,15 +1,8 @@
 package choi.web.springboot.repository;
 
 import choi.web.springboot.domain.Board;
-import org.apache.ibatis.annotations.Mapper;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
-
-@Mapper
-public interface BoardRepository {
-
-    int selectCount();
-
-    List<Board> selectAll(int currentPage);
+public interface BoardRepository extends JpaRepository<Board, Long> {
 
 }
