@@ -12,8 +12,12 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class TodoController {
 
+    private TodoService todoService;
+
     @Autowired
-    TodoService todoService;
+    public TodoController(TodoService todoService) {
+        this.todoService = todoService;
+    }
 
     @PostMapping("/todo/insert")
     public String insert(Todo todo, HttpSession session) {

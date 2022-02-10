@@ -17,8 +17,12 @@ import java.util.List;
 @Controller
 public class MemberController {
 
+    private MemberService memberService;
+
     @Autowired
-    MemberService memberService;
+    public MemberController(MemberService memberService) {
+        this.memberService = memberService;
+    }
 
     @GetMapping("/member/list")
     public String list(Member member, Model model) {

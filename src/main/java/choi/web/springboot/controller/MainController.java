@@ -17,17 +17,18 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class MainController {
 
-    @Autowired
-    BoardService boardService;
+    private BoardService boardService;
+    private TodoService todoService;
+    private MessagesService messagesService;
+    private MemberService memberService;
 
     @Autowired
-    TodoService todoService;
-
-    @Autowired
-    MessagesService messagesService;
-
-    @Autowired
-    MemberService memberService;
+    public MainController(BoardService boardService, TodoService todoService, MessagesService messagesService, MemberService memberService) {
+        this.boardService = boardService;
+        this.todoService = todoService;
+        this.messagesService = messagesService;
+        this.memberService = memberService;
+    }
 
     @GetMapping("/")
     public String signIn(Member member) {

@@ -14,8 +14,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class BoardController {
 
+    private BoardService boardService;
+
     @Autowired
-    BoardService boardService;
+    public BoardController(BoardService boardService) {
+        this.boardService = boardService;
+    }
 
     @GetMapping("/board/list")
     public String list(Model model,
