@@ -97,6 +97,6 @@ server:
 
 logging:
   level:
-    root: info
+    root: warn
   file:
     name: /home/opc/dev/log/boot.log
