@@ -25,6 +25,12 @@ mybatis:
 server:
   port: 8084
 
+logging:
+  level:
+    root: info
+  file:
+    name: /Users/choi/dev/log/boot.log
+
 ---
 
 spring:
@@ -54,6 +60,12 @@ mybatis:
 server:
   port: 8084
 
+logging:
+  level:
+    root: info
+  file:
+    name: C:\\Users\\choi\\Desktop\\boot.log
+
 ---
 
 spring:
@@ -82,3 +94,9 @@ mybatis:
 
 server:
   port: 8084
+
+logging:
+  level:
+    root: info
+  file:
+    name: /home/opc/dev/log/boot.log

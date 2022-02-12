@@ -5,6 +5,8 @@ import choi.web.springboot.service.BoardService;
 import choi.web.springboot.service.MemberService;
 import choi.web.springboot.service.MessagesService;
 import choi.web.springboot.service.TodoService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +18,8 @@ import javax.servlet.http.HttpSession;
 
 @Controller
 public class MainController {
+
+    private Logger logger = LoggerFactory.getLogger(MainController.class);
 
     private BoardService boardService;
     private TodoService todoService;
@@ -69,6 +73,7 @@ public class MainController {
             // TODO: 2022/01/21. 로그인 로직 분리할 것
             HttpSession session = request.getSession();
             session.setAttribute("loginMember", loginMember);
+            logger.info("Login Member = {}", loginMember.getMemberEmail());
 
             // 메인화면 구성
             model.addAttribute("boardList", boardService.selectAll(0));
