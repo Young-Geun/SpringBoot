@@ -22,23 +22,12 @@
                 </div>
             </li>
             <li class="nav-item menu-items">
-                <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+                <a class="nav-link" th:href="@{/board/list}">
                     <span class="menu-icon">
-                        <i class="mdi mdi-laptop"></i>
+                        <i class="mdi mdi-bulletin-board"></i>
                     </span>
                     <span class="menu-title">게시판</span>
-                    <i class="menu-arrow"></i>
                 </a>
-                <div class="collapse" id="ui-basic">
-                    <ul class="nav flex-column sub-menu">
-                        <li class="nav-item">
-                            <a class="nav-link" th:href="@{/board/list}">공지사항</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Sub Menu</a>
-                        </li>
-                    </ul>
-                </div>
             </li>
             <li class="nav-item menu-items">
                 <a class="nav-link" th:href="@{/chart/list}">
