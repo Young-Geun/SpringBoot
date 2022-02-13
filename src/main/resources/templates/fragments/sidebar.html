@@ -38,6 +38,28 @@
                 </a>
             </li>
             <li class="nav-item menu-items">
+                <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+                    <span class="menu-icon">
+                        <i class="mdi mdi-book-open-page-variant"></i>
+                    </span>
+                    <span class="menu-title">샘플코드</span>
+                    <i class="menu-arrow"></i>
+                </a>
+                <div class="collapse" id="ui-basic">
+                    <ul class="nav flex-column sub-menu">
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/sample/thymeleaf}">타임리프</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Sample</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Sample</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="nav-item menu-items">
                 <a class="nav-link" th:href="@{https://github.com/Young-Geun}">
                     <span class="menu-icon">
                         <i class="mdi mdi-github-circle"></i>
