@@ -1,0 +1,129 @@
+<!DOCTYPE HTML>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head.html :: headFragment"></head>
+<body>
+<div class="container-scroller">
+    <nav th:replace="fragments/sidebar.html :: sidebarFragment"></nav>
+    <div class="container-fluid page-body-wrapper">
+        <nav th:replace="fragments/top.html :: topbarFragment"></nav>
+        <div class="main-panel">
+            <div class="content-wrapper">
+                <div class="page-header">
+                    <h3 class="page-title">통계</h3>
+                </div>
+                <div class="row">
+                    <input type="hidden" id="activeCount"
+                           th:value="${#aggregates.sum(memberList.?[memberStatus=='Y'].![1])}">
+                    <input type="hidden" id="inactiveCount"
+                           th:value="${#aggregates.sum(memberList.?[memberStatus=='N'].![1])}">
+                    <div class="col-lg-6 grid-margin stretch-card">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">사용자 계정 상태</h4>
+                                <canvas id="doughnutChart" class="h-75"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 grid-margin stretch-card">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">사용자 계정 상태</h4>
+                                <canvas id="barChart" class="h-75"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer th:replace="fragments/footer.html :: footerFragment"></footer>
+        </div>
+    </div>
+</div>
+<script>
+    var activeCount = $('#activeCount').val();
+    var inactiveCount = $('#inactiveCount').val();
+
+    var barData = {
+        labels: ["활성화", "비활성화"],
+        datasets: [{
+            data: [activeCount, inactiveCount],
+            backgroundColor: [
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 99, 132, 0.2)'
+            ],
+            borderColor: [
+                'rgba(54, 162, 235, 1)',
+                'rgba(255,99,132,1)'
+            ],
+            borderWidth: 1,
+            fill: false
+        }]
+    };
+    var barOptions = {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                },
+                gridLines: {
+                    color: "rgba(204, 204, 204,0.1)"
+                }
+            }],
+            xAxes: [{
+                gridLines: {
+                    color: "rgba(204, 204, 204,0.1)"
+                }
+            }]
+        },
+        legend: {
+            display: false
+        },
+        elements: {
+            point: {
+                radius: 0
+            }
+        }
+    };
+    if ($("#barChart").length) {
+        var barChartCanvas = $("#barChart").get(0).getContext("2d");
+        var barChart = new Chart(barChartCanvas, {
+            type: 'bar',
+            data: barData,
+            options: barOptions
+        });
+    }
+
+    var doughnutPieData = {
+        datasets: [{
+            data: [activeCount, inactiveCount],
+            backgroundColor: [
+                'rgba(54, 162, 235, 0.5)',
+                'rgba(255, 99, 132, 0.5)'
+            ],
+            borderColor: [
+                'rgba(54, 162, 235, 1)',
+                'rgba(255,99,132,1)'
+            ],
+        }],
+        labels: [
+            '활성화',
+            '비활성화',
+        ]
+    };
+    var doughnutPieOptions = {
+        responsive: true,
+        animation: {
+            animateScale: true,
+            animateRotate: true
+        }
+    };
+    if ($("#doughnutChart").length) {
+        var doughnutChartCanvas = $("#doughnutChart").get(0).getContext("2d");
+        var doughnutChart = new Chart(doughnutChartCanvas, {
+            type: 'doughnut',
+            data: doughnutPieData,
+            options: doughnutPieOptions
+        });
+    }
+</script>
+</body>
+</html>
