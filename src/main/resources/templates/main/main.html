@@ -1,99 +1,94 @@
 <!DOCTYPE HTML>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/head.html :: headFragment"></head>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout}">
 <body>
-<div class="container-scroller">
-    <nav th:replace="fragments/sidebar.html :: sidebarFragment"></nav>
-    <div class="container-fluid page-body-wrapper">
-        <nav th:replace="fragments/top.html :: topbarFragment"></nav>
-        <div class="main-panel">
-            <!-- contents -->
-            <div class="content-wrapper">
-                <div class="row">
-                    <div class="col-md-6 col-xl-4 grid-margin stretch-card">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">Notifications</h4>
-                                <div class="owl-carousel owl-theme full-width owl-carousel-dash portfolio-carousel" id="owl-carousel-basic">
-                                    <div class="item" th:each="board : ${boardList.content}">
-                                        <img src="/assets/images/dashboard/Rectangle.jpg">
-                                        <h6 class="preview-subject py-2" th:text="${board.title}">Title</h6>
-                                        <p class="text-muted" th:text="${board.contents}">Contents</p>
+<div class="content-wrapper" layout:fragment="content">
+    <div class="row">
+        <div class="col-md-6 col-xl-4 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Notifications</h4>
+                    <div class="owl-carousel owl-theme full-width owl-carousel-dash portfolio-carousel"
+                         id="owl-carousel-basic">
+                        <div class="item" th:each="board : ${boardList.content}">
+                            <img src="/assets/images/dashboard/Rectangle.jpg">
+                            <h6 class="preview-subject py-2" th:text="${board.title}">Title</h6>
+                            <p class="text-muted" th:text="${board.contents}">Contents</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-xl-4 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex flex-row justify-content-between">
+                        <h4 class="card-title">Messages</h4>
+                        <p class="text-muted mb-1 small">View all</p>
+                    </div>
+                    <div class="preview-list">
+                        <div th:each="messages : ${messagesList}" class="preview-item border-bottom">
+                            <div class="preview-thumbnail">
+                                <img src="/assets/images/faces-clipart/pic-2.png" class="rounded-circle"/>
+                            </div>
+                            <div class="preview-item-content d-flex flex-grow">
+                                <div class="flex-grow">
+                                    <div class="d-flex d-md-block d-xl-flex justify-content-between">
+                                        <h6 class="preview-subject" th:text="${messages.sender.memberName}">Sender</h6>
                                     </div>
+                                    <p class="text-muted" th:text="${messages.messages}">Messages</p>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-6 col-xl-4 grid-margin stretch-card">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="d-flex flex-row justify-content-between">
-                                    <h4 class="card-title">Messages</h4>
-                                    <p class="text-muted mb-1 small">View all</p>
-                                </div>
-                                <div class="preview-list">
-                                    <div th:each="messages : ${messagesList}" class="preview-item border-bottom">
-                                        <div class="preview-thumbnail">
-                                            <img src="/assets/images/faces-clipart/pic-2.png" class="rounded-circle"/>
-                                        </div>
-                                        <div class="preview-item-content d-flex flex-grow">
-                                            <div class="flex-grow">
-                                                <div class="d-flex d-md-block d-xl-flex justify-content-between">
-                                                    <h6 class="preview-subject" th:text="${messages.sender.memberName}">Sender</h6>
-                                                </div>
-                                                <p class="text-muted" th:text="${messages.messages}">Messages</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div th:if="${messagesList == null || messagesList.size() == 0}"class="preview-item border-bottom">
-                                        <div class="preview-item-content d-flex flex-grow">
-                                            <div class="flex-grow">
-                                                <p class="text-muted">받은 쪽지가 없습니다.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12 col-xl-4 grid-margin stretch-card">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">To do list</h4>
-                                <form th:action="@{/todo/insert}" th:method="post">
-                                    <div class="add-items d-flex">
-                                        <input type="text" name="contents" class="form-control todo-list-input" placeholder="Enter task...">
-                                        <button th:type="submit" class="add btn btn-primary">Add</button>
-                                    </div>
-                                </form>
-                                <div class="list-wrapper">
-                                    <ul class="d-flex flex-column-reverse text-white todo-list todo-list-custom">
-                                        <li th:each="todo : ${todoList}" th:classappend="${todo.todoStatus} == 'Y' ? 'completed'">
-                                            <div class="form-check form-check-primary">
-                                                <label class="form-check-label">
-                                                    <input class="checkbox" type="checkbox"
-                                                           th:onclick="updateTodo([[${todo.todoId}]], [[${todo.todoStatus}]])"
-                                                           th:text="${todo.contents}"
-                                                           th:checked="${todo.todoStatus} == 'Y'">
-                                                </label>
-                                            </div>
-                                            <i th:onclick="|location.href='@{/todo/delete}?todoId=${todo.todoId}'|" class="remove mdi mdi-close-circle-outline"></i>
-                                        </li>
-                                    </ul>
+                        <div th:if="${messagesList == null || messagesList.size() == 0}"
+                             class="preview-item border-bottom">
+                            <div class="preview-item-content d-flex flex-grow">
+                                <div class="flex-grow">
+                                    <p class="text-muted">받은 쪽지가 없습니다.</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <footer th:replace="fragments/footer.html :: footerFragment"></footer>
+        </div>
+        <div class="col-md-12 col-xl-4 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">To do list</h4>
+                    <form th:action="@{/todo/insert}" th:method="post">
+                        <div class="add-items d-flex">
+                            <input type="text" name="contents" class="form-control todo-list-input"
+                                   placeholder="Enter task...">
+                            <button th:type="submit" class="add btn btn-primary">Add</button>
+                        </div>
+                    </form>
+                    <div class="list-wrapper">
+                        <ul class="d-flex flex-column-reverse text-white todo-list todo-list-custom">
+                            <li th:each="todo : ${todoList}" th:classappend="${todo.todoStatus} == 'Y' ? 'completed'">
+                                <div class="form-check form-check-primary">
+                                    <label class="form-check-label">
+                                        <input class="checkbox" type="checkbox"
+                                               th:onclick="updateTodo([[${todo.todoId}]], [[${todo.todoStatus}]])"
+                                               th:text="${todo.contents}"
+                                               th:checked="${todo.todoStatus} == 'Y'">
+                                    </label>
+                                </div>
+                                <i th:onclick="|location.href='@{/todo/delete}?todoId=${todo.todoId}'|"
+                                   class="remove mdi mdi-close-circle-outline"></i>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+    <script>
+        function updateTodo(todoId, todoStatus) {
+            location.href = '/todo/update?todoId=' + todoId + '&todoStatus=' + todoStatus;
+        }
+    </script>
 </div>
-<script>
-    function updateTodo(todoId, todoStatus) {
-        location.href = '/todo/update?todoId=' + todoId + '&todoStatus=' + todoStatus;
-    }
-</script>
 </body>
 </html>
