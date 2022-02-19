@@ -18,4 +18,8 @@ public class BoardService {
         return boardRepository.findAll(PageRequest.of(page, 10, Sort.by(Sort.Direction.DESC, "boardId")));
     }
 
+    public Board selectOne(long boardId) {
+        return boardRepository.findById(boardId).get();
+    }
+
 }

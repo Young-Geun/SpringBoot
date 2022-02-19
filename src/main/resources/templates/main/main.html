@@ -13,7 +13,11 @@
                          id="owl-carousel-basic">
                         <div class="item" th:each="board : ${boardList.content}">
                             <img src="/assets/images/dashboard/Rectangle.jpg">
-                            <h6 class="preview-subject py-2" th:text="${board.title}">Title</h6>
+                            <h6 class="preview-subject py-2">
+                                <a th:text="${board.title}" th:href="@{/board/detail(boardId = ${board.boardId})}">
+                                    Title
+                                </a>
+                            </h6>
                             <p class="text-muted" th:text="${board.contents}">Contents</p>
                         </div>
                     </div>

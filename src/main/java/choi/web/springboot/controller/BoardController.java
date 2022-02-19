@@ -35,4 +35,12 @@ public class BoardController {
         return "board/list";
     }
 
+    @GetMapping("/board/detail")
+    public String list(Model model, Board board) {
+        Board result = boardService.selectOne(board.getBoardId());
+        model.addAttribute("result", result);
+
+        return "board/detail";
+    }
+
 }

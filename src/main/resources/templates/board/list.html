@@ -24,7 +24,11 @@
                             <tbody>
                             <tr th:each="board : ${boardList.content}">
                                 <td th:text="${board.boardId}">No</td>
-                                <td th:text="${board.title}">제목</td>
+                                <td>
+                                    <a th:text="${board.title}" th:href="@{/board/detail(boardId = ${board.boardId})}">
+                                        제목
+                                    </a>
+                                </td>
                                 <td th:text="${board.poster.memberName}">작성자</td>
                                 <td th:text="${#temporals.format(board.regDate, 'yyyy-MM-dd HH:mm:ss')}">작성일시</td>
                             </tr>
