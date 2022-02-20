@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
@@ -41,6 +42,18 @@ public class BoardController {
         model.addAttribute("result", result);
 
         return "board/detail";
+    }
+
+    @PostMapping("/board/update")
+    public String update(Board board) {
+        boardService.update(board);
+        return "redirect:/board/list";
+    }
+
+    @PostMapping("/board/delete")
+    public String delete(Board board) {
+        boardService.delete(board);
+        return "redirect:/board/list";
     }
 
 }

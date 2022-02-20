@@ -22,4 +22,12 @@ public class BoardService {
         return boardRepository.findById(boardId).get();
     }
 
+    public void update(Board board) {
+        boardRepository.save(board);
+    }
+
+    public void delete(Board board) {
+        boardRepository.deleteById(board.getBoardId());
+    }
+
 }

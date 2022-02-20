@@ -28,10 +28,11 @@ public class Board {
 
     // 등록자
     @OneToOne
-    @JoinColumn(name = "reg_id")
+    @JoinColumn(name = "reg_id", updatable = false)
     private Member poster;
 
     // 등록일시
+    @Column(updatable = false)
     LocalDateTime regDate;
 
 }
