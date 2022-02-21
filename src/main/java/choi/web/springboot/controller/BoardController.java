@@ -8,9 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import javax.servlet.http.HttpSession;
 
 @Controller
 public class BoardController {
@@ -42,6 +46,26 @@ public class BoardController {
         model.addAttribute("result", result);
 
         return "board/detail";
+    }
+
+    @GetMapping("/board/insert")
+    public String insert(Board board) {
+        return "board/insert";
+    }
+
+    @PostMapping("/board/insert")
+    public String insert(@Validated Board board, BindingResult bindingResult, Model model, HttpSession session) {
+        if (bindingResult.hasErrors()) {
+            return "board/insert";
+        }
+
+        int result = boardService.insert(board, session);
+        if (result == 0) {
+            model.addAttribute("result", "등록에 실패하였습니다.");
+            return "board/insert";
+        } else {
+            return "redirect:/board/list";
+        }
     }
 
     @PostMapping("/board/update")

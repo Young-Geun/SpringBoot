@@ -3,6 +3,7 @@ package choi.web.springboot.domain;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 
 @Data
@@ -21,9 +22,11 @@ public class Board {
     long boardId;
 
     // 제목
+    @NotBlank(message = "제목을 입력해주세요.")
     String title;
 
     // 내용
+    @NotBlank(message = "내용을 입력해주세요.")
     String contents;
 
     // 등록자
