@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -26,6 +27,8 @@ public class SampleController {
         list.add(new Sample(9, "테스트9", 2, 8, 9, 1));
 
         model.addAttribute("sampleList", list);
+        model.addAttribute("alphabetList", Arrays.asList("a", "b", "c", "d", "e", "f", "g"));
+
         return "sample/thymeleaf";
     }
 

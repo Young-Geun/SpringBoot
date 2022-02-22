@@ -69,6 +69,43 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-lg-6 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body" th:with="existA='N', existZ='N'">
+                    <h4 class="card-title">타임리프 변수 재바인딩</h4>
+                    <div class="table-responsive py-xl-5">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th th:class="text-center">알파벳</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="alphabet : ${alphabetList}">
+                                <th:block th:if="${alphabet == 'a'}">
+                                    <th:block th:with="existA='Y'"></th:block>
+                                </th:block>
+                                <th:block th:if="${alphabet == 'z'}">
+                                    <th:block th:with="existZ='Y'"></th:block>
+                                </th:block>
+                                <td th:class="text-center" th:text="${alphabet}">알파벳</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                        a 존재여부 :
+                        <span th:text="${existA}">a 존재여부</span>
+                    </div>
+                    <div>
+                        z 존재여부 :
+                        <span th:text="${existZ}">z 존재여부</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 </html>
