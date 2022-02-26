@@ -73,7 +73,7 @@ public class MainController {
             // 메인화면 구성
             session.setAttribute("boardList", boardService.selectAll(0));
             session.setAttribute("todoList", todoService.selectAll(loginMember.getMemberId()));
-            session.setAttribute("messagesList", messagesService.selectAll(loginMember.getMemberId()));
+            session.setAttribute("messagesList", messagesService.selectAll(0, loginMember.getMemberId()));
 
             return "main/main";
         }
