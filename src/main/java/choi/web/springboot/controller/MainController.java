@@ -47,6 +47,9 @@ public class MainController {
 
             return "main/login";
         } else {
+            // 메인화면 구성
+            model.addAttribute("todoList", todoService.selectAll(loginMember.getMemberId()));
+
             return "main/main";
         }
     }
@@ -66,8 +69,8 @@ public class MainController {
 
             // 메인화면 구성
             session.setAttribute("boardList", boardService.selectAll(0));
-            session.setAttribute("todoList", todoService.selectAll(loginMember.getMemberId()));
             session.setAttribute("messagesList", messagesService.selectAll(0, loginMember.getMemberId()));
+            model.addAttribute("todoList", todoService.selectAll(loginMember.getMemberId()));
 
             return "main/main";
         }
