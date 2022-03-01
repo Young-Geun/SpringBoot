@@ -5,6 +5,7 @@ import choi.web.springboot.service.BoardService;
 import choi.web.springboot.service.MemberService;
 import choi.web.springboot.service.MessagesService;
 import choi.web.springboot.service.TodoService;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,23 +17,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+@RequiredArgsConstructor
 @Controller
 public class MainController {
 
     private Logger logger = LoggerFactory.getLogger(MainController.class);
 
-    private BoardService boardService;
-    private TodoService todoService;
-    private MessagesService messagesService;
-    private MemberService memberService;
-
-    @Autowired
-    public MainController(BoardService boardService, TodoService todoService, MessagesService messagesService, MemberService memberService) {
-        this.boardService = boardService;
-        this.todoService = todoService;
-        this.messagesService = messagesService;
-        this.memberService = memberService;
-    }
+    private final BoardService boardService;
+    private final TodoService todoService;
+    private final MessagesService messagesService;
+    private final MemberService memberService;
 
     @GetMapping("/")
     public String signIn(Member member) {

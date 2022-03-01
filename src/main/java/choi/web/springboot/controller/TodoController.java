@@ -2,22 +2,18 @@ package choi.web.springboot.controller;
 
 import choi.web.springboot.domain.Todo;
 import choi.web.springboot.service.TodoService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpSession;
 
+@RequiredArgsConstructor
 @Controller
 public class TodoController {
 
-    private TodoService todoService;
-
-    @Autowired
-    public TodoController(TodoService todoService) {
-        this.todoService = todoService;
-    }
+    private final TodoService todoService;
 
     @PostMapping("/todo/insert")
     public String insert(Todo todo, HttpSession session) {

@@ -3,7 +3,7 @@ package choi.web.springboot.controller;
 
 import choi.web.springboot.domain.Member;
 import choi.web.springboot.service.MemberService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,15 +14,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
+@RequiredArgsConstructor
 @Controller
 public class MemberController {
 
-    private MemberService memberService;
-
-    @Autowired
-    public MemberController(MemberService memberService) {
-        this.memberService = memberService;
-    }
+    private final MemberService memberService;
 
     @GetMapping("/member/list")
     public String list(Member member, Model model) {

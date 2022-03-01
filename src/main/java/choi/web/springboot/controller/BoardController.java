@@ -4,7 +4,7 @@ package choi.web.springboot.controller;
 import choi.web.springboot.common.Pagination;
 import choi.web.springboot.domain.Board;
 import choi.web.springboot.service.BoardService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,15 +16,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 
+@RequiredArgsConstructor
 @Controller
 public class BoardController {
 
-    private BoardService boardService;
-
-    @Autowired
-    public BoardController(BoardService boardService) {
-        this.boardService = boardService;
-    }
+    private final BoardService boardService;
 
     @GetMapping("/board/list")
     public String list(Model model,

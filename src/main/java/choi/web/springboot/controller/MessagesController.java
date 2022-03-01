@@ -5,7 +5,7 @@ import choi.web.springboot.common.Pagination;
 import choi.web.springboot.domain.Member;
 import choi.web.springboot.domain.Messages;
 import choi.web.springboot.service.MessagesService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,15 +14,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 
+@RequiredArgsConstructor
 @Controller
 public class MessagesController {
 
-    private MessagesService messagesService;
-
-    @Autowired
-    public MessagesController(MessagesService messagesService) {
-        this.messagesService = messagesService;
-    }
+    private final MessagesService messagesService;
 
     @GetMapping("/messages/list")
     public String list(Model model,
