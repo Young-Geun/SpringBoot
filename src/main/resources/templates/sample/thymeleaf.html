@@ -105,6 +105,29 @@
                 </div>
             </div>
         </div>
+        <div class="col-lg-6 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">커스텀 함수</h4>
+                    <div class="table-responsive py-xl-5">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th th:class="text-center">변경 전</th>
+                                <th th:class="text-center">변경 후</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="list : ${numList}">
+                                <td th:class="text-center" th:text="${list}">변경 전</td>
+                                <td th:class="text-center" th:text="${@commonUtils.numberFormat(list)}">변경 후</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 </body>
