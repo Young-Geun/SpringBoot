@@ -23,7 +23,7 @@ public class Pagination {
         this.listCnt = listCnt;
 
         // 전체 페이지수
-        this.pageCnt = (int) Math.ceil(listCnt / listSize);
+        this.pageCnt = listCnt % listSize == 0 ? listCnt / listSize : listCnt / listSize + 1;
 
         // 시작 페이지
         this.startPage = (range - 1) * rangeSize + 1;

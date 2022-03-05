@@ -34,7 +34,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="text-right" th:unless="${messagesList == null || messagesList.content == null || messagesList.content.size() == 0}">
+                    <div class="text-right py-xl-4" th:unless="${messagesList == null || messagesList.content == null || messagesList.content.size() == 0}">
                         <div class="btn-group">
                             <button th:onclick="search([[${pages.startPage - 2}]], [[${pages.range - 1}]])" th:if="${pages.prev}" type="button" class="btn btn-outline-secondary">
                                 <i class="mdi mdi-arrow-left"></i>
