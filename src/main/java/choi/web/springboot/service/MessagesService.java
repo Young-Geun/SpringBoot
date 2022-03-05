@@ -9,6 +9,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
+import java.time.LocalDateTime;
+
 @RequiredArgsConstructor
 @Service
 public class MessagesService {
@@ -25,6 +28,20 @@ public class MessagesService {
         Member sender = new Member();
         sender.setMemberId(memberId);
         return messagesRepository.findBySender(sender, PageRequest.of(page, 10, Sort.by(Sort.Direction.DESC, "messagesId")));
+    }
+
+    public int sendMessages(Member member, String content, HttpSession session) {
+        Messages messages = new Messages();
+        messages.setSender((Member) session.getAttribute("loginMember"));
+        messages.setReceiver(member);
+        messages.setMessages(content);
+        messages.setSendDate(LocalDateTime.now());
+        try {
+            messagesRepository.save(messages);
+        } catch (Exception e) {
+            return 0;
+        }
+        return 1;
     }
 
 }

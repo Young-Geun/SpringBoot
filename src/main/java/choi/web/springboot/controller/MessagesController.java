@@ -10,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
@@ -49,6 +50,25 @@ public class MessagesController {
         model.addAttribute("pages", pagination);
 
         return "messages/sendList";
+    }
+
+    @GetMapping("/messages/send")
+    public String send(Member member) {
+        return "messages/sendForm";
+    }
+
+    @PostMapping("/messages/send")
+    public String send(Member member, String content, Model model, HttpSession session) {
+        int result = messagesService.sendMessages(member, content, session);
+        if (result == 0) {
+            model.addAttribute("resultFlag", false);
+            model.addAttribute("resultMsg", "메시지 발송을 실패하였습니다.");
+        } else {
+            model.addAttribute("resultFlag", true);
+            model.addAttribute("resultMsg", "메시지 발송을 성공하였습니다.");
+        }
+
+        return "messages/sendForm";
     }
 
 }

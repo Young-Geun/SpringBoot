@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: headFragment"></head>
+<body>
+<div class="container-scroller">
+    <div class="container-fluid page-body-wrapper">
+        <div class="main-panel">
+            <div class="col-lg-12 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <form th:action="@{/messages/send}" th:method="post">
+                            <div class="form-group">
+                                <label>받는이</label>
+                                <input type="hidden" th:field="${member.memberId}">
+                                <input type="text" class="form-control" th:field="${member.memberName}">
+                            </div>
+                            <div class="form-group">
+                                <label>내용</label>
+                                <textarea name="content" class="form-control" rows="4"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary mr-2">보내기</button>
+                            <button type="button" class="btn btn-dark mr-2" th:onclick="self.close()">닫기</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script th:inline="javascript">
+        $(document).ready(function(){
+            let resultFlag = [[${resultFlag}]];
+            let resultMsg = [[${resultMsg}]];
+
+            if (resultFlag != null) {
+                alert(resultMsg);
+                self.close();
+            }
+        });
+    </script>
+</div>
+</body>
+</html>

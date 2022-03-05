@@ -21136,3 +21136,10 @@ div.tagsinput {
   flex-grow: 1; }
 
 /*# sourceMappingURL=maps/style.css.map */
+
+
+/* custom */
+.custom-link {
+  color: #007bff !important;
+  cursor: pointer !important;
+}
