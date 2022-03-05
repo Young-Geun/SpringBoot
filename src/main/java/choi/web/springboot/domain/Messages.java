@@ -20,12 +20,15 @@ public class Messages {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "MESSAGES_SEQ_GENERATOR")
     long messagesId;
 
+    // 발송인
     @OneToOne
     @JoinColumn(name = "send_id")
     private Member sender;
 
-    // 받는이 아이디
-    long recvId;
+    // 수신인
+    @OneToOne
+    @JoinColumn(name = "recv_id")
+    private Member receiver;
 
     // 내용
     String messages;

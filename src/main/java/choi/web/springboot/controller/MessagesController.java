@@ -20,20 +20,35 @@ public class MessagesController {
 
     private final MessagesService messagesService;
 
-    @GetMapping("/messages/list")
-    public String list(Model model,
-                       HttpSession session,
-                       @RequestParam(required = false, defaultValue = "0", value = "page") int page,
-                       @RequestParam(required = false, defaultValue = "1", value = "range") int range) {
+    @GetMapping("/messages/recvList")
+    public String recvList(Model model, HttpSession session,
+                           @RequestParam(required = false, defaultValue = "0", value = "page") int page,
+                           @RequestParam(required = false, defaultValue = "1", value = "range") int range) {
         Member loginMember = (Member) session.getAttribute("loginMember");
-        Page<Messages> list = messagesService.selectAll(page, loginMember.getMemberId());
+        Page<Messages> list = messagesService.selectRecvMessagesList(page, loginMember.getMemberId());
         model.addAttribute("messagesList", list);
 
         Pagination pagination = new Pagination();
         pagination.pageInfo(page + 1, range, (int) list.getTotalElements());
         model.addAttribute("pages", pagination);
 
-        return "messages/list";
+        return "messages/recvList";
+    }
+
+    @GetMapping("/messages/sendList")
+    public String sendList(Model model,
+                           HttpSession session,
+                           @RequestParam(required = false, defaultValue = "0", value = "page") int page,
+                           @RequestParam(required = false, defaultValue = "1", value = "range") int range) {
+        Member loginMember = (Member) session.getAttribute("loginMember");
+        Page<Messages> list = messagesService.selectSendMessagesList(page, loginMember.getMemberId());
+        model.addAttribute("messagesList", list);
+
+        Pagination pagination = new Pagination();
+        pagination.pageInfo(page + 1, range, (int) list.getTotalElements());
+        model.addAttribute("pages", pagination);
+
+        return "messages/sendList";
     }
 
 }

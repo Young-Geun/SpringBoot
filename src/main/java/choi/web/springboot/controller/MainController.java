@@ -8,7 +8,6 @@ import choi.web.springboot.service.TodoService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -69,7 +68,7 @@ public class MainController {
 
             // 메인화면 구성
             session.setAttribute("boardList", boardService.selectAll(0));
-            session.setAttribute("messagesList", messagesService.selectAll(0, loginMember.getMemberId()));
+            session.setAttribute("messagesList", messagesService.selectRecvMessagesList(0, loginMember.getMemberId()));
             model.addAttribute("todoList", todoService.selectAll(loginMember.getMemberId()));
 
             return "main/main";
