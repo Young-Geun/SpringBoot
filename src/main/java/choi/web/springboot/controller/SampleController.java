@@ -43,6 +43,14 @@ public class SampleController {
         numList.add(5678L);
         model.addAttribute("numList", numList);
 
+        // Set Value
+        model.addAttribute("intNum1", 0);
+        model.addAttribute("intNum2", 10);
+        model.addAttribute("doubleNum1", 0.0);
+        model.addAttribute("doubleNum2", 0.01);
+        model.addAttribute("longNum1", 0L);
+        model.addAttribute("longNum2", 10L);
+
         // Return Result
         return "sample/thymeleaf";
     }
