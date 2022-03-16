@@ -5,10 +5,13 @@
 <div class="container-scroller">
     <div class="container-fluid page-body-wrapper full-page-wrapper">
         <div class="row w-100 m-0">
-            <div class="content-wrapper full-page-wrapper d-flex align-items-center auth login-bg">
+            <div class="content-wrapper full-page-wrapper d-flex align-items-center auth">
                 <div class="card col-lg-4 mx-auto">
                     <div class="card-body px-5 py-5">
-                        <h3 class="card-title text-left mb-3">Sign in</h3>
+                        <h3 class="card-title text-center mb-5">
+                            <img src="/assets/images/octocat-walk.gif" class="w-50 mb-1"/>
+                            <div>Sign in</div>
+                        </h3>
                         <p class="text-danger" th:text="${result}"></p>
                         <form th:action="@{/main}" th:object="${member}" th:method="post">
                             <div class="form-group">

@@ -1,21 +1,29 @@
 
 
-              _
-             | |
-             | |===( )    (((())
-             |_|   |||    | o o|
-                    |||   \    >                    ____
-                     |||   \ =/                    ||   \_
-                      ||||||||||||||               ||     |
-                      ||||||||||||||            ...||__/|-"
-                      ||||||||||||||         __|________|__
-                         ||| ||| |||        |______________|
-                         ||| ||| ( )        || ||      || ||
-                         ||| |||            || ||      || ||
--------------------------|||-|||------------||-||------||-||-------
-                         |__>|__>           || ||      || ||
 
-
-                                            hit any key to continue
+.------------------------------------------------------------------------------.
+|                             .mmMMMMMMMMMMMMMmm.                              |
+|                         .mMMMMMMMMMMMMMMMMMMMMMMMm.                          |
+|                      .mMMMMMMMMMMMMMMMMMMMMMMMMMMMMMm.                       |
+|                    .MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM.                     |
+|                  .MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM.                   |
+|                 MMMMMMMM'  `"MMMMM"""""""MMMM""`  'MMMMMMMM                  |
+|                MMMMMMMMM                           MMMMMMMMM                 |
+|               MMMMMMMMMM:                         :MMMMMMMMMM                |
+|              .MMMMMMMMMM                           MMMMMMMMMM.               |
+|              MMMMMMMMM"                             "MMMMMMMMM               |
+|              MMMMMMMMM                               MMMMMMMMM               |
+|              MMMMMMMMM                               MMMMMMMMM               |
+|              MMMMMMMMMM                             MMMMMMMMMM               |
+|              `MMMMMMMMMM                           MMMMMMMMMM`               |
+|               MMMMMMMMMMMM.                     .MMMMMMMMMMMM                |
+|                MMMMMM  MMMMMMMMMM         MMMMMMMMMMMMMMMMMM                 |
+|                 MMMMMM  'MMMMMMM           MMMMMMMMMMMMMMMM                  |
+|                  `MMMMMM  "MMMMM           MMMMMMMMMMMMMM`                   |
+|                    `MMMMMm                 MMMMMMMMMMMM`                     |
+|                      `"MMMMMMMMM           MMMMMMMMM"`                       |
+|                         `"MMMMMM           MMMMMM"`                          |
+|                             `""M           M""`             © 2022. CHOI     |
+'------------------------------------------------------------------------------'
 
 
