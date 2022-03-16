@@ -6,28 +6,30 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
 
 @RequiredArgsConstructor
 @Controller
+@RequestMapping("/todo")
 public class TodoController {
 
     private final TodoService todoService;
 
-    @PostMapping("/todo/insert")
+    @PostMapping("/insert")
     public String insert(Todo todo, HttpSession session) {
         todoService.insert(todo, session);
         return "redirect:/main";
     }
 
-    @GetMapping("/todo/update")
+    @GetMapping("/update")
     public String update(Todo todo, HttpSession session) {
         todoService.update(todo, session);
         return "redirect:/main";
     }
 
-    @GetMapping("/todo/delete")
+    @GetMapping("/delete")
     public String delete(Todo todo, HttpSession session) {
         todoService.delete(todo);
         return "redirect:/main";

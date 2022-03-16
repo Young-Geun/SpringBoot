@@ -11,17 +11,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 
 @RequiredArgsConstructor
 @Controller
+@RequestMapping("/messages")
 public class MessagesController {
 
     private final MessagesService messagesService;
 
-    @GetMapping("/messages/recvList")
+    @GetMapping("/recvList")
     public String recvList(Model model, HttpSession session,
                            @RequestParam(required = false, defaultValue = "0", value = "page") int page,
                            @RequestParam(required = false, defaultValue = "1", value = "range") int range) {
@@ -36,7 +38,7 @@ public class MessagesController {
         return "messages/recvList";
     }
 
-    @GetMapping("/messages/sendList")
+    @GetMapping("/sendList")
     public String sendList(Model model,
                            HttpSession session,
                            @RequestParam(required = false, defaultValue = "0", value = "page") int page,
@@ -52,12 +54,12 @@ public class MessagesController {
         return "messages/sendList";
     }
 
-    @GetMapping("/messages/send")
+    @GetMapping("/send")
     public String send(Member member) {
         return "messages/sendForm";
     }
 
-    @PostMapping("/messages/send")
+    @PostMapping("/send")
     public String send(Member member, String content, Model model, HttpSession session) {
         int result = messagesService.sendMessages(member, content, session);
         if (result == 0) {

@@ -12,17 +12,19 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 
 @RequiredArgsConstructor
 @Controller
+@RequestMapping("/board")
 public class BoardController {
 
     private final BoardService boardService;
 
-    @GetMapping("/board/list")
+    @GetMapping("/list")
     public String list(Model model,
                        @RequestParam(required = false, defaultValue = "0", value = "page") int page,
                        @RequestParam(required = false, defaultValue = "1", value = "range") int range) {
@@ -36,7 +38,7 @@ public class BoardController {
         return "board/list";
     }
 
-    @GetMapping("/board/detail")
+    @GetMapping("/detail")
     public String list(Model model, Board board) {
         Board result = boardService.selectOne(board.getBoardId());
         model.addAttribute("result", result);
@@ -44,12 +46,12 @@ public class BoardController {
         return "board/detail";
     }
 
-    @GetMapping("/board/insert")
+    @GetMapping("/insert")
     public String insert(Board board) {
         return "board/insert";
     }
 
-    @PostMapping("/board/insert")
+    @PostMapping("/insert")
     public String insert(@Validated Board board, BindingResult bindingResult, Model model, HttpSession session) {
         if (bindingResult.hasErrors()) {
             return "board/insert";
@@ -64,13 +66,13 @@ public class BoardController {
         }
     }
 
-    @PostMapping("/board/update")
+    @PostMapping("/update")
     public String update(Board board) {
         boardService.update(board);
         return "redirect:/board/list";
     }
 
-    @PostMapping("/board/delete")
+    @PostMapping("/delete")
     public String delete(Board board) {
         boardService.delete(board);
         return "redirect:/board/list";

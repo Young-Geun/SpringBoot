@@ -10,17 +10,19 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @RequiredArgsConstructor
 @Controller
+@RequestMapping("/member")
 public class MemberController {
 
     private final MemberService memberService;
 
-    @GetMapping("/member/list")
+    @GetMapping("/list")
     public String list(Member member, Model model) {
         List<Member> memberList = memberService.selectList(member.getMemberName());
         model.addAttribute("memberList", memberList);
@@ -28,12 +30,12 @@ public class MemberController {
         return "member/list";
     }
 
-    @GetMapping("/member/insert")
+    @GetMapping("/insert")
     public String insert(Member member) {
         return "member/insert";
     }
 
-    @PostMapping("/member/insert")
+    @PostMapping("/insert")
     public String insert(@Validated Member member, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             return "member/insert";
@@ -52,7 +54,7 @@ public class MemberController {
         }
     }
 
-    @GetMapping("/member/update")
+    @GetMapping("/update")
     public String update(Model model, HttpSession session) {
         Member loginMember = (Member) session.getAttribute("loginMember");
         model.addAttribute("member", loginMember);
@@ -60,7 +62,7 @@ public class MemberController {
         return "member/update";
     }
 
-    @PostMapping("/member/update")
+    @PostMapping("/update")
     public String update(@Validated Member member, BindingResult bindingResult, Model model, HttpSession session) {
         if (bindingResult.hasErrors()) {
             return "member/update";
