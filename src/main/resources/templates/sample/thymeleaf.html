@@ -102,6 +102,9 @@
                         z 존재여부 :
                         <span th:text="${existZ}">z 존재여부</span>
                     </div>
+                    <div>
+                        결론 : 타임리프는 재바인딩이 불가능하다.
+                    </div>
                 </div>
             </div>
         </div>
@@ -169,6 +172,90 @@
                             </tr>
                             </tbody>
                         </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body" th:with="existA='N', existZ='N'">
+                    <h4 class="card-title">타임리프 상태 변수</h4>
+                    <div class="table-responsive py-xl-5">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th th:class="text-center">알파벳</th>
+                                <th th:class="text-center">index</th>
+                                <th th:class="text-center">count</th>
+                                <th th:class="text-center">size</th>
+                                <th th:class="text-center">even</th>
+                                <th th:class="text-center">odd</th>
+                                <th th:class="text-center">first</th>
+                                <th th:class="text-center">last</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="alphabet : ${alphabetList}">
+                                <td th:class="text-center" th:text="${alphabet}">알파벳</td>
+                                <td th:class="text-center" th:text="${alphabetStat.index}">index</td>
+                                <td th:class="text-center" th:text="${alphabetStat.count}">count</td>
+                                <td th:class="text-center" th:text="${alphabetStat.size}">size</td>
+                                <td th:class="text-center" th:text="${alphabetStat.even}">even</td>
+                                <td th:class="text-center" th:text="${alphabetStat.odd}">odd</td>
+                                <td th:class="text-center" th:text="${alphabetStat.first}">first</td>
+                                <td th:class="text-center" th:text="${alphabetStat.last}">last</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                        상태변수는 기본적으로 '오브젝트명 + "Stat"' 형태의 변수명을 갖는다.<br>
+                        문법의 형태가 다음과 같다면,<br>
+                        th:each="alphabet : ${alphabetList}"<br>
+                        'alphabetStat.index'와 같은 형태로 사용할 수 있다.<br>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body" th:with="existA='N', existZ='N'">
+                    <h4 class="card-title">타임리프 상태 변수</h4>
+                    <div class="table-responsive py-xl-5">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th th:class="text-center">알파벳</th>
+                                <th th:class="text-center">index</th>
+                                <th th:class="text-center">count</th>
+                                <th th:class="text-center">size</th>
+                                <th th:class="text-center">even</th>
+                                <th th:class="text-center">odd</th>
+                                <th th:class="text-center">first</th>
+                                <th th:class="text-center">last</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="alphabet, i : ${alphabetList}">
+                                <td th:class="text-center" th:text="${alphabet}">알파벳</td>
+                                <td th:class="text-center" th:text="${i.index}">index</td>
+                                <td th:class="text-center" th:text="${i.count}">count</td>
+                                <td th:class="text-center" th:text="${i.size}">size</td>
+                                <td th:class="text-center" th:text="${i.even}">even</td>
+                                <td th:class="text-center" th:text="${i.odd}">odd</td>
+                                <td th:class="text-center" th:text="${i.first}">first</td>
+                                <td th:class="text-center" th:text="${i.last}">last</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                        상태변수는 개발자가 직접 명명할 수도 있다.<br>
+                        문법의 형태가 다음과 같다면,<br>
+                        th:each="alphabet, i : ${alphabetList}"<br>
+                        'i.index'와 같은 형태로 사용할 수 있다.<br>
                     </div>
                 </div>
             </div>
