@@ -1,22 +1,31 @@
 
 package choi.web.springboot.controller;
 
+import choi.web.springboot.domain.Member;
 import choi.web.springboot.domain.Sample;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
 @Controller
 @RequestMapping("/sample")
 public class SampleController {
 
+    @Autowired
+    private MessageSource messageSource;
+
     @GetMapping("/thymeleaf")
-    public String list(Model model) {
+    public String thymeleaf(Model model) {
         // Set Value
         List<Sample> list = new ArrayList();
         list.add(new Sample(1, "테스트1", 1, 1, 1, 1));
@@ -55,6 +64,24 @@ public class SampleController {
 
         // Return Result
         return "sample/thymeleaf";
+    }
+
+    @GetMapping("/messages")
+    public String messages(@RequestParam String lang, Model model, HttpSession session) {
+        Member loginMember = (Member) session.getAttribute("loginMember");
+        String[] param = new String[]{loginMember.getMemberName(), loginMember.getMemberEmail()};
+
+        String title = messageSource.getMessage("sample.messages.title", null, "en".equals(lang) ? Locale.ENGLISH : Locale.KOREAN);
+        String content = messageSource.getMessage("sample.messages.content", param, "en".equals(lang) ? Locale.ENGLISH : Locale.KOREAN);
+        String optionKo = messageSource.getMessage("sample.messages.ko", null, "en".equals(lang) ? Locale.ENGLISH : Locale.KOREAN);
+        String optionEn = messageSource.getMessage("sample.messages.en", null, "en".equals(lang) ? Locale.ENGLISH : Locale.KOREAN);
+
+        model.addAttribute("title", title);
+        model.addAttribute("content", content);
+        model.addAttribute("optionKo", optionKo);
+        model.addAttribute("optionEn", optionEn);
+
+        return "sample/messages";
     }
 
 }
