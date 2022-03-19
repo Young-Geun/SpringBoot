@@ -3,6 +3,7 @@ package choi.web.springboot.controller;
 
 import choi.web.springboot.domain.Member;
 import choi.web.springboot.domain.Sample;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,7 @@ import java.util.Locale;
 
 @Controller
 @RequestMapping("/sample")
+@Slf4j
 public class SampleController {
 
     @Autowired
@@ -71,6 +73,7 @@ public class SampleController {
         Member loginMember = (Member) session.getAttribute("loginMember");
         String[] param = new String[]{loginMember.getMemberName(), loginMember.getMemberEmail()};
 
+        log.info("lang = {}", lang);
         String title = messageSource.getMessage("sample.messages.title", null, "en".equals(lang) ? Locale.ENGLISH : Locale.KOREAN);
         String content = messageSource.getMessage("sample.messages.content", param, "en".equals(lang) ? Locale.ENGLISH : Locale.KOREAN);
         String optionKo = messageSource.getMessage("sample.messages.ko", null, "en".equals(lang) ? Locale.ENGLISH : Locale.KOREAN);
@@ -80,6 +83,7 @@ public class SampleController {
         model.addAttribute("content", content);
         model.addAttribute("optionKo", optionKo);
         model.addAttribute("optionEn", optionEn);
+        log.info("Messages = {}", model);
 
         return "sample/messages";
     }
