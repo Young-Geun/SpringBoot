@@ -24,6 +24,9 @@ mybatis:
 
 server:
   port: 8084
+  servlet:
+    session:
+      timeout: 600
 
 logging:
   level:
@@ -59,6 +62,9 @@ mybatis:
 
 server:
   port: 8084
+  servlet:
+    session:
+      timeout: 600
 
 logging:
   level:
@@ -94,6 +100,9 @@ mybatis:
 
 server:
   port: 8084
+  servlet:
+    session:
+      timeout: 600
 
 logging:
   level:
