@@ -11,8 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
-import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -69,8 +69,7 @@ public class SampleController {
     }
 
     @GetMapping("/messages")
-    public String messages(@RequestParam String lang, Model model, HttpSession session) {
-        Member loginMember = (Member) session.getAttribute("loginMember");
+    public String messages(@RequestParam String lang, Model model, @SessionAttribute(required = false) Member loginMember) {
         String[] param = new String[]{loginMember.getMemberName(), loginMember.getMemberEmail()};
 
         log.info("lang = {}", lang);
