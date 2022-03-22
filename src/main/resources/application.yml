@@ -27,6 +27,7 @@ server:
   servlet:
     session:
       timeout: 600
+      tracking-modes: cookie
 
 logging:
   level:
@@ -65,6 +66,7 @@ server:
   servlet:
     session:
       timeout: 600
+      tracking-modes: cookie
 
 logging:
   level:
@@ -103,6 +105,7 @@ server:
   servlet:
     session:
       timeout: 600
+      tracking-modes: cookie
 
 logging:
   level:
