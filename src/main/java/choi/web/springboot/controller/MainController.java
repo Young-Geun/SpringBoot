@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -31,28 +32,7 @@ public class MainController {
         return "main/login";
     }
 
-    @GetMapping("/logout")
-    public String logout(Member member, HttpSession session) {
-        session.invalidate();
-        return "main/login";
-    }
-
-    @GetMapping("/main")
-    public String main(Model model, HttpSession session) {
-        Member loginMember = (Member) session.getAttribute("loginMember");
-        if (loginMember == null) {
-            model.addAttribute("result", "세션이 만료되었습니다.");
-
-            return "main/login";
-        } else {
-            // 메인화면 구성
-            model.addAttribute("todoList", todoService.selectAll(loginMember.getMemberId()));
-
-            return "main/main";
-        }
-    }
-
-    @PostMapping("/main")
+    @PostMapping("/login")
     public String main(Member member, Model model, HttpServletRequest request) {
         Member loginMember = memberService.selectOne(member.getMemberEmail(), member.getMemberPassword());
         if (loginMember == null) {
@@ -60,18 +40,28 @@ public class MainController {
 
             return "main/login";
         } else {
-            // TODO: 2022/01/21. 로그인 로직 분리할 것
             HttpSession session = request.getSession();
             session.setAttribute("loginMember", loginMember);
             log.info("Login Member = {}", loginMember.getMemberEmail());
 
-            // 메인화면 구성
-            session.setAttribute("boardList", boardService.selectAll(0));
-            session.setAttribute("messagesList", messagesService.selectRecvMessagesList(0, loginMember.getMemberId()));
-            model.addAttribute("todoList", todoService.selectAll(loginMember.getMemberId()));
-
-            return "main/main";
+            return "redirect:/main";
         }
+    }
+
+    @GetMapping("/logout")
+    public String logout(Member member, HttpSession session) {
+        session.invalidate();
+        return "main/login";
+    }
+
+    @GetMapping("/main")
+    public String main(@SessionAttribute(required = false) Member loginMember, Model model, HttpSession session) {
+        // 메인화면 구성
+        session.setAttribute("boardList", boardService.selectAll(0));
+        session.setAttribute("messagesList", messagesService.selectRecvMessagesList(0, loginMember.getMemberId()));
+        model.addAttribute("todoList", todoService.selectAll(loginMember.getMemberId()));
+
+        return "main/main";
     }
 
 }

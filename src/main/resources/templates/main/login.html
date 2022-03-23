@@ -13,7 +13,7 @@
                             <div>Sign in</div>
                         </h3>
                         <p class="text-danger" th:text="${result}"></p>
-                        <form th:action="@{/main}" th:object="${member}" th:method="post">
+                        <form th:action="@{/login}" th:object="${member}" th:method="post">
                             <div class="form-group">
                                 <label>Email</label>
                                 <input th:field="*{memberEmail}" type="text" class="form-control p_input">
