@@ -7,6 +7,7 @@ CREATE TABLE member
     member_email varchar2(100) NOT NULL,
     member_password varchar2(255) NOT NULL,
     member_name varchar2(100) NOT NULL,
+    member_profile varchar2(100),
     member_status varchar2(1),
 
     PRIMARY KEY (member_id)
@@ -21,9 +22,9 @@ NOCYCLE --순한하지않음
 NOCACHE; --메모리에 시퀀스값 미리할당
 
 INSERT INTO member (member_id, member_email, member_password, member_name, member_status)
-VALUES (1, 'choi', '1', '최영근', 'Y');
+VALUES (MEMBER_SEQ.nextval, 'choi', '1', '최영근', 'Y');
 INSERT INTO member (member_id, member_email, member_password, member_name, member_status)
-VALUES (2, 'test1@naver.com', '1', '테스터1', 'Y');
+VALUES (MEMBER_SEQ.nextval, 'test1@naver.com', '1', '테스터1', 'Y');
 
 
 
@@ -52,11 +53,11 @@ NOCYCLE
 NOCACHE;
 
 INSERT INTO messages (messages_id, send_id, recv_id, messages, send_date)
-VALUES (1, 2, 1, 'hi choi~', SYSDATE);
+VALUES (MESSAGES_SEQ.nextval, 2, 1, 'hi choi~', SYSDATE);
 INSERT INTO messages (messages_id, send_id, recv_id, messages, send_date)
-VALUES (2, 2, 1, 'hello', SYSDATE);
+VALUES (MESSAGES_SEQ.nextval, 2, 1, 'hello', SYSDATE);
 INSERT INTO messages (messages_id, send_id, recv_id, messages, send_date)
-VALUES (3, 1, 2, '안녕 테스터1!', SYSDATE);
+VALUES (MESSAGES_SEQ.nextval, 1, 2, '안녕 테스터1!', SYSDATE);
 
 
 
@@ -85,9 +86,9 @@ NOCYCLE
 NOCACHE;
 
 INSERT INTO board (board_id, title, contents, reg_id, reg_date)
-VALUES (1, '홈페이지 오픈', '오픈했습니다', 1, SYSDATE);
+VALUES (BOARD_SEQ.nextval, '홈페이지 오픈', '오픈했습니다', 1, SYSDATE);
 INSERT INTO board (board_id, title, contents, reg_id, reg_date)
-VALUES (2, '공지사항', '테스트입니다.', 1, SYSDATE);
+VALUES (BOARD_SEQ.nextval, '공지사항', '테스트입니다.', 1, SYSDATE);
 
 
 
@@ -115,6 +116,6 @@ NOCYCLE
 NOCACHE;
 
 INSERT INTO todo (todo_id, contents, reg_id, todo_status)
-VALUES (1, '커밋하기', 1, 'N');
+VALUES (TODO_SEQ.nextval, '커밋하기', 1, 'N');
 INSERT INTO todo (todo_id, contents, reg_id, todo_status)
-VALUES (2, '오류 고치기', 1, 'N');
+VALUES (TODO_SEQ.nextval, '오류 고치기', 1, 'N');

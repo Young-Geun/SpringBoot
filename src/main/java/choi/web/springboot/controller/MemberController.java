@@ -11,6 +11,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -63,12 +65,14 @@ public class MemberController {
     }
 
     @PostMapping("/update")
-    public String update(@Validated Member member, BindingResult bindingResult, Model model, HttpSession session) {
+    public String update(@Validated Member member, BindingResult bindingResult,
+                         @RequestParam("file") MultipartFile files,
+                         Model model, HttpSession session) {
         if (bindingResult.hasErrors()) {
             return "member/update";
         }
 
-        int result = memberService.update(member);
+        int result = memberService.update(member, files);
         if (result == 0) {
             model.addAttribute("result", "수정에 실패하였습니다.");
         } else {

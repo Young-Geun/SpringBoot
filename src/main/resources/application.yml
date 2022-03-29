@@ -35,6 +35,9 @@ logging:
   file:
     name: /Users/choi/dev/log/boot.log
 
+file:
+  dir: /Users/choi/dev/upload/
+
 ---
 
 spring:
@@ -74,6 +77,9 @@ logging:
   file:
     name: C:\\Users\\choi\\Desktop\\boot.log
 
+file:
+  dir: C:\\dev\\upload\\
+
 ---
 
 spring:
@@ -112,3 +118,6 @@ logging:
     root: warn
   file:
     name: /home/opc/dev/log/boot.log
+
+file:
+  dir: /home/opc/dev/upload/

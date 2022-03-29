@@ -34,6 +34,9 @@ public class Member {
     @NotBlank(message = "사용자 이름을 입력해주세요.")
     String memberName;
 
+    // 사용자 프로필 경로
+    String memberProfile;
+
     // 계정 상태
     String memberStatus;
 
