@@ -29,6 +29,10 @@ public class MemberService {
         return memberRepository.findByMemberEmailAndMemberPassword(email, password);
     }
 
+    public Member findByMemberId(long id) {
+        return memberRepository.findByMemberId(id);
+    }
+
     public int insert(Member member) {
         int result = 1;
         if (memberRepository.findByMemberEmail(member.getMemberEmail()) == null) {

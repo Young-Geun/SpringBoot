@@ -4,6 +4,13 @@ package choi.web.springboot.controller;
 import choi.web.springboot.domain.Member;
 import choi.web.springboot.service.MemberService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,12 +22,21 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
+@Slf4j
 @RequiredArgsConstructor
 @Controller
 @RequestMapping("/member")
 public class MemberController {
+
+    @Value("${file.dir}")
+    private String fileDir;
 
     private final MemberService memberService;
 
@@ -81,6 +97,25 @@ public class MemberController {
         }
 
         return "member/update";
+    }
+
+    @GetMapping("/profile")
+    public ResponseEntity<Resource> display(@RequestParam("memberId") long memberId) {
+        // 사용자 조회
+        Member member = memberService.findByMemberId(memberId);
+
+        // 사용자 프로필 셋팅
+        String filePath = fileDir + "member_pic" + File.separator + member.getMemberProfile();
+        Resource resource = new FileSystemResource(filePath);
+        HttpHeaders header = new HttpHeaders();
+        try {
+            Path path = Paths.get(filePath);
+            header.add("Content-type", Files.probeContentType(path));
+        } catch (IOException e) {
+            log.error(e.getMessage());
+        }
+
+        return new ResponseEntity<Resource>(resource, header, HttpStatus.OK);
     }
 
 }

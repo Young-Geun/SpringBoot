@@ -34,7 +34,10 @@
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item preview-item">
                                 <div class="preview-thumbnail">
-                                    <img src="/assets/images/faces-clipart/pic-1.png" class="rounded-circle profile-pic">
+                                    <img th:if="${messages.sender.memberProfile == null}"
+                                         src="/assets/images/faces-clipart/pic-1.png" class="rounded-circle profile-pic">
+                                    <img th:unless="${messages.sender.memberProfile == null}"
+                                         th:src="|/member/profile?memberId=${messages.sender.memberId}|" class="rounded-circle profile-pic">
                                 </div>
                                 <div class="preview-item-content">
                                     <p class="preview-subject ellipsis mb-1" th:text="${messages.sender.memberName}">Sender</p>
@@ -102,7 +105,10 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link" id="profileDropdown" href="#" data-toggle="dropdown">
                         <div class="navbar-profile">
-                            <img class="img-xs rounded-circle" src="/assets/images/faces-clipart/pic-1.png">
+                            <img th:if="${session.loginMember.memberProfile == null}"
+                                 src="/assets/images/faces-clipart/pic-1.png" class="img-xs rounded-circle">
+                            <img th:unless="${session.loginMember.memberProfile == null}"
+                                 th:src="|/member/profile?memberId=${session.loginMember.memberId}|" class="img-xs rounded-circle">
                             <p class="mb-0 d-none d-sm-block navbar-profile-name" th:text="${session.loginMember.memberName}">Name</p>
                             <i class="mdi mdi-menu-down d-none d-sm-block"></i>
                         </div>

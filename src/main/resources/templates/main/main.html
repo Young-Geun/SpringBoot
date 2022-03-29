@@ -38,7 +38,10 @@
                     <div class="preview-list">
                         <div th:each="messages : ${session.messagesList.content}" class="preview-item border-bottom">
                             <div class="preview-thumbnail">
-                                <img src="/assets/images/faces-clipart/pic-2.png" class="rounded-circle"/>
+                                <img th:if="${messages.sender.memberProfile == null}"
+                                     src="/assets/images/faces-clipart/pic-1.png" class="rounded-circle">
+                                <img th:unless="${messages.sender.memberProfile == null}"
+                                     th:src="|/member/profile?memberId=${messages.sender.memberId}|" class="rounded-circle">
                             </div>
                             <div class="preview-item-content d-flex flex-grow">
                                 <div class="flex-grow">
