@@ -11,10 +11,7 @@
                 <div class="profile-desc">
                     <div class="profile-pic">
                         <div class="count-indicator">
-                            <img th:if="${session.loginMember.memberProfile == null}"
-                                 src="/assets/images/faces-clipart/pic-1.png" class="img-xs rounded-circle">
-                            <img th:unless="${session.loginMember.memberProfile == null}"
-                                 th:src="|/member/profile?memberId=${session.loginMember.memberId}|" class="img-xs rounded-circle">
+                            <img th:src="|/member/profile?memberId=${session.loginMember.memberId}|" class="img-xs rounded-circle">
                             <span class="count bg-success"></span>
                         </div>
                         <div class="profile-name">
