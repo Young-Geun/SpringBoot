@@ -8,6 +8,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -91,9 +93,9 @@ public class MemberController {
 
     @ResponseBody
     @GetMapping("/profile")
-    public Resource display(@RequestParam("memberId") long memberId) {
+    public Resource profile(@RequestParam("memberId") long memberId) {
         // 사용자 조회
-        Member member = memberService.findByMemberId(memberId);
+        Member member = findMember(memberId);
 
         // 사용자 프로필 셋팅
         try {
@@ -108,6 +110,34 @@ public class MemberController {
             log.error(e.getMessage());
             return null;
         }
+    }
+
+    @GetMapping("/profileDownload")
+    public ResponseEntity<Resource> profileDownload(@RequestParam("memberId") long memberId) throws Exception {
+        // 사용자 조회
+        Member member = findMember(memberId);
+
+        // 사용자 프로필 다운로드
+        try {
+            String filePath = fileDir + "member_pic" + File.separator + member.getMemberProfile();
+            Resource resource = new UrlResource("file:" + filePath);
+            if (resource.exists()) {
+                return ResponseEntity.ok()
+                        .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + member.getMemberProfile())
+                        .body(resource);
+            } else {
+                return ResponseEntity.ok()
+                        .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=pic-1.png")
+                        .body(new UrlResource("classpath:static/assets/images/faces-clipart/pic-1.png"));
+            }
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            return null;
+        }
+    }
+
+    public Member findMember(long memberId) {
+        return memberService.findByMemberId(memberId);
     }
 
 }
