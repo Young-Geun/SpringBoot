@@ -119,3 +119,28 @@ INSERT INTO todo (todo_id, contents, reg_id, todo_status)
 VALUES (TODO_SEQ.nextval, '커밋하기', 1, 'N');
 INSERT INTO todo (todo_id, contents, reg_id, todo_status)
 VALUES (TODO_SEQ.nextval, '오류 고치기', 1, 'N');
+
+
+
+
+
+-- 접근이력 테이블
+DROP TABLE access_history;
+
+CREATE TABLE access_history
+(
+    access_id number(10, 0) NOT NULL,
+    access_member_id number(10, 0) NOT NULL,
+    access_path varchar2(255) NOT NULL,
+    access_date date,
+
+    PRIMARY KEY (access_id)
+);
+
+CREATE SEQUENCE access_history_seq
+    INCREMENT BY 1 --증감숫자 1
+    START WITH 1 --시작숫자 1
+    MINVALUE 1 --최소값 1
+    MAXVALUE 100000 --최대값 1000
+    NOCYCLE --순한하지않음
+NOCACHE; --메모리에 시퀀스값 미리할당

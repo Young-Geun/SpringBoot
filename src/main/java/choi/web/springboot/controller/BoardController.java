@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @RequiredArgsConstructor
@@ -52,12 +53,13 @@ public class BoardController {
     }
 
     @PostMapping("/insert")
-    public String insert(@Validated Board board, BindingResult bindingResult, Model model, HttpSession session) {
+    public String insert(@Validated Board board, BindingResult bindingResult,
+                         Model model, HttpServletRequest request, HttpSession session) {
         if (bindingResult.hasErrors()) {
             return "board/insert";
         }
 
-        int result = boardService.insert(board, session);
+        int result = boardService.insert(board, request, session);
         if (result == 0) {
             model.addAttribute("result", "등록에 실패하였습니다.");
             return "board/insert";
