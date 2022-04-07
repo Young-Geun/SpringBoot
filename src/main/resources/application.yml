@@ -16,6 +16,8 @@ spring:
       hibernate:
         show_sql: true
         format_sql: true
+  pid:
+    file: /Users/choi/dev/boot.pid
 
 mybatis:
   mapper-locations: mapper/*.xml
@@ -58,6 +60,8 @@ spring:
       hibernate:
         show_sql: true
         format_sql: true
+  pid:
+    file: C:\\Users\\choi\\Desktop\\boot.pid
 
 mybatis:
   mapper-locations: mapper/*.xml
@@ -100,6 +104,8 @@ spring:
       hibernate:
         show_sql: false
         format_sql: false
+  pid:
+    file: /home/opc/dev/boot.pid
 
 mybatis:
   mapper-locations: mapper/*.xml

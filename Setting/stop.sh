@@ -1,0 +1,1 @@
+kill -9 `cat /home/opc/dev/boot.pid`
