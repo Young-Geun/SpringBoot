@@ -55,17 +55,19 @@ public class BoardController {
     @PostMapping("/insert")
     public String insert(@Validated Board board, BindingResult bindingResult,
                          Model model, HttpServletRequest request, HttpSession session) {
+
         if (bindingResult.hasErrors()) {
             return "board/insert";
         }
 
-        int result = boardService.insert(board, request, session);
-        if (result == 0) {
+        try {
+            boardService.insert(board, request, session);
+            return "redirect:/board/list";
+        } catch (Exception e) {
             model.addAttribute("result", "등록에 실패하였습니다.");
             return "board/insert";
-        } else {
-            return "redirect:/board/list";
         }
+
     }
 
     @PostMapping("/update")
