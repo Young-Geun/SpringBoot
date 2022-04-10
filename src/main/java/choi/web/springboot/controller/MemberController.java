@@ -80,7 +80,7 @@ public class MemberController {
             return "member/update";
         }
 
-        int result = memberService.update(member, files);
+        int result = memberService.update(member, (Member) session.getAttribute("loginMember"), files);
         if (result == 0) {
             model.addAttribute("result", "수정에 실패하였습니다.");
         } else {

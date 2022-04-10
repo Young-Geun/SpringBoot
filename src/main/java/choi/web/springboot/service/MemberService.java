@@ -50,7 +50,7 @@ public class MemberService {
         return result;
     }
 
-    public int update(Member member, MultipartFile files) {
+    public int update(Member member, Member loginMember, MultipartFile files) {
         int result = 1;
         try {
             // 프로필 저장
@@ -65,7 +65,10 @@ public class MemberService {
                 files.transferTo(new File(filePath));
 
                 member.setMemberProfile(member.getMemberId() + ext);
+            } else {
+                member.setMemberProfile(loginMember.getMemberProfile());
             }
+            member.setLastLoginDate(loginMember.getLastLoginDate());
 
             memberRepository.save(member);
         } catch (Exception e) {
