@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Slf4j
@@ -73,6 +74,11 @@ public class MemberService {
         }
 
         return result;
+    }
+
+    public void updateLastLoginDate(Member member) {
+        member.setLastLoginDate(LocalDateTime.now());
+        memberRepository.save(member);
     }
 
 }

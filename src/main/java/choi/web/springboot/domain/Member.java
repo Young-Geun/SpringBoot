@@ -5,6 +5,7 @@ import lombok.Data;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import java.time.LocalDateTime;
 
 @Data
 @Entity(name = "member")
@@ -39,5 +40,8 @@ public class Member {
 
     // 계정 상태
     String memberStatus;
+
+    // 마지막 로그인
+    LocalDateTime lastLoginDate;
 
 }

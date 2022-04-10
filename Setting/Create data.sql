@@ -9,6 +9,7 @@ CREATE TABLE member
     member_name varchar2(100) NOT NULL,
     member_profile varchar2(100),
     member_status varchar2(1),
+    last_login_date date,
 
     PRIMARY KEY (member_id)
 );
@@ -22,7 +23,7 @@ NOCYCLE --순한하지않음
 NOCACHE; --메모리에 시퀀스값 미리할당
 
 INSERT INTO member (member_id, member_email, member_password, member_name, member_status)
-VALUES (MEMBER_SEQ.nextval, 'choi', '1', '최영근', 'Y');
+VALUES (MEMBER_SEQ.nextval, 'choi@naver.com', '1', '최영근', 'Y');
 INSERT INTO member (member_id, member_email, member_password, member_name, member_status)
 VALUES (MEMBER_SEQ.nextval, 'test1@naver.com', '1', '테스터1', 'Y');
 
