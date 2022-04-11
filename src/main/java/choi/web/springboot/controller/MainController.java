@@ -40,12 +40,18 @@ public class MainController {
 
             return "main/login";
         } else {
-            memberService.updateLastLoginDate(loginMember);
-            HttpSession session = request.getSession();
-            session.setAttribute("loginMember", loginMember);
-            log.info("Login Member = {}", loginMember.getMemberEmail());
+            if (!"Y".equals(loginMember.getMemberStatus())) {
+                model.addAttribute("result", "비활성화 계정입니다.");
 
-            return "redirect:/main";
+                return "main/login";
+            } else{
+                memberService.updateLastLoginDate(loginMember);
+                HttpSession session = request.getSession();
+                session.setAttribute("loginMember", loginMember);
+                log.info("Login Member = {}", loginMember.getMemberEmail());
+
+                return "redirect:/main";
+            }
         }
     }
 
