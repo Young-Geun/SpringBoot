@@ -26,6 +26,10 @@ public class MemberService {
         return memberRepository.findByMemberNameLike("%" + name + "%");
     }
 
+    public List<Member> findByMemberStatus(String status) {
+        return memberRepository.findByMemberStatus(status);
+    }
+
     public Member selectOne(String email, String password) {
         return memberRepository.findByMemberEmailAndMemberPassword(email, password);
     }
@@ -81,6 +85,11 @@ public class MemberService {
 
     public void updateLastLoginDate(Member member) {
         member.setLastLoginDate(LocalDateTime.now());
+        memberRepository.save(member);
+    }
+
+    public void updateStatus(Member member, String status) {
+        member.setMemberStatus(status);
         memberRepository.save(member);
     }
 
