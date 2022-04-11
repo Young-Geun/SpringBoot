@@ -24,11 +24,11 @@ public class BoardService {
     private final BoardRepository boardRepository;
     private final AccessHistoryRepository accessHistoryRepository;
 
-    public Page<Board> selectAll(int page) {
+    public Page<Board> findAll(int page) {
         return boardRepository.findAll(PageRequest.of(page, 10, Sort.by(Sort.Direction.DESC, "boardId")));
     }
 
-    public Board selectOne(long boardId) {
+    public Board findById(long boardId) {
         return boardRepository.findById(boardId).get();
     }
 

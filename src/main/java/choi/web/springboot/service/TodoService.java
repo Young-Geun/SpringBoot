@@ -15,7 +15,7 @@ public class TodoService {
 
     private final TodoRepository todoRepository;
 
-    public List<Todo> selectAll(long regId) {
+    public List<Todo> findByRegId(long regId) {
         return todoRepository.findByRegId(regId);
     }
 

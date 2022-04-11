@@ -19,9 +19,9 @@ class MainControllerTest {
 
     @Test
     void login() {
-        Member existMember = memberService.selectOne("choi", "1");
-        Member notExistMember = memberService.selectOne("choi@google.com", "1");
-        Member passwordIncorrectMember = memberService.selectOne("choi", "1234");
+        Member existMember = memberService.findForLogin("choi", "1");
+        Member notExistMember = memberService.findForLogin("choi@google.com", "1");
+        Member passwordIncorrectMember = memberService.findForLogin("choi", "1234");
 
         assertEquals(existMember.getMemberEmail(), "choi");
         assertNull(notExistMember);

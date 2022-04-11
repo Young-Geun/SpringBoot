@@ -18,13 +18,13 @@ public class MessagesService {
 
     private final MessagesRepository messagesRepository;
 
-    public Page<Messages> selectRecvMessagesList(int page, long memberId) {
+    public Page<Messages> findByReceiver(int page, long memberId) {
         Member receiver = new Member();
         receiver.setMemberId(memberId);
         return messagesRepository.findByReceiver(receiver, PageRequest.of(page, 10, Sort.by(Sort.Direction.DESC, "messagesId")));
     }
 
-    public Page<Messages> selectSendMessagesList(int page, long memberId) {
+    public Page<Messages> findBySender(int page, long memberId) {
         Member sender = new Member();
         sender.setMemberId(memberId);
         return messagesRepository.findBySender(sender, PageRequest.of(page, 10, Sort.by(Sort.Direction.DESC, "messagesId")));

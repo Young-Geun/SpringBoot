@@ -28,7 +28,7 @@ public class MessagesController {
                            @RequestParam(required = false, defaultValue = "0", value = "page") int page,
                            @RequestParam(required = false, defaultValue = "1", value = "range") int range) {
         Member loginMember = (Member) session.getAttribute("loginMember");
-        Page<Messages> list = messagesService.selectRecvMessagesList(page, loginMember.getMemberId());
+        Page<Messages> list = messagesService.findByReceiver(page, loginMember.getMemberId());
         model.addAttribute("messagesList", list);
 
         Pagination pagination = new Pagination();
@@ -44,7 +44,7 @@ public class MessagesController {
                            @RequestParam(required = false, defaultValue = "0", value = "page") int page,
                            @RequestParam(required = false, defaultValue = "1", value = "range") int range) {
         Member loginMember = (Member) session.getAttribute("loginMember");
-        Page<Messages> list = messagesService.selectSendMessagesList(page, loginMember.getMemberId());
+        Page<Messages> list = messagesService.findBySender(page, loginMember.getMemberId());
         model.addAttribute("messagesList", list);
 
         Pagination pagination = new Pagination();

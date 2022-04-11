@@ -34,7 +34,7 @@ public class MainController {
 
     @PostMapping("/login")
     public String login(Member member, Model model, HttpServletRequest request) {
-        Member loginMember = memberService.selectOne(member.getMemberEmail(), member.getMemberPassword());
+        Member loginMember = memberService.findForLogin(member.getMemberEmail(), member.getMemberPassword());
         if (loginMember == null) {
             model.addAttribute("result", "아이디 또는 비밀번호를 확인해주세요.");
 
@@ -64,9 +64,9 @@ public class MainController {
     @GetMapping("/main")
     public String main(@SessionAttribute(required = false) Member loginMember, Model model, HttpSession session) {
         // 메인화면 구성
-        session.setAttribute("boardList", boardService.selectAll(0));
-        session.setAttribute("messagesList", messagesService.selectRecvMessagesList(0, loginMember.getMemberId()));
-        model.addAttribute("todoList", todoService.selectAll(loginMember.getMemberId()));
+        session.setAttribute("boardList", boardService.findAll(0));
+        session.setAttribute("messagesList", messagesService.findByReceiver(0, loginMember.getMemberId()));
+        model.addAttribute("todoList", todoService.findByRegId(loginMember.getMemberId()));
 
         return "main/main";
     }

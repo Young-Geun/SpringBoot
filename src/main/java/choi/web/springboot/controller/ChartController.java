@@ -19,7 +19,7 @@ public class ChartController {
 
     @GetMapping("/list")
     public String list(Member member, Model model) {
-        List<Member> memberList = memberService.selectList("");
+        List<Member> memberList = memberService.findAll();
         model.addAttribute("memberList", memberList);
 
         return "chart/list";

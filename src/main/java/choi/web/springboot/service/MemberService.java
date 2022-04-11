@@ -22,7 +22,11 @@ public class MemberService {
 
     private final MemberRepository memberRepository;
 
-    public List<Member> selectList(String name) {
+    public List<Member> findAll() {
+        return memberRepository.findAll();
+    }
+
+    public List<Member> findByMemberName(String name) {
         return memberRepository.findByMemberNameLike("%" + name + "%");
     }
 
@@ -30,12 +34,12 @@ public class MemberService {
         return memberRepository.findByMemberStatus(status);
     }
 
-    public Member selectOne(String email, String password) {
-        return memberRepository.findByMemberEmailAndMemberPassword(email, password);
-    }
-
     public Member findByMemberId(long id) {
         return memberRepository.findByMemberId(id);
+    }
+
+    public Member findForLogin(String email, String password) {
+        return memberRepository.findByMemberEmailAndMemberPassword(email, password);
     }
 
     public int insert(Member member) {

@@ -29,7 +29,7 @@ public class BoardController {
     public String list(Model model,
                        @RequestParam(required = false, defaultValue = "0", value = "page") int page,
                        @RequestParam(required = false, defaultValue = "1", value = "range") int range) {
-        Page<Board> list = boardService.selectAll(page);
+        Page<Board> list = boardService.findAll(page);
         model.addAttribute("boardList", list);
 
         Pagination pagination = new Pagination();
@@ -41,7 +41,7 @@ public class BoardController {
 
     @GetMapping("/detail")
     public String list(Model model, Board board) {
-        Board result = boardService.selectOne(board.getBoardId());
+        Board result = boardService.findById(board.getBoardId());
         model.addAttribute("result", result);
 
         return "board/detail";
