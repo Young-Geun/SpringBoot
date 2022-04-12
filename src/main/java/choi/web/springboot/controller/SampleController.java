@@ -87,4 +87,9 @@ public class SampleController {
         return "sample/messages";
     }
 
+    @GetMapping("/css")
+    public String css() {
+        return "sample/css";
+    }
+
 }

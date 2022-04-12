@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout}">
+<body>
+<div class="content-wrapper" layout:fragment="content">
+    <style>
+        .wrapper1, .wrapper2 {
+            width: 300px;
+            overflow-x: scroll;
+            overflow-y: hidden;
+        }
+
+        .wrapper1 {
+            height: 20px;
+        }
+
+        .wrapper2 {
+            height: 200px;
+        }
+
+        .div1 {
+            width: 1000px;
+            height: 20px;
+        }
+
+        .div2 {
+            font-size: 14px;
+            width: 1000px;
+            height: 200px;
+            background-color: #8f8f8f;
+            overflow: auto;
+        }
+    </style>
+    <div class="page-header">
+        <h3 class="page-title">CSS</h3>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Scrollbar</h5>
+                    <div class="wrapper1">
+                        <div class="div1"></div>
+                    </div>
+                    <div class="wrapper2">
+                        <div class="div2">
+                            가나다라마바사아자차카타파하. 1234567890. ABCDEFGHIJKLMNOPQRSTUVWXYZ.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(function () {
+            $(".wrapper1").scroll(function () {
+                $(".wrapper2").scrollLeft($(".wrapper1").scrollLeft());
+            });
+
+            $(".wrapper2").scroll(function () {
+                $(".wrapper1").scrollLeft($(".wrapper2").scrollLeft());
+            });
+        });
+    </script>
+</div>
+</body>
+</html>
