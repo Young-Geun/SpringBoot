@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @RequiredArgsConstructor
 @Service
@@ -30,6 +31,10 @@ public class BoardService {
 
     public Board findById(long boardId) {
         return boardRepository.findById(boardId).get();
+    }
+
+    public List<Board> findByTitle(Board board) {
+        return boardRepository.findByTitleLike("%" + board.getTitle() + "%");
     }
 
     @Transactional
