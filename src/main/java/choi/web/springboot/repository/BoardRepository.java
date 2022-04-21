@@ -9,4 +9,6 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
 
     List<Board> findByTitleLike(String title);
 
+    List<Board> findByTitleContainingIgnoreCase(String title);
+
 }

@@ -33,8 +33,12 @@ public class BoardService {
         return boardRepository.findById(boardId).get();
     }
 
-    public List<Board> findByTitle(Board board) {
+    public List<Board> findByTitleLike(Board board) {
         return boardRepository.findByTitleLike("%" + board.getTitle() + "%");
+    }
+
+    public List<Board> findByTitleContainingIgnoreCase(Board board) {
+        return boardRepository.findByTitleContainingIgnoreCase(board.getTitle());
     }
 
     @Transactional
