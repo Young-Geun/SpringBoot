@@ -41,6 +41,18 @@ public class BoardService {
         return boardRepository.findByTitleContainingIgnoreCase(board.getTitle());
     }
 
+    public List<Board> findByPosterMemberId(Board board) {
+        return boardRepository.findByPosterMemberId(board.getPoster().getMemberId());
+    }
+
+    public List<Board> findByPosterMemberName(Board board) {
+        return boardRepository.findByPosterMemberName(board.getPoster().getMemberName());
+    }
+
+    public List<Board> findByPosterMemberNameContainingIgnoreCase(Board board) {
+        return boardRepository.findByPosterMemberNameContainingIgnoreCase(board.getPoster().getMemberName());
+    }
+
     @Transactional
     public void insert(Board board, HttpServletRequest request, HttpSession session) throws Exception {
         LocalDateTime regDate = LocalDateTime.now();

@@ -1,6 +1,7 @@
 package choi.web.springboot.controller;
 
 import choi.web.springboot.domain.Board;
+import choi.web.springboot.domain.Member;
 import choi.web.springboot.service.BoardService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,6 +61,51 @@ class BoardControllerTest {
          */
         assertEquals(list1.size(), 1);
         assertEquals(list2.size(), 2);
+    }
+
+    @Test
+    void 작성자ID로_검색() {
+        // 게시글
+        Member member = new Member();
+        member.setMemberId(2);
+        Board board = new Board();
+        board.setPoster(member);
+
+        // 조회
+        List<Board> list = boardService.findByPosterMemberId(board);
+
+        // 결과비교
+        assertEquals(list.size(), 1);
+    }
+
+    @Test
+    void 작성자명으로_검색() {
+        // 게시글
+        Member member = new Member();
+        member.setMemberName("최영근");
+        Board board = new Board();
+        board.setPoster(member);
+
+        // 조회
+        List<Board> list = boardService.findByPosterMemberName(board);
+
+        // 결과비교
+        assertEquals(list.size(), 8);
+    }
+
+    @Test
+    void 작성자명으로_LIKE_검색() {
+        // 게시글
+        Member member = new Member();
+        member.setMemberName("최");
+        Board board = new Board();
+        board.setPoster(member);
+
+        // 조회
+        List<Board> list = boardService.findByPosterMemberNameContainingIgnoreCase(board);
+
+        // 결과비교
+        assertEquals(list.size(), 9);
     }
 
 }
