@@ -18,4 +18,6 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
 
     List<Board> findByPosterMemberNameContainingIgnoreCase(String memberName);
 
+    List<Board> findByTitleContainingIgnoreCaseOrPosterMemberNameContainingIgnoreCase(String title, String memberName);
+
 }

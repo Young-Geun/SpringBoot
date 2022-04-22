@@ -108,4 +108,21 @@ class BoardControllerTest {
         assertEquals(list.size(), 9);
     }
 
+    @Test
+    void 제목_또는_작성자명으로_검색() {
+        // 게시글
+        Member member = new Member();
+        member.setMemberName("테스터");
+        Board board = new Board();
+        board.setPoster(member);
+        board.setTitle("abc");
+
+        // 조회
+        List<Board> list = boardService.findByTitleOrPoster(board);
+
+        // 결과비교
+        // (제목 = 2) + (작성자명 = 2) = 4
+        assertEquals(list.size(), 4);
+    }
+
 }
