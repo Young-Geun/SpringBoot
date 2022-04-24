@@ -30,6 +30,14 @@ public class MemberService {
         return memberRepository.findByMemberNameLike("%" + name + "%");
     }
 
+    public List<Member> findByMemberNameContainingIgnoreCase(String name) {
+        return memberRepository.findByMemberNameContainingIgnoreCase(name);
+    }
+
+    public List<Member> findByMemberEmailContainingIgnoreCase(String email) {
+        return memberRepository.findByMemberEmailContainingIgnoreCase(email);
+    }
+
     public List<Member> findByMemberStatus(String status) {
         return memberRepository.findByMemberStatus(status);
     }
