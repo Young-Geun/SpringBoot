@@ -26,10 +26,6 @@ public class MemberService {
         return memberRepository.findAll();
     }
 
-    public List<Member> findByMemberName(String name) {
-        return memberRepository.findByMemberNameLike("%" + name + "%");
-    }
-
     public List<Member> findByMemberNameContainingIgnoreCase(String name) {
         return memberRepository.findByMemberNameContainingIgnoreCase(name);
     }

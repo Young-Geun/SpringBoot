@@ -34,7 +34,12 @@ public class MemberController {
 
     @GetMapping("/list")
     public String list(Member member, Model model) {
-        List<Member> memberList = memberService.findByMemberName(member.getMemberName());
+        List<Member> memberList;
+        if (member.getMemberName() != null) {
+            memberList = memberService.findByMemberNameContainingIgnoreCase(member.getMemberName());
+        } else {
+            memberList = memberService.findByMemberEmailContainingIgnoreCase(member.getMemberEmail());
+        }
         model.addAttribute("memberList", memberList);
 
         return "member/list";
