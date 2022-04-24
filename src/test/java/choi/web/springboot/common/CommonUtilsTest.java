@@ -10,17 +10,17 @@ class CommonUtilsTest {
 
     @Test
     void 숫자포맷_테스트() {
-        assertEquals(commonUtils.numberFormat(123), "123");
-        assertEquals(commonUtils.numberFormat(123.0), "123");
-        assertEquals(commonUtils.numberFormat(123.00), "123");
-        assertEquals(commonUtils.numberFormat(123.01), "123.01");
-        assertEquals(commonUtils.numberFormat(123.10), "123.1");
+        assertEquals("123", commonUtils.numberFormat(123));
+        assertEquals("123", commonUtils.numberFormat(123.0));
+        assertEquals("123", commonUtils.numberFormat(123.00));
+        assertEquals("123.01", commonUtils.numberFormat(123.01));
+        assertEquals("123.1", commonUtils.numberFormat(123.10));
 
-        assertEquals(commonUtils.numberFormat(1234), "1,234");
-        assertEquals(commonUtils.numberFormat(1234.0), "1,234");
-        assertEquals(commonUtils.numberFormat(1234.00), "1,234");
-        assertEquals(commonUtils.numberFormat(1234.01), "1,234.01");
-        assertEquals(commonUtils.numberFormat(1234.10), "1,234.1");
+        assertEquals("1,234", commonUtils.numberFormat(1234));
+        assertEquals("1,234", commonUtils.numberFormat(1234.0));
+        assertEquals("1,234", commonUtils.numberFormat(1234.00));
+        assertEquals("1,234.01", commonUtils.numberFormat(1234.01));
+        assertEquals("1,234.1", commonUtils.numberFormat(1234.10));
     }
 
 }

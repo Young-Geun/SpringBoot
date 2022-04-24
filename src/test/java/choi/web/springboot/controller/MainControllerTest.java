@@ -23,7 +23,7 @@ class MainControllerTest {
         Member notExistMember = memberService.findForLogin("choi@google.com", "1");
         Member passwordIncorrectMember = memberService.findForLogin("choi", "1234");
 
-        assertEquals(existMember.getMemberEmail(), "choi");
+        assertEquals("choi", existMember.getMemberEmail());
         assertNull(notExistMember);
         assertNull(passwordIncorrectMember);
     }

@@ -30,7 +30,7 @@ class BoardControllerTest {
         List<Board> list = boardService.findByTitleLike(board);
 
         // 결과비교
-        assertEquals(list.size(), 3);
+        assertEquals(3, list.size());
     }
 
     @Test
@@ -59,8 +59,8 @@ class BoardControllerTest {
               : IgnoreCase = 대소문자를 구별하지 않는다.
               : 조회결과 = abc, ABC 모두 검색된다.
          */
-        assertEquals(list1.size(), 1);
-        assertEquals(list2.size(), 2);
+        assertEquals(1, list1.size());
+        assertEquals(2, list2.size());
     }
 
     @Test
@@ -75,7 +75,7 @@ class BoardControllerTest {
         List<Board> list = boardService.findByPosterMemberId(board);
 
         // 결과비교
-        assertEquals(list.size(), 1);
+        assertEquals(1, list.size());
     }
 
     @Test
@@ -90,7 +90,7 @@ class BoardControllerTest {
         List<Board> list = boardService.findByPosterMemberName(board);
 
         // 결과비교
-        assertEquals(list.size(), 8);
+        assertEquals(8, list.size());
     }
 
     @Test
@@ -105,7 +105,7 @@ class BoardControllerTest {
         List<Board> list = boardService.findByPosterMemberNameContainingIgnoreCase(board);
 
         // 결과비교
-        assertEquals(list.size(), 9);
+        assertEquals(9, list.size());
     }
 
     @Test
@@ -122,7 +122,7 @@ class BoardControllerTest {
 
         // 결과비교
         // (제목 = 2) + (작성자명 = 2) = 4
-        assertEquals(list.size(), 4);
+        assertEquals(4, list.size());
     }
 
 }
