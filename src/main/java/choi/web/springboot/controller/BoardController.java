@@ -26,10 +26,11 @@ public class BoardController {
     private final BoardService boardService;
 
     @GetMapping("/list")
-    public String list(Model model,
+    public String list(Board board,
+                       Model model,
                        @RequestParam(required = false, defaultValue = "0", value = "page") int page,
                        @RequestParam(required = false, defaultValue = "1", value = "range") int range) {
-        Page<Board> list = boardService.findAll(page);
+        Page<Board> list = boardService.findByKeyword(page, board);
         model.addAttribute("boardList", list);
 
         Pagination pagination = new Pagination();

@@ -29,6 +29,15 @@ public class BoardService {
         return boardRepository.findAll(PageRequest.of(page, 10, Sort.by(Sort.Direction.DESC, "boardId")));
     }
 
+    public Page<Board> findByKeyword(int page, Board board) {
+        String title = board.getTitle() == null ? "" : board.getTitle();
+        String name = (board.getPoster() == null || board.getPoster().getMemberName() == null) ? "" : board.getPoster().getMemberName();
+        return boardRepository.findByTitleContainingIgnoreCaseAndPosterMemberNameContainingIgnoreCase(
+                title,
+                name,
+                PageRequest.of(page, 10, Sort.by(Sort.Direction.DESC, "boardId")));
+    }
+
     public Board findById(long boardId) {
         return boardRepository.findById(boardId).get();
     }
@@ -54,7 +63,9 @@ public class BoardService {
     }
 
     public List<Board> findByTitleOrPoster(Board board) {
-        return boardRepository.findByTitleContainingIgnoreCaseOrPosterMemberNameContainingIgnoreCase(board.getTitle(), board.getPoster().getMemberName());
+        return boardRepository.findByTitleContainingIgnoreCaseOrPosterMemberNameContainingIgnoreCase(
+                board.getTitle(),
+                board.getPoster().getMemberName());
     }
 
     @Transactional
