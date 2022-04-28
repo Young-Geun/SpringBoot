@@ -1,11 +1,13 @@
 package choi.web.springboot.domain;
 
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Data
 @Entity(name = "messages")
 @SequenceGenerator(
         name = "MESSAGES_SEQ_GENERATOR", // 제너레이터명
@@ -13,6 +15,10 @@ import java.time.LocalDateTime;
         initialValue = 1, // 시작 값
         allocationSize = 1 // 할당할 범위 사이즈
 )
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
 public class Messages {
 
     // 메시지 아이디

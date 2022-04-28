@@ -31,12 +31,14 @@ public class MessagesService {
     }
 
     public int sendMessages(Member member, String content, HttpSession session) {
-        Messages messages = new Messages();
-        messages.setSender((Member) session.getAttribute("loginMember"));
-        messages.setReceiver(member);
-        messages.setMessages(content);
-        messages.setSendDate(LocalDateTime.now());
         try {
+            Messages messages = Messages.builder()
+                    .sender((Member) session.getAttribute("loginMember"))
+                    .receiver(member)
+                    .messages(content)
+                    .sendDate(LocalDateTime.now())
+                    .build();
+
             messagesRepository.save(messages);
         } catch (Exception e) {
             return 0;
