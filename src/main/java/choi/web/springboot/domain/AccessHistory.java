@@ -1,11 +1,11 @@
 package choi.web.springboot.domain;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Data
+
 @Entity(name = "access_history")
 @SequenceGenerator(
         name = "ACCESS_HISTORY_SEQ_GENERATOR", // 제너레이터명
@@ -13,6 +13,9 @@ import java.time.LocalDateTime;
         initialValue = 1, // 시작 값
         allocationSize = 1 // 할당할 범위 사이즈
 )
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class AccessHistory {
 
     // 접근이력 아이디

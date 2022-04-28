@@ -79,10 +79,12 @@ public class BoardService {
         boardRepository.save(board);
 
         // 접근이력 등록
-        AccessHistory accessHistory = new AccessHistory();
-        accessHistory.setAccessMemberId(loginMember.getMemberId());
-        accessHistory.setAccessPath(request.getRequestURI());
-        accessHistory.setAccessDate(regDate);
+        AccessHistory accessHistory = AccessHistory.builder()
+                .accessMemberId(loginMember.getMemberId())
+                .accessPath(request.getRequestURI())
+                .accessDate(regDate)
+                .build();
+
         accessHistoryRepository.save(accessHistory);
     }
 
