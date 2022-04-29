@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 @RequiredArgsConstructor
 @Service
@@ -66,6 +67,10 @@ public class BoardService {
         return boardRepository.findByTitleContainingIgnoreCaseOrPosterMemberNameContainingIgnoreCase(
                 board.getTitle(),
                 board.getPoster().getMemberName());
+    }
+
+    public List<Map<String, Object>> findGroupByForStatistics() {
+        return boardRepository.findGroupByForStatistics();
     }
 
     @Transactional

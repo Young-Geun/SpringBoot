@@ -23,66 +23,18 @@
         <div class="col-lg-6 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">사용자 계정 상태</h4>
+                    <h4 class="card-title">게시글 등록 현황</h4>
                     <canvas id="barChart" class="h-75"></canvas>
                 </div>
             </div>
         </div>
     </div>
-    <script>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+
+        // 사용자 계정 상태
         var activeCount = $('#activeCount').val();
         var inactiveCount = $('#inactiveCount').val();
-
-        var barData = {
-            labels: ["활성화", "비활성화"],
-            datasets: [{
-                data: [activeCount, inactiveCount],
-                backgroundColor: [
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 99, 132, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255,99,132,1)'
-                ],
-                borderWidth: 1,
-                fill: false
-            }]
-        };
-        var barOptions = {
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                    },
-                    gridLines: {
-                        color: "rgba(204, 204, 204,0.1)"
-                    }
-                }],
-                xAxes: [{
-                    gridLines: {
-                        color: "rgba(204, 204, 204,0.1)"
-                    }
-                }]
-            },
-            legend: {
-                display: false
-            },
-            elements: {
-                point: {
-                    radius: 0
-                }
-            }
-        };
-        if ($("#barChart").length) {
-            var barChartCanvas = $("#barChart").get(0).getContext("2d");
-            var barChart = new Chart(barChartCanvas, {
-                type: 'bar',
-                data: barData,
-                options: barOptions
-            });
-        }
-
         var doughnutPieData = {
             datasets: [{
                 data: [activeCount, inactiveCount],
@@ -115,6 +67,60 @@
                 options: doughnutPieOptions
             });
         }
+
+        // 게시글 등록 현황
+        var boardList = [[${boardStatisticsList}]];
+        var sumList = new Array();
+        var regList = new Array();
+        for (var i = 0; i < boardList.length; i++) {
+            sumList[i] = boardList[i].REG_SUM;
+            regList[i] = boardList[i].REG_DT;
+        }
+        var barData = {
+            labels: regList,
+            datasets: [{
+                data: sumList,
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1,
+                fill: false
+            }]
+        };
+        var barOptions = {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    },
+                    gridLines: {
+                        color: "rgba(204, 204, 204, 0.1)"
+                    }
+                }],
+                xAxes: [{
+                    gridLines: {
+                        color: "rgba(204, 204, 204, 0.1)"
+                    }
+                }]
+            },
+            legend: {
+                display: false
+            },
+            elements: {
+                point: {
+                    radius: 0
+                }
+            }
+        };
+        if ($("#barChart").length) {
+            var barChartCanvas = $("#barChart").get(0).getContext("2d");
+            var barChart = new Chart(barChartCanvas, {
+                type: 'bar',
+                data: barData,
+                options: barOptions
+            });
+        }
+
+        /*]]>*/
     </script>
 </div>
 </body>
