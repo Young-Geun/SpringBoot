@@ -88,8 +88,13 @@ public class SampleController {
     }
 
     @GetMapping("/scroll")
-    public String css() {
+    public String scroll() {
         return "sample/scroll";
+    }
+
+    @GetMapping("/drag-to-scroll")
+    public String dragToScroll() {
+        return "sample/dragToScroll";
     }
 
 }
