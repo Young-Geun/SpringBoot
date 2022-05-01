@@ -41,6 +41,7 @@
             isDown = true;
             startX = e.pageX - slider.offsetLeft;
             scrollLeft = slider.scrollLeft;
+            slider.style.cursor = 'grab';
         });
 
         slider.addEventListener('mouseleave', () => {
@@ -52,7 +53,10 @@
         });
 
         slider.addEventListener('mousemove', e => {
-            if (!isDown) return;
+            if (!isDown) {
+                slider.style.cursor = 'auto';
+                return;
+            }
             e.preventDefault();
             const x = e.pageX - slider.offsetLeft;
             const walk = x - startX;
