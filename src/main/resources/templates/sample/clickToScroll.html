@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout}">
+<body>
+<div class="content-wrapper" layout:fragment="content">
+    <style>
+        .left-float {
+            position: fixed;
+            width: 30px;
+            height: 25px;
+            bottom: 100px;
+            right: 80px;
+            background-color: #0C9;
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+        }
+
+        .right-float {
+            position: fixed;
+            width: 30px;
+            height: 25px;
+            bottom: 100px;
+            right: 40px;
+            background-color: #0C9;
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+        }
+    </style>
+    <div class="page-header">
+        <h3 class="page-title">Click to scroll</h3>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Table</h5>
+                    <div id="items" class="table-responsive py-xl-5 items">
+                        <table class="table table-striped">
+                            <tbody>
+                            <tr th:each="trNum : ${#numbers.sequence(1, 10)}">
+                                <td th:each="tdNum : ${#numbers.sequence(1, 100)}" th:text="|${trNum}행 ${tdNum}열|"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <a href="javascript: moveLeft();" class="left-float">
+                            <i class="mdi mdi-arrow-left"></i>
+                        </a>
+                        <a href="javascript: moveRight();" class="right-float">
+                            <i class="mdi mdi-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        const slider = document.querySelector('#items')
+
+        function moveLeft() {
+            slider.scrollLeft = slider.scrollLeft - 500;
+        }
+
+        function moveRight() {
+            slider.scrollLeft = slider.scrollLeft + 500;
+        }
+    </script>
+</div>
+</body>
+</html>

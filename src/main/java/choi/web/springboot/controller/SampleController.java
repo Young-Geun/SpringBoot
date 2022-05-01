@@ -97,4 +97,9 @@ public class SampleController {
         return "sample/dragToScroll";
     }
 
+    @GetMapping("/click-to-scroll")
+    public String clickToScroll() {
+        return "sample/clickToScroll";
+    }
+
 }
