@@ -27,40 +27,40 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr th:each="list, i : ${sampleList}">
-                                <td th:if="${i.index == 0}" th:rowspan="${sampleList.size()}">조회<br>리스트</td>
+                            <tr th:each="list, i : ${testList}">
+                                <td th:if="${i.index == 0}" th:rowspan="${testList.size()}">조회<br>리스트</td>
                                 <td th:text="${i.index}">아이디</td>
                                 <td th:text="${i.count}">Index</td>
-                                <td th:text="${list.sampleId}">Count</td>
-                                <td th:text="${list.sampleName}">이름</td>
-                                <td th:text="${list.sampleType}">타입</td>
-                                <td th:text="${list.sampleNum1}">값1</td>
-                                <td th:text="${list.sampleNum2}">값2</td>
-                                <td th:text="${list.sampleNum3}">값3</td>
+                                <td th:text="${list.testId}">Count</td>
+                                <td th:text="${list.testName}">이름</td>
+                                <td th:text="${list.testType}">타입</td>
+                                <td th:text="${list.testNum1}">값1</td>
+                                <td th:text="${list.testNum2}">값2</td>
+                                <td th:text="${list.testNum3}">값3</td>
                             </tr>
                             <tr>
                                 <td th:colspan="6">타입1 합계</td>
-                                <td th:text="${#aggregates.sum(sampleList.?[sampleType==1].![sampleNum1])}">값1</td>
-                                <td th:text="${#aggregates.sum(sampleList.?[sampleType==1].![sampleNum2])}">값2</td>
-                                <td th:text="${#aggregates.sum(sampleList.?[sampleType==1].![sampleNum3])}">값3</td>
+                                <td th:text="${#aggregates.sum(testList.?[testType==1].![testNum1])}">값1</td>
+                                <td th:text="${#aggregates.sum(testList.?[testType==1].![testNum2])}">값2</td>
+                                <td th:text="${#aggregates.sum(testList.?[testType==1].![testNum3])}">값3</td>
                             </tr>
                             <tr>
                                 <td th:colspan="6">타입2 합계</td>
-                                <td th:text="${#aggregates.sum(sampleList.?[sampleType==2].![sampleNum1])}">값1</td>
-                                <td th:text="${#aggregates.sum(sampleList.?[sampleType==2].![sampleNum2])}">값2</td>
-                                <td th:text="${#aggregates.sum(sampleList.?[sampleType==2].![sampleNum3])}">값3</td>
+                                <td th:text="${#aggregates.sum(testList.?[testType==2].![testNum1])}">값1</td>
+                                <td th:text="${#aggregates.sum(testList.?[testType==2].![testNum2])}">값2</td>
+                                <td th:text="${#aggregates.sum(testList.?[testType==2].![testNum3])}">값3</td>
                             </tr>
                             <tr>
                                 <td th:colspan="6">타입3 합계</td>
-                                <td th:text="${#aggregates.sum(sampleList.?[sampleType==3].![sampleNum1])}">값1</td>
-                                <td th:text="${#aggregates.sum(sampleList.?[sampleType==3].![sampleNum2])}">값2</td>
-                                <td th:text="${#aggregates.sum(sampleList.?[sampleType==3].![sampleNum3])}">값3</td>
+                                <td th:text="${#aggregates.sum(testList.?[testType==3].![testNum1])}">값1</td>
+                                <td th:text="${#aggregates.sum(testList.?[testType==3].![testNum2])}">값2</td>
+                                <td th:text="${#aggregates.sum(testList.?[testType==3].![testNum3])}">값3</td>
                             </tr>
                             <tr>
                                 <td th:colspan="6">전체 합계</td>
-                                <td th:text="${#aggregates.sum(sampleList.![sampleNum1])}">값1</td>
-                                <td th:text="${#aggregates.sum(sampleList.![sampleNum2])}">값2</td>
-                                <td th:text="${#aggregates.sum(sampleList.![sampleNum3])}">값3</td>
+                                <td th:text="${#aggregates.sum(testList.![testNum1])}">값1</td>
+                                <td th:text="${#aggregates.sum(testList.![testNum2])}">값2</td>
+                                <td th:text="${#aggregates.sum(testList.![testNum3])}">값3</td>
                             </tr>
                             </tbody>
                         </table>
