@@ -145,3 +145,27 @@ CREATE SEQUENCE access_history_seq
     MAXVALUE 100000 --최대값 1000
     NOCYCLE --순한하지않음
 NOCACHE; --메모리에 시퀀스값 미리할당
+
+
+
+
+
+-- 샘플 테이블
+DROP TABLE sample;
+
+CREATE TABLE sample
+(
+    num_colum1 number(10, 0),
+    num_colum2 number(10, 0),
+    num_colum3 number(10, 0),
+    num_colum4 number(10, 0),
+    num_colum5 number(10, 0),
+    str_colum1 varchar2(1000),
+    str_colum2 varchar2(1000),
+    str_colum3 varchar2(1000),
+    str_colum4 varchar2(1000),
+    str_colum5 varchar2(1000),
+    date_colum1 date,
+    date_colum2 date,
+    date_colum3 date
+);
