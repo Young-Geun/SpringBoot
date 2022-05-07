@@ -155,17 +155,17 @@ DROP TABLE sample;
 
 CREATE TABLE sample
 (
-    num_colum1 number(10, 0),
-    num_colum2 number(10, 0),
-    num_colum3 number(10, 0),
-    num_colum4 number(10, 0),
-    num_colum5 number(10, 0),
-    str_colum1 varchar2(1000),
-    str_colum2 varchar2(1000),
-    str_colum3 varchar2(1000),
-    str_colum4 varchar2(1000),
-    str_colum5 varchar2(1000),
-    date_colum1 date,
-    date_colum2 date,
-    date_colum3 date
+    num_column1 number(10, 0),
+    num_column2 number(10, 0),
+    num_column3 number(10, 0),
+    num_column4 number(10, 0),
+    num_column5 number(10, 0),
+    str_column1 varchar2(1000),
+    str_column2 varchar2(1000),
+    str_column3 varchar2(1000),
+    str_column4 varchar2(1000),
+    str_column5 varchar2(1000),
+    date_column1 date,
+    date_column2 date,
+    date_column3 date
 );
