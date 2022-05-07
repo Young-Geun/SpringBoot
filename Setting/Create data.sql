@@ -155,6 +155,7 @@ DROP TABLE sample;
 
 CREATE TABLE sample
 (
+    sample_id number(10, 0) NOT NULL,
     num_column1 number(10, 0),
     num_column2 number(10, 0),
     num_column3 number(10, 0),
@@ -169,3 +170,14 @@ CREATE TABLE sample
     date_column2 date,
     date_column3 date
 );
+
+CREATE SEQUENCE SAMPLE_SEQ
+    INCREMENT BY 1
+    START WITH 1
+    MINVALUE 1
+    MAXVALUE 100000
+    NOCYCLE
+NOCACHE;
+
+INSERT INTO sample (sample_id, num_column1, num_column2, num_column3)
+VALUES (SAMPLE_SEQ.nextval, 10, 10, 10);

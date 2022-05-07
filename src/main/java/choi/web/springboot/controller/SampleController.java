@@ -2,29 +2,29 @@
 package choi.web.springboot.controller;
 
 import choi.web.springboot.domain.Member;
+import choi.web.springboot.domain.Sample;
 import choi.web.springboot.domain.Test;
+import choi.web.springboot.service.MybatisService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
+@RequiredArgsConstructor
 @Controller
 @RequestMapping("/sample")
 @Slf4j
 public class SampleController {
 
-    @Autowired
-    private MessageSource messageSource;
+    private final MessageSource messageSource;
+    private final MybatisService mybatisService;
 
     @GetMapping("/thymeleaf")
     public String thymeleaf(Model model) {
@@ -100,6 +100,18 @@ public class SampleController {
     @GetMapping("/click-to-scroll")
     public String clickToScroll() {
         return "sample/clickToScroll";
+    }
+
+    @GetMapping("/mybatis")
+    public String mybatis(Model model) {
+        model.addAttribute("sample", mybatisService.findByFirstRow());
+        return "sample/mybatis";
+    }
+
+    @PostMapping("/mybatis")
+    public String mybatis(Sample sample) {
+        mybatisService.update(sample);
+        return "redirect:/sample/mybatis";
     }
 
 }

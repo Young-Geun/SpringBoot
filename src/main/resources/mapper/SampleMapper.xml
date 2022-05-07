@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="choi.web.springboot.repository.MybatisRepository">
+
+    <select id="findByFirstRow" resultType="choi.web.springboot.domain.Sample">
+        SELECT * FROM sample WHERE ROWNUM = 1
+    </select>
+
+    <update id="update" parameterType="choi.web.springboot.domain.Sample">
+        UPDATE sample
+        <set>
+            <if test="numColumn1 != null and numColumn1 != ''">
+                num_column1 = #{numColumn1},
+            </if>
+            <if test="numColumn2 != null and !''.equals(numColumn2)">
+                num_column2 = #{numColumn2},
+            </if>
+        </set>
+        WHERE sample_id = #{sampleId}
+    </update>
+
+</mapper>
