@@ -114,4 +114,9 @@ public class SampleController {
         return "redirect:/sample/mybatis";
     }
 
+    @GetMapping("/resize")
+    public String resize() {
+        return "sample/resize";
+    }
+
 }
