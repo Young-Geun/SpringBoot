@@ -1,0 +1,123 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout}">
+<body>
+<div class="content-wrapper" layout:fragment="content">
+    <style>
+        .fixed-header {
+            color: white !important;
+            background: #000000;
+            position: sticky;
+            top: 0;
+        }
+    </style>
+    <div id="headerArea" class="page-header">
+        <h3 class="page-title">Resize</h3>
+    </div>
+    <div id="searchArea" class="row">
+        <div class="col-lg-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <label class="col-sm-1 col-form-label">조건1</label>
+                                <div class="col-sm-5">
+                                    <input type="text" class="form-control" />
+                                </div>
+                                <label class="col-sm-1 col-form-label">조건2</label>
+                                <div class="col-sm-5">
+                                    <input type="text" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <label class="col-sm-1 col-form-label">조건3</label>
+                                <div class="col-sm-5">
+                                    <input type="text" class="form-control" />
+                                </div>
+                                <label class="col-sm-1 col-form-label">조건4</label>
+                                <div class="col-sm-5">
+                                    <input type="text" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <label class="col-sm-1 col-form-label">조건5</label>
+                                <div class="col-sm-5">
+                                    <input type="text" class="form-control" />
+                                </div>
+                                <label class="col-sm-1 col-form-label">조건6</label>
+                                <div class="col-sm-5">
+                                    <input type="text" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <label class="col-sm-1 col-form-label">조건7</label>
+                                <div class="col-sm-5">
+                                    <input type="text" class="form-control" />
+                                </div>
+                                <label class="col-sm-1 col-form-label">조건8</label>
+                                <div class="col-sm-5">
+                                    <input type="text" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <div id="tableArea" class="table-responsive items">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th class="fixed-header text-center"
+                                        th:each="thNum : ${#numbers.sequence(1, 100)}"
+                                        th:text="|Header${thNum}|">헤더</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="trNum : ${#numbers.sequence(1, 500)}">
+                                    <td th:each="tdNum : ${#numbers.sequence(1, 100)}" th:text="|${trNum}행 ${tdNum}열|"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function(){
+            tableResize();
+        });
+
+        $(window).on('resize', function(){
+            tableResize();
+        });
+
+        function tableResize() {
+            var headerHeight = $("#headerArea").height();
+            var searchHeight = $("#searchArea").height();
+            $("#tableArea").height($(window).height() - headerHeight - searchHeight - 300);
+        }
+    </script>
+</div>
+</body>
+</html>

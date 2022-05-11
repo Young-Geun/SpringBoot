@@ -119,4 +119,9 @@ public class SampleController {
         return "sample/resize";
     }
 
+    @GetMapping("/fix-header")
+    public String fixedHeader() {
+        return "sample/fixedHeader";
+    }
+
 }
