@@ -53,7 +53,7 @@ public class MainController {
 
                 return "main/login";
             } else {
-                memberService.updateLastLoginDate(loginMember);
+                memberService.updateLastLoginDate(loginMember, request);
                 HttpSession session = request.getSession();
                 session.setAttribute("loginMember", loginMember);
                 log.info("Login Member = {}", loginMember.getMemberEmail());

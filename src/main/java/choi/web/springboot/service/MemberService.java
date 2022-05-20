@@ -1,6 +1,8 @@
 package choi.web.springboot.service;
 
+import choi.web.springboot.domain.AccessHistory;
 import choi.web.springboot.domain.Member;
+import choi.web.springboot.repository.AccessHistoryRepository;
 import choi.web.springboot.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -8,6 +10,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -21,6 +24,8 @@ public class MemberService {
     private String fileDir;
 
     private final MemberRepository memberRepository;
+
+    private final AccessHistoryRepository accessHistoryRepository;
 
     public List<Member> findAll() {
         return memberRepository.findAll();
@@ -91,9 +96,21 @@ public class MemberService {
         return result;
     }
 
-    public void updateLastLoginDate(Member member) {
-        member.setLastLoginDate(LocalDateTime.now());
+    public void updateLastLoginDate(Member member, HttpServletRequest request) {
+        LocalDateTime nowDate = LocalDateTime.now();
+        
+        // 로그인시간 갱신
+        member.setLastLoginDate(nowDate);
         memberRepository.save(member);
+
+        // 접근이력 등록
+        AccessHistory accessHistory = AccessHistory.builder()
+                .accessMemberId(member.getMemberId())
+                .accessPath(request.getRequestURI())
+                .accessDate(nowDate)
+                .build();
+
+        accessHistoryRepository.save(accessHistory);        
     }
 
     public void updateStatus(Member member, String status) {
