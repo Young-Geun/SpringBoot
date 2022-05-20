@@ -21,7 +21,7 @@ public class Scheduler {
     public void disableMember() {
         List<Member> memberList = memberService.findByMemberStatus("Y");
         for (Member member : memberList) {
-            if (member.getLastLoginDate().isBefore(LocalDateTime.now().minusDays(30))) {
+            if (member.getLastLoginDate().isBefore(LocalDateTime.now().minusDays(7))) {
                 memberService.updateStatus(member, "N");
                 log.info("Disable Member : {}", member.getMemberEmail());
             }
