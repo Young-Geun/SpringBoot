@@ -124,4 +124,10 @@ public class SampleController {
         return "sample/fixedHeader";
     }
 
+    @GetMapping("/db-connect")
+    public String dbConnect() {
+        mybatisService.dbConnect();
+        return "redirect:/main";
+    }
+
 }
