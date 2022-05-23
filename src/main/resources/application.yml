@@ -2,8 +2,13 @@ spring:
   profiles: mac
   datasource:
     driver-class-name: oracle.jdbc.OracleDriver
-    url: jdbc:oracle:thin:@db202202032030_high?TNS_ADMIN=/Users/choi/dev/Wallet
+    jdbc-url: jdbc:oracle:thin:@db202202032030_high?TNS_ADMIN=/Users/choi/dev/Wallet
     username: admin
+    password: 1234
+  datasource-sub:
+    driver-class-name: org.mariadb.jdbc.Driver
+    jdbc-url: jdbc:mariadb://193.123.240.87:3306/mysql
+    username: root
     password: 1234
   thymeleaf:
     prefix: classpath:templates/
@@ -95,8 +100,13 @@ spring:
   profiles: cloud
   datasource:
     driver-class-name: oracle.jdbc.OracleDriver
-    url: jdbc:oracle:thin:@db202202032030_high?TNS_ADMIN=/home/opc/dev/Wallet/
+    jdbc-url: jdbc:oracle:thin:@db202202032030_high?TNS_ADMIN=/home/opc/dev/Wallet/
     username: admin
+    password: 1234
+  datasource-sub:
+    driver-class-name: org.mariadb.jdbc.Driver
+    jdbc-url: jdbc:mariadb://193.123.240.87:3306/mysql
+    username: root
     password: 1234
   thymeleaf:
     prefix: classpath:templates/
