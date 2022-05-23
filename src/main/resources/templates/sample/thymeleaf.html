@@ -176,6 +176,41 @@
                 </div>
             </div>
         </div>
+        <div class="col-lg-6 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">반올림</h4>
+                    <div class="table-responsive py-xl-5">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th th:class="text-center">데이터</th>
+                                <th th:class="text-center">반올림</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td th:class="text-center" th:text="${roundsTest1}">데이터</td>
+                                <td th:class="text-center" th:text="${#numbers.formatInteger(roundsTest1, 0, 'COMMA')}">반올림</td>
+                            </tr>
+                            <tr>
+                                <td th:class="text-center" th:text="${roundsTest2}">데이터</td>
+                                <td th:class="text-center" th:text="${#numbers.formatInteger(roundsTest2, 0, 'COMMA')}">반올림</td>
+                            </tr>
+                            <tr>
+                                <td th:class="text-center" th:text="${roundsTest3}">데이터</td>
+                                <td th:class="text-center" th:text="${#numbers.formatInteger(roundsTest3, 0, 'COMMA')}">반올림</td>
+                            </tr>
+                            <tr>
+                                <td th:class="text-center" th:text="${roundsTest4}">데이터</td>
+                                <td th:class="text-center" th:text="${#numbers.formatInteger(roundsTest4, 0, 'COMMA')}">반올림</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="row">
         <div class="col-lg-6 grid-margin stretch-card">

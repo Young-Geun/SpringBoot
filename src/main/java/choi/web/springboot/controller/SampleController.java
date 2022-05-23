@@ -64,6 +64,12 @@ public class SampleController {
         model.addAttribute("longNum1", 0L);
         model.addAttribute("longNum2", 10L);
 
+        // Set Value (반올림 테스트)
+        model.addAttribute("roundsTest1", 12.46);
+        model.addAttribute("roundsTest2", 34.56);
+        model.addAttribute("roundsTest3", 1234.46);
+        model.addAttribute("roundsTest4", 4567.56);
+
         // Return Result
         return "sample/thymeleaf";
     }
