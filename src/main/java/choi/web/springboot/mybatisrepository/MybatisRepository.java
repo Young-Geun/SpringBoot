@@ -1,4 +1,4 @@
-package choi.web.springboot.repository;
+package choi.web.springboot.mybatisrepository;
 
 import choi.web.springboot.domain.Sample;
 import org.apache.ibatis.annotations.Mapper;

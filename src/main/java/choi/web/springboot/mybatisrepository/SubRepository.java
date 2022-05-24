@@ -1,4 +1,4 @@
-package choi.web.springboot.dao;
+package choi.web.springboot.mybatisrepository;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 @Component
-public class SubDao {
+public class SubRepository {
 
     @Autowired
     @Qualifier(value = "sqlSessionFactorySub")

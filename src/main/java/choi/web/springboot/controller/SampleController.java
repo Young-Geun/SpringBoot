@@ -12,10 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 
 @RequiredArgsConstructor
 @Controller
@@ -130,10 +127,10 @@ public class SampleController {
         return "sample/fixedHeader";
     }
 
-    @GetMapping("/db-connect")
-    public String dbConnect() {
-        mybatisService.dbConnect();
-        return "redirect:/main";
+    @GetMapping("/multi-datasource")
+    public String multiDatasource(Model model) {
+        model.addAttribute("result", mybatisService.multiDatasource());
+        return "sample/multiDatasource";
     }
 
 }
