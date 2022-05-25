@@ -45,6 +45,10 @@ logging:
 file:
   dir: /Users/choi/dev/upload/
 
+app:
+  config:
+    test-prop: abc
+
 ---
 
 spring:
