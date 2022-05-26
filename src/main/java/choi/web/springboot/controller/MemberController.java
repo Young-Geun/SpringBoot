@@ -1,11 +1,11 @@
 
 package choi.web.springboot.controller;
 
+import choi.web.springboot.config.ConfigProp;
 import choi.web.springboot.domain.Member;
 import choi.web.springboot.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpHeaders;
@@ -27,8 +27,7 @@ import java.util.List;
 @RequestMapping("/member")
 public class MemberController {
 
-    @Value("${file.dir}")
-    private String fileDir;
+    private final ConfigProp configProp;
 
     private final MemberService memberService;
 
@@ -104,7 +103,7 @@ public class MemberController {
 
         // 사용자 프로필 셋팅
         try {
-            String filePath = fileDir + "member_pic" + File.separator + member.getMemberProfile();
+            String filePath = configProp.getFileDir() + "member_pic" + File.separator + member.getMemberProfile();
             Resource resource = new UrlResource("file:" + filePath);
             if (resource.exists()) {
                 return resource;
@@ -124,7 +123,7 @@ public class MemberController {
 
         // 사용자 프로필 다운로드
         try {
-            String filePath = fileDir + "member_pic" + File.separator + member.getMemberProfile();
+            String filePath = configProp.getFileDir() + "member_pic" + File.separator + member.getMemberProfile();
             Resource resource = new UrlResource("file:" + filePath);
             if (resource.exists()) {
                 return ResponseEntity.ok()

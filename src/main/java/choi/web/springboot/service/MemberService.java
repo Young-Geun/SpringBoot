@@ -1,12 +1,12 @@
 package choi.web.springboot.service;
 
+import choi.web.springboot.config.ConfigProp;
 import choi.web.springboot.domain.AccessHistory;
 import choi.web.springboot.domain.Member;
 import choi.web.springboot.repository.AccessHistoryRepository;
 import choi.web.springboot.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -20,8 +20,7 @@ import java.util.List;
 @Service
 public class MemberService {
 
-    @Value("${file.dir}")
-    private String fileDir;
+    private final ConfigProp configProp;
 
     private final MemberRepository memberRepository;
 
@@ -72,7 +71,7 @@ public class MemberService {
         try {
             // 프로필 저장
             if (!files.isEmpty()) {
-                String profilePath = fileDir + "member_pic";
+                String profilePath = configProp.getFileDir() + "member_pic";
                 if (new File(profilePath).mkdirs()) {
                     throw new Exception("사진 업로드 실패");
                 }

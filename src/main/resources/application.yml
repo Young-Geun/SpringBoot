@@ -42,9 +42,6 @@ logging:
   file:
     name: /Users/choi/dev/log/boot.log
 
-file:
-  dir: /Users/choi/dev/upload/
-
 app:
   config:
     file-dir: /Users/choi/dev/upload/
@@ -95,8 +92,9 @@ logging:
   file:
     name: C:\\Users\\choi\\Desktop\\boot.log
 
-file:
-  dir: C:\\dev\\upload\\
+app:
+  config:
+    file-dir: C:\\dev\\upload\\
 
 ---
 
@@ -144,5 +142,6 @@ logging:
   file:
     name: /home/opc/dev/log/boot.log
 
-file:
-  dir: /home/opc/dev/upload/
+app:
+  config:
+    file-dir: /home/opc/dev/upload/
