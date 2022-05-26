@@ -47,7 +47,7 @@ file:
 
 app:
   config:
-    test-prop: abc
+    file-dir: /Users/choi/dev/upload/
 
 ---
 

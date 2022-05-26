@@ -9,6 +9,6 @@ import org.springframework.stereotype.Component;
 @Data
 public class ConfigProp {
 
-    private String testProp;
+    private String fileDir;
 
 }

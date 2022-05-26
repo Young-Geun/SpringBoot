@@ -17,7 +17,7 @@ class ConfigPropTest {
     @Test
     void 설정값_가져오기() {
         // 결과비교
-        assertEquals("abc", configProp.getTestProp());
+        assertEquals("/Users/choi/dev/upload/", configProp.getFileDir());
     }
 
 }
