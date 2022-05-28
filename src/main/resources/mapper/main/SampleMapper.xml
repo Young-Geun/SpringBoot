@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="choi.web.springboot.mybatisrepository.MybatisRepository">
+<mapper namespace="choi.web.springboot.repository.mybatismain.SampleMainRepository">
 
     <select id="findByFirstRow" resultType="choi.web.springboot.domain.Sample">
         SELECT * FROM sample WHERE ROWNUM = 1
@@ -18,5 +18,9 @@
         </set>
         WHERE sample_id = #{sampleId}
     </update>
+
+    <select id="findResult" resultType="string">
+        SELECT member_email FROM member WHERE member_id = 1
+    </select>
 
 </mapper>

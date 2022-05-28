@@ -1,13 +1,15 @@
-package choi.web.springboot.mybatisrepository;
+package choi.web.springboot.repository.mybatismain;
 
 import choi.web.springboot.domain.Sample;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
-public interface MybatisRepository {
+public interface SampleMainRepository {
 
     Sample findByFirstRow();
 
     int update(Sample sample);
+
+    String findResult();
 
 }

@@ -1,9 +1,8 @@
 package choi.web.springboot.service;
 
-import choi.web.springboot.mybatisrepository.MainRepository;
-import choi.web.springboot.mybatisrepository.SubRepository;
 import choi.web.springboot.domain.Sample;
-import choi.web.springboot.mybatisrepository.MybatisRepository;
+import choi.web.springboot.repository.mybatismain.SampleMainRepository;
+import choi.web.springboot.repository.mybatissub.SampleSubRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -16,24 +15,22 @@ import java.util.Map;
 @Slf4j
 public class MybatisService {
 
-    private final MybatisRepository mybatisRepository;
+    private final SampleMainRepository sampleMainRepository;
 
-    private final MainRepository mainRepository;
-
-    private final SubRepository subRepository;
+    private final SampleSubRepository sampleSubRepository;
 
     public Sample findByFirstRow() {
-        return mybatisRepository.findByFirstRow();
+        return sampleMainRepository.findByFirstRow();
     }
 
     public int update(Sample sample) {
-        return mybatisRepository.update(sample);
+        return sampleMainRepository.update(sample);
     }
 
     public Map multiDatasource() {
         Map<String, String> resultMap = new HashMap<>();
-        resultMap.put("mainResult", mainRepository.selectMainResult());
-        resultMap.put("subResult", subRepository.selectSubResult());
+        resultMap.put("mainResult", sampleMainRepository.findResult());
+        resultMap.put("subResult", sampleSubRepository.findResult());
         return resultMap;
     }
 }

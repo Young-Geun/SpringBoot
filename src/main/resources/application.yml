@@ -24,11 +24,6 @@ spring:
   pid:
     file: /Users/choi/dev/boot.pid
 
-mybatis:
-  mapper-locations: mapper/*.xml
-  configuration:
-    map-underscore-to-camel-case: true
-
 server:
   port: 8084
   servlet:
@@ -74,11 +69,6 @@ spring:
   pid:
     file: C:\\Users\\choi\\Desktop\\boot.pid
 
-mybatis:
-  mapper-locations: mapper/*.xml
-  configuration:
-    map-underscore-to-camel-case: true
-
 server:
   port: 8084
   servlet:
@@ -123,11 +113,6 @@ spring:
         format_sql: false
   pid:
     file: /home/opc/dev/boot.pid
-
-mybatis:
-  mapper-locations: mapper/*.xml
-  configuration:
-    map-underscore-to-camel-case: true
 
 server:
   port: 8084
