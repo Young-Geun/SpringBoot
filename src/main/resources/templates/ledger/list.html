@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout}">
+<body>
+<div class="content-wrapper" layout:fragment="content">
+    <div class="page-header">
+        <h3 class="page-title">가계부</h3>
+    </div>
+    <div class="row">
+        <div class="col-12 grid-margin">
+            <div class="card">
+
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive px-xl-3">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th class="text-center">거래일시</th>
+                                <th class="text-center">거래종류</th>
+                                <th class="text-center">거래금액</th>
+                                <th class="text-center" th:width="500">비고</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="ledger : ${list}">
+                                <td class="text-center" th:text="${#temporals.format(ledger.transDate, 'yyyy-MM-dd HH:mm:ss')}">거래일시</td>
+                                <td class="text-center" th:text="${ledger.transType}">거래종류</td>
+                                <td class="text-right" th:text="${#numbers.formatInteger(ledger.transAmount, 0, 'COMMA')}">거래금액</td>
+                                <td class="text-left" th:text="${ledger.transComment}">비고</td>
+                            </tr>
+                            <tr th:if="${list == null || list.size() == 0}">
+                                <td th:colspan="4" th:align="center">조회 결과가 없습니다.</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

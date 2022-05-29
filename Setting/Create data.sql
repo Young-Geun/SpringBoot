@@ -181,3 +181,33 @@ NOCACHE;
 
 INSERT INTO sample (sample_id, num_column1, num_column2, num_column3)
 VALUES (SAMPLE_SEQ.nextval, 10, 10, 10);
+
+
+
+
+
+-- 가계부 테이블(MariaDB)
+DROP TABLE ledger;
+
+CREATE TABLE ledger
+(
+    ledger_id INT NOT NULL AUTO_INCREMENT,
+    member_id INT,
+    trans_date DATETIME,
+    trans_type VARCHAR (4),
+    trans_amount INT,
+    trans_comment VARCHAR (4000),
+
+    PRIMARY KEY (LEDGER_ID)
+);
+
+INSERT INTO ledger (member_id, trans_date, trans_type, trans_amount, trans_comment)
+VALUES (1, now(), '0001', '1000', 'test1');
+INSERT INTO ledger (member_id, trans_date, trans_type, trans_amount, trans_comment)
+VALUES (1, now(), '0001', '2000', 'test2');
+INSERT INTO ledger (member_id, trans_date, trans_type, trans_amount, trans_comment)
+VALUES (1, now(), '0001', '3000', 'test3');
+INSERT INTO ledger (member_id, trans_date, trans_type, trans_amount, trans_comment)
+VALUES (1, now(), '0001', '4000', 'test4');
+INSERT INTO ledger (member_id, trans_date, trans_type, trans_amount, trans_comment)
+VALUES (1, now(), '0001', '5000', 'test5');
