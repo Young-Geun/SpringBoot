@@ -8,6 +8,8 @@ import java.util.List;
 @Mapper
 public interface LedgerRepository {
 
-    List<Ledger> findAll(long memberId);
+    int findTotalCount(long memberId);
+
+    List<Ledger> findAll(long memberId, int page);
 
 }

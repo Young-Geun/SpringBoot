@@ -15,8 +15,12 @@ public class LedgerService {
 
     private final LedgerRepository ledgerRepository;
 
-    public List<Ledger> findAll(long memberId) {
-        return ledgerRepository.findAll(memberId);
+    public int findTotalCount(long memberId) {
+        return ledgerRepository.findTotalCount(memberId);
+    }
+
+    public List<Ledger> findAll(long memberId, int page) {
+        return ledgerRepository.findAll(memberId, page * 10);
     }
 
 }
