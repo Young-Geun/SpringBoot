@@ -10,9 +10,23 @@
     <div class="row">
         <div class="col-12 grid-margin">
             <div class="card">
-                <form id="form" method="get">
+                <form th:id="form" th:action="@{/ledger/list}" th:object="${ledger}" th:method="get">
                     <input type="hidden" id="page" name="page">
                     <input type="hidden" id="range" name="range">
+                    <input type="hidden" th:field="*{searchDate}">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-sm-12 text-center">
+                                        <button type="button" class="btn" onclick="addMonth('-1');"><i class="mdi mdi-arrow-left"></i></button>
+                                        <span th:text="|*{#strings.substring(searchDate, 0, 4)}-*{#strings.substring(searchDate, 4, 6)}|">검색일시</span>
+                                        <button type="button" class="btn" onclick="addMonth('1');"><i class="mdi mdi-arrow-right"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>
@@ -68,6 +82,24 @@
         </div>
     </div>
     <script>
+        function addMonth(month) {
+            var searchDate = $('#searchDate').val();
+            var selectedYear = searchDate.substring(0, 4);
+            var selectedMonth = searchDate.substring(4, 6);
+            var currentDate = new Date(selectedYear, selectedMonth, 1);
+            currentDate.setMonth(currentDate.getMonth() + parseInt(month));
+
+            if (currentDate.getMonth() == 0) {
+                $('#searchDate').val(currentDate.getFullYear() + '01');
+            } else if (currentDate.getMonth() < 10) {
+                $('#searchDate').val(currentDate.getFullYear() + '0' + currentDate.getMonth());
+            } else {
+                $('#searchDate').val(currentDate.getFullYear() + '' + currentDate.getMonth());
+            }
+
+            search(0, 1);
+        }
+
         function search(page, range) {
             $('#page').val(page);
             $('#range').val(range);

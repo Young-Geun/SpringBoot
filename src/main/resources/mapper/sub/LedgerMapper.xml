@@ -2,13 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="choi.web.springboot.repository.mybatissub.LedgerRepository">
 
-    <select id="findTotalCount" resultType="int" parameterType="long">
+    <select id="findTotalCount" resultType="int" parameterType="choi.web.springboot.domain.Ledger">
         SELECT COUNT(1)
         FROM ledger
         WHERE member_id = #{memberId}
+        AND TO_CHAR(trans_date, 'YYYYMM') = #{searchDate}
     </select>
 
-    <select id="findAll" resultType="choi.web.springboot.domain.Ledger">
+    <select id="findAll" resultType="choi.web.springboot.domain.Ledger" parameterType="choi.web.springboot.domain.Ledger">
         SELECT ledger_id,
                member_id,
                trans_date,
@@ -27,8 +28,9 @@
                trans_comment
         FROM ledger
         WHERE member_id = #{memberId}
-        ORDER BY ledger_id desc
-        LIMIT #{page}, 10
+        AND TO_CHAR(trans_date, 'YYYYMM') = #{searchDate}
+        ORDER BY trans_date desc
+        LIMIT #{currentPage}, 10
     </select>
 
 </mapper>

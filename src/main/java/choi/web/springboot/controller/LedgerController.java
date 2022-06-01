@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 @RequiredArgsConstructor
 @Controller
 @Slf4j
@@ -21,16 +24,22 @@ public class LedgerController {
     private final LedgerService ledgerService;
 
     @GetMapping("/ledger/list")
-    public String list(Model model,
+    public String list(Ledger ledger,
+                       Model model,
                        @SessionAttribute(required = false) Member loginMember,
                        @RequestParam(required = false, defaultValue = "0", value = "page") int page,
                        @RequestParam(required = false, defaultValue = "1", value = "range") int range) {
+        // valid check
+        if (ledger.getSearchDate() == null || "".equals(ledger.getSearchDate())) {
+            ledger.setSearchDate(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMM")));
+        }
+
         // total count
-        int totalCount = ledgerService.findTotalCount(loginMember.getMemberId());
+        int totalCount = ledgerService.findTotalCount(ledger, loginMember.getMemberId());
         model.addAttribute("totalCount", totalCount);
 
         // list
-        model.addAttribute("list", ledgerService.findAll(loginMember.getMemberId(), page));
+        model.addAttribute("list", ledgerService.findAll(ledger, loginMember.getMemberId(), page));
 
         // pagination
         Pagination pagination = new Pagination();

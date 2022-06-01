@@ -25,4 +25,10 @@ public class Ledger {
     // 비고
     private String transComment;
 
+    // 검색년월
+    private String searchDate;
+
+    // 현재 페이지
+    private int currentPage;
+
 }
