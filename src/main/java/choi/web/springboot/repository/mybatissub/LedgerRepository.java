@@ -12,4 +12,6 @@ public interface LedgerRepository {
 
     List<Ledger> findAll(Ledger ledger);
 
+    List<Ledger> findSummary(long memberId);
+
 }

@@ -49,4 +49,11 @@ public class LedgerController {
         return "ledger/list";
     }
 
+    @GetMapping("/ledger/summary")
+    public String summary(@SessionAttribute(required = false) Member loginMember, Model model) {
+        // list
+        model.addAttribute("list", ledgerService.findSummary(loginMember.getMemberId()));
+        return "ledger/summary";
+    }
+
 }

@@ -33,4 +33,18 @@
         LIMIT #{currentPage}, 10
     </select>
 
+    <select id="findSummary" resultType="choi.web.springboot.domain.Ledger" parameterType="long">
+        SELECT IF(yyyymm IS NULL, '총 합계', if(yyyymmdd IS NULL, concat(yyyymm, '월 합계') ,yyyymmdd)) trans_date_fmt,
+               IF(yyyymmdd IS NULL, SUM(t.trans_amount), t.trans_amount) trans_amount
+        FROM (
+                 SELECT  TO_CHAR(trans_date, 'yyyyMMdd') yyyymmdd,
+                         TO_CHAR(trans_date, 'yyyyMM') yyyymm,
+                         trans_amount
+                 FROM ledger
+                 WHERE member_id = #{memberId}
+             ) t
+        GROUP BY t.yyyymm, t.yyyymmdd
+        WITH ROLLUP;
+    </select>
+
 </mapper>

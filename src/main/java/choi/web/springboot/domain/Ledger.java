@@ -16,6 +16,9 @@ public class Ledger {
     // 거래일시
     private LocalDateTime transDate;
 
+    // 거래일시(formatted)
+    private String transDateFmt;
+
     // 거래종류 (0000=기타, 0001=식비, 0002=문화생활, 0003=교통비, 0004=통신비, 0005=카드 0006=저축/투자, 0007=교육)
     private String transType;
 

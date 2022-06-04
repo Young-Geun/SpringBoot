@@ -57,12 +57,23 @@
                 </a>
             </li>
             <li class="nav-item menu-items">
-                <a class="nav-link" th:href="@{/ledger/list}">
+                <a class="nav-link" data-toggle="collapse" href="#ledger" aria-expanded="false" aria-controls="ledger">
                     <span class="menu-icon">
                         <i class="mdi mdi-cash-usd"></i>
                     </span>
                     <span class="menu-title">가계부</span>
+                    <i class="menu-arrow"></i>
                 </a>
+                <div class="collapse" id="ledger">
+                    <ul class="nav flex-column sub-menu">
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/ledger/list}">리스트</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/ledger/summary}">집계</a>
+                        </li>
+                    </ul>
+                </div>
             </li>
             <li class="nav-item menu-items">
                 <a class="nav-link" data-toggle="collapse" href="#sample" aria-expanded="false" aria-controls="sample">

@@ -26,4 +26,8 @@ public class LedgerService {
         return ledgerRepository.findAll(ledger);
     }
 
+    public List<Ledger> findSummary(long memberId) {
+        return ledgerRepository.findSummary(memberId);
+    }
+
 }
