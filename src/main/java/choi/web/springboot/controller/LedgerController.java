@@ -56,4 +56,12 @@ public class LedgerController {
         return "ledger/summary";
     }
 
+    @GetMapping("/ledger/detail")
+    public String detail(Ledger ledger, Model model) {
+        Ledger result = ledgerService.findById(ledger.getLedgerId());
+        model.addAttribute("result", result);
+
+        return "ledger/detail";
+    }
+
 }

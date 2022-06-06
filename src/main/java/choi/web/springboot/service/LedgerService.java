@@ -30,4 +30,8 @@ public class LedgerService {
         return ledgerRepository.findSummary(memberId);
     }
 
+    public Ledger findById(long ledgerId) {
+        return ledgerRepository.findById(ledgerId);
+    }
+
 }

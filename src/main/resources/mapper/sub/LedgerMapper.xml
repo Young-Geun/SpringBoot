@@ -48,4 +48,25 @@
         WITH ROLLUP;
     </select>
 
+    <select id="findById" resultType="choi.web.springboot.domain.Ledger" parameterType="long">
+        SELECT ledger_id,
+               member_id,
+               trans_date,
+               ( CASE trans_type
+                     WHEN '0000' THEN '기타'
+                     WHEN '0001' THEN '식비'
+                     WHEN '0002' THEN '문화생활'
+                     WHEN '0003' THEN '교통비'
+                     WHEN '0004' THEN '통신비'
+                     WHEN '0005' THEN '카드'
+                     WHEN '0006' THEN '저축/투자'
+                     WHEN '0007' THEN '교육'
+                   END
+                   ) AS trans_type,
+               trans_amount,
+               trans_comment
+        FROM ledger
+        WHERE ledger_id = #{ledgerId}
+    </select>
+
 </mapper>

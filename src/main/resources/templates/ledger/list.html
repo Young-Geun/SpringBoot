@@ -49,7 +49,12 @@
                             </thead>
                             <tbody>
                             <tr th:each="ledger : ${list}">
-                                <td class="text-center" th:text="${#numbers.formatInteger(ledger.ledgerId, 0, 'COMMA')}">거래번호</td>
+                                <td class="text-center">
+                                    <a th:text="${#numbers.formatInteger(ledger.ledgerId, 0, 'COMMA')}"
+                                       th:href="@{/ledger/detail(ledgerId = ${ledger.ledgerId})}">
+                                        거래번호
+                                    </a>
+                                </td>
                                 <td class="text-center" th:text="${#temporals.format(ledger.transDate, 'yyyy-MM-dd HH:mm:ss')}">거래일시</td>
                                 <td class="text-center" th:text="${ledger.transType}">거래종류</td>
                                 <td class="text-right" th:text="${#numbers.formatInteger(ledger.transAmount, 0, 'COMMA')}">거래금액</td>
