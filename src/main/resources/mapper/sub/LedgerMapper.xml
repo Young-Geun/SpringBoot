@@ -39,9 +39,10 @@
         FROM (
                  SELECT  TO_CHAR(trans_date, 'yyyyMMdd') yyyymmdd,
                          TO_CHAR(trans_date, 'yyyyMM') yyyymm,
-                         trans_amount
+                         sum(trans_amount) trans_amount
                  FROM ledger
                  WHERE member_id = #{memberId}
+                 GROUP BY TO_CHAR(trans_date, 'yyyyMMdd')
              ) t
         GROUP BY t.yyyymm, t.yyyymmdd
         WITH ROLLUP;
