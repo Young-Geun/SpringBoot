@@ -41,7 +41,7 @@ public class BoardController {
     }
 
     @GetMapping("/detail")
-    public String list(Model model, Board board) {
+    public String detail(Model model, Board board) {
         Board result = boardService.findById(board.getBoardId());
         model.addAttribute("result", result);
 
