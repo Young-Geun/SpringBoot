@@ -1,12 +1,14 @@
 package choi.web.springboot.service;
 
 import choi.web.springboot.domain.Ledger;
+import choi.web.springboot.domain.Member;
 import choi.web.springboot.repository.mybatissub.LedgerRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -33,6 +35,13 @@ public class LedgerService {
 
     public Ledger findById(long ledgerId) {
         return ledgerRepository.findById(ledgerId);
+    }
+
+    @Transactional
+    public void insert(Ledger ledger, HttpSession session) throws Exception {
+        Member loginMember = (Member) session.getAttribute("loginMember");
+        ledger.setMemberId(loginMember.getMemberId());
+        ledgerRepository.save(ledger);
     }
 
     @Transactional

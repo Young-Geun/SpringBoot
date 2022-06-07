@@ -69,6 +69,11 @@
         WHERE ledger_id = #{ledgerId}
     </select>
 
+    <insert id="save" parameterType="choi.web.springboot.domain.Ledger">
+        INSERT INTO ledger (member_id, trans_date, trans_type, trans_amount, trans_comment)
+        VALUES (#{memberId}, #{transDate}, #{transType}, #{transAmount}, #{transComment});
+    </insert>
+
     <delete id="deleteById" parameterType="long">
         DELETE
         FROM ledger

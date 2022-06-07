@@ -1,6 +1,7 @@
 package choi.web.springboot.domain;
 
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
 
@@ -14,6 +15,7 @@ public class Ledger {
     private long memberId;
 
     // 거래일시
+    @DateTimeFormat(pattern = "yyyyMMddHHmmss")
     private LocalDateTime transDate;
 
     // 거래일시(formatted)

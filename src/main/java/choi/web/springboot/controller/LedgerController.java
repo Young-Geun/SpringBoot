@@ -9,11 +9,14 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
+import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -63,6 +66,27 @@ public class LedgerController {
         model.addAttribute("result", result);
 
         return "ledger/detail";
+    }
+
+    @GetMapping("/ledger/insert")
+    public String insert(Ledger ledger) {
+        return "ledger/insert";
+    }
+
+    @PostMapping("/ledger/insert")
+    public String insert(@Validated Ledger ledger, BindingResult bindingResult, Model model, HttpSession session) {
+        if (bindingResult.hasErrors()) {
+            return "ledger/insert";
+        }
+
+        try {
+            ledgerService.insert(ledger, session);
+            return "redirect:/ledger/list";
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            model.addAttribute("result", "등록에 실패하였습니다.");
+            return "ledger/insert";
+        }
     }
 
     @PostMapping("/ledger/delete")

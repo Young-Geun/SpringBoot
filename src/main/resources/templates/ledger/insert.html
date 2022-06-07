@@ -1,0 +1,91 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout}">
+<body>
+<div class="content-wrapper" layout:fragment="content">
+    <div class="page-header">
+        <h3 class="page-title">거래내역 등록</h3>
+    </div>
+    <div class="row">
+        <div class="col-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <form th:action="@{/ledger/insert}" th:object="${ledger}" th:method="post">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p class="text-danger" th:text="${result}">메시지</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group row">
+                                    <label class="col-form-label col-sm-1">거래일시</label>
+                                    <div class="col-sm-11">
+                                        <input class="form-control" type="text" th:field="*{transDate}">
+                                        <p class="text-danger" th:if="${#fields.hasErrors('transDate')}" th:errors="*{transDate}"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-form-label col-sm-2">거래종류</label>
+                                    <div class="col-sm-10">
+                                        <select class="form-control" th:field="*{transType}">
+                                            <option value="0000">기타</option>
+                                            <option value="0001">식비</option>
+                                            <option value="0002">문화생활</option>
+                                            <option value="0003">교통비</option>
+                                            <option value="0004">통신비</option>
+                                            <option value="0005">카드</option>
+                                            <option value="0006">저축/투자</option>
+                                            <option value="0007">교육</option>
+                                        </select>
+                                        <p class="text-danger" th:if="${#fields.hasErrors('transType')}" th:errors="*{transType}"></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-form-label col-sm-2">거래금액</label>
+                                    <div class="col-sm-10">
+                                        <input class="form-control text-right" type="text" th:field="*{transAmount}">
+                                        <p class="text-danger" th:if="${#fields.hasErrors('transAmount')}" th:errors="*{transAmount}"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group row">
+                                    <label class="col-form-label col-md-1">비고</label>
+                                    <div class="col-md-11">
+                                        <textarea class="form-control w-100" rows="4" th:field="*{transComment}"></textarea>
+                                        <p class="text-danger" th:if="${#fields.hasErrors('transComment')}" th:errors="*{transComment}"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-5">
+                            <div class="col-md-12">
+                                <div class="form-group row">
+                                    <button type="submit" class="btn btn-primary mr-2">등록</button>
+                                    <button type="button" class="btn btn-dark mr-2" th:onclick="list()">목록</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function list() {
+            location.href = '/ledger/list';
+        }
+    </script>
+</div>
+</body>
+</html>

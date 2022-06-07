@@ -16,6 +16,8 @@ public interface LedgerRepository {
 
     Ledger findById(long ledgerId);
 
+    int save(Ledger ledger);
+
     int deleteById(long ledgerId);
 
 }
