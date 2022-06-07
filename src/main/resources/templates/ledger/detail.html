@@ -33,12 +33,18 @@
                             </textarea>
                         </div>
                     </form>
+                    <button class="btn btn-danger mr-2" th:onclick="remove()">삭제</button>
                     <button class="btn btn-dark mr-2" th:onclick="list()">목록</button>
                 </div>
             </div>
         </div>
     </div>
     <script>
+        function remove() {
+            $("#form").attr("action", "/ledger/delete");
+            $('#form').submit();
+        }
+
         function list() {
             location.href = '/ledger/list';
         }

@@ -5,6 +5,7 @@ import choi.web.springboot.repository.mybatissub.LedgerRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -32,6 +33,11 @@ public class LedgerService {
 
     public Ledger findById(long ledgerId) {
         return ledgerRepository.findById(ledgerId);
+    }
+
+    @Transactional
+    public void delete(Ledger ledger) {
+        ledgerRepository.deleteById(ledger.getLedgerId());
     }
 
 }

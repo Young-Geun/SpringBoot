@@ -69,4 +69,10 @@
         WHERE ledger_id = #{ledgerId}
     </select>
 
+    <delete id="deleteById" parameterType="long">
+        DELETE
+        FROM ledger
+        WHERE ledger_id = #{ledgerId}
+    </delete>
+
 </mapper>
