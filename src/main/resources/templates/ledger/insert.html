@@ -82,6 +82,14 @@
         </div>
     </div>
     <script>
+        $(function(){
+            $("#transDate").datepicker({
+                language: 'ko',
+                timepicker: true,
+                timeFormat: "hh:ii:00"
+            });
+        })
+
         function list() {
             location.href = '/ledger/list';
         }

@@ -15,7 +15,7 @@ public class Ledger {
     private long memberId;
 
     // 거래일시
-    @DateTimeFormat(pattern = "yyyyMMddHHmmss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime transDate;
 
     // 거래일시(formatted)
