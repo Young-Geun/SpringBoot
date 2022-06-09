@@ -18,6 +18,8 @@ public interface LedgerRepository {
 
     int save(Ledger ledger);
 
+    int update(Ledger ledger);
+
     int deleteById(long ledgerId);
 
 }

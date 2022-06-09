@@ -13,33 +13,83 @@
                 <div class="card-body">
                     <form id="form" th:method="post">
                         <input type="hidden" th:field="${result.ledgerId}">
-                        <div class="form-group">
-                            <label>거래일시</label>
-                            <input type="text" class="form-control"
-                                   th:value="${#temporals.format(result.transDate, 'yyyy-MM-dd HH:mm:ss')}" readonly>
-                       </div>
-                        <div class="form-group">
-                            <label>거래종류</label>
-                            <input type="text" class="form-control" th:value="${result.transType}" readonly>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group row">
+                                    <label class="col-form-label col-sm-1">거래일시</label>
+                                    <div class="col-sm-11">
+                                        <input class="form-control" type="text"
+                                               th:field="${result.transDate}"
+                                               th:value="${#temporals.format(result.transDate, 'yyyy-MM-dd HH:mm:ss')}" readonly>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label>거래금액</label>
-                            <input type="text" class="form-control"
-                                   th:value="${#numbers.formatInteger(result.transAmount, 0, 'COMMA')}" readonly>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-form-label col-sm-2">거래종류</label>
+                                    <div class="col-sm-10">
+                                        <select class="form-control" th:field="${result.transType}">
+                                            <option value="0000">기타</option>
+                                            <option value="0001">식비</option>
+                                            <option value="0002">문화생활</option>
+                                            <option value="0003">교통비</option>
+                                            <option value="0004">통신비</option>
+                                            <option value="0005">카드</option>
+                                            <option value="0006">저축/투자</option>
+                                            <option value="0007">교육</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-form-label col-sm-2">거래금액</label>
+                                    <div class="col-sm-10">
+                                        <input class="form-control text-right" type="text" th:field="${result.transAmount}">
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label>비고</label>
-                            <textarea class="form-control" rows="4" th:field="${result.transComment}" readonly>
-                            </textarea>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group row">
+                                    <label class="col-form-label col-md-1">비고</label>
+                                    <div class="col-md-11">
+                                        <textarea class="form-control w-100" rows="4" th:field="${result.transComment}"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-5">
+                            <div class="col-md-12">
+                                <div class="form-group row">
+                                    <button class="btn btn-primary mr-2" th:onclick="edit()">수정</button>
+                                    <button class="btn btn-danger mr-2" th:onclick="remove()">삭제</button>
+                                    <button class="btn btn-dark mr-2" th:onclick="list()">목록</button>
+                                </div>
+                            </div>
                         </div>
                     </form>
-                    <button class="btn btn-danger mr-2" th:onclick="remove()">삭제</button>
-                    <button class="btn btn-dark mr-2" th:onclick="list()">목록</button>
                 </div>
             </div>
         </div>
     </div>
     <script>
+        $(function(){
+            $("#transDate").datepicker({
+                language: 'ko',
+                timepicker: true,
+                timeFormat: "hh:ii:00"
+            });
+        })
+
+        function edit() {
+            $("#form").attr("action", "/ledger/update");
+            $('#form').submit();
+        }
+
         function remove() {
             $("#form").attr("action", "/ledger/delete");
             $('#form').submit();

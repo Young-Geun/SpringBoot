@@ -45,6 +45,11 @@ public class LedgerService {
     }
 
     @Transactional
+    public void update(Ledger ledger) {
+        ledgerRepository.update(ledger);
+    }
+
+    @Transactional
     public void delete(Ledger ledger) {
         ledgerRepository.deleteById(ledger.getLedgerId());
     }

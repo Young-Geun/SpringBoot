@@ -89,6 +89,12 @@ public class LedgerController {
         }
     }
 
+    @PostMapping("/ledger/update")
+    public String update(Ledger ledger) {
+        ledgerService.update(ledger);
+        return "redirect:/ledger/list";
+    }
+
     @PostMapping("/ledger/delete")
     public String delete(Ledger ledger) {
         ledgerService.delete(ledger);
