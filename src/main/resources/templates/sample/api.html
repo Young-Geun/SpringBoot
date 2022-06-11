@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout}">
+<body>
+<div class="content-wrapper" layout:fragment="content">
+    <div class="page-header">
+        <h3 class="page-title">API</h3>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive py-xl-5">
+                        <div class="col-md-12">
+                            <div class="form-group row">
+                                <label class="col-form-label col-sm-2 text-right">응답 코드</label>
+                                <label class="col-form-label col-sm-4" th:text="${result?.code}">응답 코드</label>
+                                <label class="col-form-label col-sm-2 text-right">응답 메시지</label>
+                                <label class="col-form-label col-sm-4" th:text="${result?.message}">응답 메시지</label>
+                            </div>
+                        </div>
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>이름</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="list : ${result?.data}">
+                                <td th:text="${list.testId}">ID</td>
+                                <td th:text="${list.testName}">이름</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
