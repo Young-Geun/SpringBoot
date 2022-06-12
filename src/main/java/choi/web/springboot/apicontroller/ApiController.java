@@ -14,7 +14,9 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RequiredArgsConstructor
 @Slf4j
@@ -47,7 +49,7 @@ public class ApiController {
     }
 
     @GetMapping("/api/server")
-    public @ResponseBody ResponseData server() {
+    public @ResponseBody Map server2() {
         List<Test> list = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
             Test test = new Test();
@@ -57,10 +59,10 @@ public class ApiController {
             list.add(test);
         }
 
-        ResponseData result = new ResponseData();
-        result.setCode("C001");
-        result.setMessage("SUCCESS");
-        result.setData(list);
+        Map result = new HashMap();
+        result.put("CODE", "C0001");
+        result.put("MESSAGE", "SUCCESS");
+        result.put("DATA", list);
         log.info("[server] result : {}", result);
 
         return result;
