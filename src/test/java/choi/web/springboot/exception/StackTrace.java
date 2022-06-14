@@ -79,7 +79,7 @@ class StackTrace {
             try {
                 repository.call();
             } catch (SQLException e) {
-                throw new MyRuntimeException(e);
+                throw new MyRuntimeException(e); // 예외를 전환할 때는 기존 예외를 반드시 포함해야한다.
             }
         }
 
