@@ -35,17 +35,33 @@
 
     <select id="findSummary" resultType="choi.web.springboot.domain.Ledger" parameterType="long">
         SELECT IF(yyyymm IS NULL, '총 합계', IF(yyyymmdd IS NULL, CONCAT(SUBSTR(yyyymm, 1, 4), '-', SUBSTR(yyyymm, 5, 6), '월 합계'), DATE_FORMAT(yyyymmdd, '%Y-%m-%d'))) trans_date_fmt,
-               IF(yyyymmdd IS NULL, SUM(t.trans_amount), t.trans_amount) trans_amount
+               SUM(trans_amount) sum_trans_amount,
+               SUM(trans_amount_0000) sum_trans_amount_0000,
+               SUM(trans_amount_0001) sum_trans_amount_0001,
+               SUM(trans_amount_0002) sum_trans_amount_0002,
+               SUM(trans_amount_0003) sum_trans_amount_0003,
+               SUM(trans_amount_0004) sum_trans_amount_0004,
+               SUM(trans_amount_0005) sum_trans_amount_0005,
+               SUM(trans_amount_0006) sum_trans_amount_0006,
+               SUM(trans_amount_0007) sum_trans_amount_0007
         FROM (
-                 SELECT  TO_CHAR(trans_date, 'yyyyMMdd') yyyymmdd,
-                         TO_CHAR(trans_date, 'yyyyMM') yyyymm,
-                         sum(trans_amount) trans_amount
+                 SELECT TO_CHAR(trans_date, 'yyyyMM') yyyymm,
+                        TO_CHAR(trans_date, 'yyyyMMdd') yyyymmdd,
+                        SUM(trans_amount) trans_amount,
+                        SUM(IF(trans_type = '0000', trans_amount, 0)) trans_amount_0000,
+                        SUM(IF(trans_type = '0001', trans_amount, 0)) trans_amount_0001,
+                        SUM(IF(trans_type = '0002', trans_amount, 0)) trans_amount_0002,
+                        SUM(IF(trans_type = '0003', trans_amount, 0)) trans_amount_0003,
+                        SUM(IF(trans_type = '0004', trans_amount, 0)) trans_amount_0004,
+                        SUM(IF(trans_type = '0005', trans_amount, 0)) trans_amount_0005,
+                        SUM(IF(trans_type = '0006', trans_amount, 0)) trans_amount_0006,
+                        SUM(IF(trans_type = '0007', trans_amount, 0)) trans_amount_0007
                  FROM ledger
                  WHERE member_id = #{memberId}
                  GROUP BY TO_CHAR(trans_date, 'yyyyMMdd')
              ) t
         GROUP BY t.yyyymm, t.yyyymmdd
-        WITH ROLLUP;
+        WITH ROLLUP
     </select>
 
     <select id="findById" resultType="choi.web.springboot.domain.Ledger" parameterType="long">

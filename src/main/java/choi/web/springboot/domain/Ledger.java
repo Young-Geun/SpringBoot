@@ -36,4 +36,31 @@ public class Ledger {
     // 현재 페이지
     private int currentPage;
 
+    // 거래금액 총 합계
+    private long sumTransAmount;
+
+    // 거래금액(기타) 총 합계
+    private long sumTransAmount0000;
+
+    // 거래금액(식비) 총 합계
+    private long sumTransAmount0001;
+
+    // 거래금액(문화생활) 총 합계
+    private long sumTransAmount0002;
+
+    // 거래금액(교통비) 총 합계
+    private long sumTransAmount0003;
+
+    // 거래금액(통신비) 총 합계
+    private long sumTransAmount0004;
+
+    // 거래금액(카드) 총 합계
+    private long sumTransAmount0005;
+
+    // 거래금액(저축/투자) 총 합계
+    private long sumTransAmount0006;
+
+    // 거래금액(교육) 총 합계
+    private long sumTransAmount0007;
+
 }

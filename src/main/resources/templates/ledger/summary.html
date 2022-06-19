@@ -15,17 +15,36 @@
                         <table class="table table-striped">
                             <thead>
                             <tr>
-                                <th class="text-center">거래일시</th>
-                                <th class="text-center">거래금액</th>
+                                <th class="text-center align-middle" rowspan="2">거래일시</th>
+                                <th class="text-center" colspan="9">거래금액</th>
+                            </tr>
+                            <tr>
+                                <th class="text-center">총 합계</th>
+                                <th class="text-center">기타</th>
+                                <th class="text-center">식비</th>
+                                <th class="text-center">문화생활</th>
+                                <th class="text-center">교통비</th>
+                                <th class="text-center">통신비</th>
+                                <th class="text-center">카드</th>
+                                <th class="text-center">저축/투자</th>
+                                <th class="text-center">교육</th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr th:each="ledger : ${list}">
                                 <td class="text-center" th:text="${ledger.transDateFmt}">거래종류</td>
-                                <td class="text-right" th:text="${#numbers.formatInteger(ledger.transAmount, 0, 'COMMA')}">거래금액</td>
+                                <td class="text-right" th:text="${#numbers.formatInteger(ledger.sumTransAmount, 0, 'COMMA')}">총 합계</td>
+                                <td class="text-right" th:text="${#numbers.formatInteger(ledger.sumTransAmount0000, 0, 'COMMA')}">기타</td>
+                                <td class="text-right" th:text="${#numbers.formatInteger(ledger.sumTransAmount0001, 0, 'COMMA')}">식비</td>
+                                <td class="text-right" th:text="${#numbers.formatInteger(ledger.sumTransAmount0002, 0, 'COMMA')}">문화생활</td>
+                                <td class="text-right" th:text="${#numbers.formatInteger(ledger.sumTransAmount0003, 0, 'COMMA')}">교통비</td>
+                                <td class="text-right" th:text="${#numbers.formatInteger(ledger.sumTransAmount0004, 0, 'COMMA')}">통신비</td>
+                                <td class="text-right" th:text="${#numbers.formatInteger(ledger.sumTransAmount0005, 0, 'COMMA')}">카드</td>
+                                <td class="text-right" th:text="${#numbers.formatInteger(ledger.sumTransAmount0006, 0, 'COMMA')}">저축/투자</td>
+                                <td class="text-right" th:text="${#numbers.formatInteger(ledger.sumTransAmount0007, 0, 'COMMA')}">교육</td>
                             </tr>
                             <tr th:if="${list == null || list.size() == 0}">
-                                <td th:colspan="2" th:align="center">조회 결과가 없습니다.</td>
+                                <td th:colspan="9" th:align="center">조회 결과가 없습니다.</td>
                             </tr>
                             </tbody>
                         </table>
