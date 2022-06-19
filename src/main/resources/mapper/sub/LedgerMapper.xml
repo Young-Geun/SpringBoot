@@ -34,6 +34,11 @@
     </select>
 
     <select id="findSummary" resultType="choi.web.springboot.domain.Ledger" parameterType="long">
+        WITH RECURSIVE date_table as (
+            SELECT '2022-01-01' as dt
+            UNION
+            SELECT DATE_ADD(date_table.dt, INTERVAL 1 DAY) FROM date_table WHERE DATE_ADD(date_table.dt, INTERVAL 1 DAY) <![CDATA[ <= ]]> now()
+        )
         SELECT IF(yyyymm IS NULL, '총 합계', IF(yyyymmdd IS NULL, CONCAT(SUBSTR(yyyymm, 1, 4), '-', SUBSTR(yyyymm, 5, 6), '월 합계'), DATE_FORMAT(yyyymmdd, '%Y-%m-%d'))) trans_date_fmt,
                SUM(trans_amount) sum_trans_amount,
                SUM(trans_amount_0000) sum_trans_amount_0000,
@@ -45,22 +50,28 @@
                SUM(trans_amount_0006) sum_trans_amount_0006,
                SUM(trans_amount_0007) sum_trans_amount_0007
         FROM (
-                 SELECT TO_CHAR(trans_date, 'yyyyMM') yyyymm,
-                        TO_CHAR(trans_date, 'yyyyMMdd') yyyymmdd,
-                        SUM(trans_amount) trans_amount,
-                        SUM(IF(trans_type = '0000', trans_amount, 0)) trans_amount_0000,
-                        SUM(IF(trans_type = '0001', trans_amount, 0)) trans_amount_0001,
-                        SUM(IF(trans_type = '0002', trans_amount, 0)) trans_amount_0002,
-                        SUM(IF(trans_type = '0003', trans_amount, 0)) trans_amount_0003,
-                        SUM(IF(trans_type = '0004', trans_amount, 0)) trans_amount_0004,
-                        SUM(IF(trans_type = '0005', trans_amount, 0)) trans_amount_0005,
-                        SUM(IF(trans_type = '0006', trans_amount, 0)) trans_amount_0006,
-                        SUM(IF(trans_type = '0007', trans_amount, 0)) trans_amount_0007
-                 FROM ledger
-                 WHERE member_id = #{memberId}
-                 GROUP BY TO_CHAR(trans_date, 'yyyyMMdd')
-             ) t
-        GROUP BY t.yyyymm, t.yyyymmdd
+                SELECT  TO_CHAR(t1.dt_fmt, 'yyyyMM') yyyymm,
+                        TO_CHAR(t1.dt_fmt, 'yyyyMMdd') yyyymmdd,
+                        SUM(t1.trans_amount) trans_amount,
+                        SUM(IF(t1.trans_type = '0000', t1.trans_amount, 0)) trans_amount_0000,
+                        SUM(IF(t1.trans_type = '0001', t1.trans_amount, 0)) trans_amount_0001,
+                        SUM(IF(t1.trans_type = '0002', t1.trans_amount, 0)) trans_amount_0002,
+                        SUM(IF(t1.trans_type = '0003', t1.trans_amount, 0)) trans_amount_0003,
+                        SUM(IF(t1.trans_type = '0004', t1.trans_amount, 0)) trans_amount_0004,
+                        SUM(IF(t1.trans_type = '0005', t1.trans_amount, 0)) trans_amount_0005,
+                        SUM(IF(t1.trans_type = '0006', t1.trans_amount, 0)) trans_amount_0006,
+                        SUM(IF(t1.trans_type = '0007', t1.trans_amount, 0)) trans_amount_0007
+                FROM (
+                        SELECT DATE_FORMAT(date_table.dt, '%Y%m%d') dt_fmt,
+                               trans_type,
+                               IF(trans_amount is null, 0, trans_amount) trans_amount
+                        FROM date_table LEFT OUTER JOIN ledger
+                        ON DATE_FORMAT(date_table.dt, '%Y%m%d') = TO_CHAR(trans_date, 'yyyyMMdd')
+                        AND member_id = 1
+                     ) t1
+                GROUP BY DATE_FORMAT(t1.dt_fmt, '%Y%m%d')
+             ) t2
+        GROUP BY t2.yyyymm, t2.yyyymmdd
         WITH ROLLUP
     </select>
 
