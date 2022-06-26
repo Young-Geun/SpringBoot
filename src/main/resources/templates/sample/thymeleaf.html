@@ -296,6 +296,34 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-lg-6 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">데이터 속성</h4>
+                    <div class="table-responsive py-xl-5">
+                        <div id="attr1" th:data-firstValue="1" th:data-secondValue="2">속성 1 (th:data-firstValue="1" th:data-secondValue="2")</div>
+                        <div id="attr2" th:attr="data-firstValue='3', data-secondValue='4'">속성 2 (th:attr="data-firstValue='3', data-secondValue='4'")</div>
+                        <button type="button" class="btn btn-primary mt-4" onclick="show()">값 확인</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function show() {
+            // 속성 1의 값
+            var firstValue1 = $("#attr1").attr("data-firstValue");
+            var secondValue1 = $("#attr1").attr("data-secondValue");
+
+            // 속성 2의 값
+            var firstValue2 = $("#attr2").attr("data-firstValue");
+            var secondValue2 = $("#attr2").attr("data-secondValue");
+
+            alert(firstValue1 + ', ' + secondValue1);
+            alert(firstValue2 + ', ' + secondValue2);
+        }
+    </script>
 </div>
 </body>
 </html>
