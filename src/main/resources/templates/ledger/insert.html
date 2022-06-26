@@ -22,7 +22,7 @@
                                 <div class="form-group row">
                                     <label class="col-form-label col-sm-1">거래일시</label>
                                     <div class="col-sm-11">
-                                        <input class="form-control" type="text" th:field="*{transDate}">
+                                        <input class="form-control" type="text" th:field="*{transDate}" autocomplete="off">
                                         <p class="text-danger" th:if="${#fields.hasErrors('transDate')}" th:errors="*{transDate}"></p>
                                     </div>
                                 </div>
