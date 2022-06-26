@@ -84,7 +84,7 @@ public class LedgerController {
             return "redirect:/ledger/list";
         } catch (Exception e) {
             log.error(e.getMessage());
-            model.addAttribute("result", "µî·Ï¿¡ ½ÇÆĞÇÏ¿´½À´Ï´Ù.");
+            model.addAttribute("result", "ë“±ë¡ì— ì‹¤íŒ¨í•˜ì˜€ìŠµë‹ˆë‹¤.");
             return "ledger/insert";
         }
     }
