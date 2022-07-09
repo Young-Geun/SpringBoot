@@ -8,6 +8,8 @@ public interface SampleMainRepository {
 
     Sample findByFirstRow();
 
+    int insert(Sample sample);
+
     int update(Sample sample);
 
     String findResult();

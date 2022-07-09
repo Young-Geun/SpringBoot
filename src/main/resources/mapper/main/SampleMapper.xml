@@ -6,6 +6,15 @@
         SELECT * FROM sample WHERE ROWNUM = 1
     </select>
 
+    <insert id="insert" parameterType="choi.web.springboot.domain.Sample">
+        INSERT INTO SAMPLE (SAMPLE_ID, NUM_COLUMN1, NUM_COLUMN2, NUM_COLUMN3, NUM_COLUMN4, NUM_COLUMN5,
+                            STR_COLUMN1, STR_COLUMN2, STR_COLUMN3, STR_COLUMN4, STR_COLUMN5,
+                            DATE_COLUMN1, DATE_COLUMN2, DATE_COLUMN3)
+        VALUES (SAMPLE_SEQ.nextval, #{numColumn1}, #{numColumn2}, #{numColumn3}, #{numColumn4}, #{numColumn5},
+                #{strColumn1}, #{strColumn2}, #{strColumn3}, #{strColumn4}, #{strColumn5},
+                #{dateColumn1}, #{dateColumn2}, #{dateColumn3})
+    </insert>
+
     <update id="update" parameterType="choi.web.springboot.domain.Sample">
         UPDATE sample
         <set>

@@ -23,6 +23,10 @@ public class MybatisService {
         return sampleMainRepository.findByFirstRow();
     }
 
+    public int insert(Sample sample) {
+        return sampleMainRepository.insert(sample);
+    }
+
     public int update(Sample sample) {
         return sampleMainRepository.update(sample);
     }
