@@ -19,7 +19,7 @@ spring:
   jpa:
     properties:
       hibernate:
-        show_sql: true
+        #show_sql: true
         format_sql: true
   pid:
     file: /Users/choi/dev/boot.pid
@@ -34,6 +34,9 @@ server:
 logging:
   level:
     root: info
+    org:
+      hibernate:
+        SQL: DEBUG
   file:
     name: /Users/choi/dev/log/boot.log
 
@@ -64,7 +67,7 @@ spring:
   jpa:
     properties:
       hibernate:
-        show_sql: true
+        #show_sql: true
         format_sql: true
   pid:
     file: C:\\Users\\choi\\Desktop\\boot.pid
@@ -79,6 +82,9 @@ server:
 logging:
   level:
     root: info
+    org:
+      hibernate:
+        SQL: DEBUG
   file:
     name: C:\\Users\\choi\\Desktop\\boot.log
 
@@ -109,7 +115,7 @@ spring:
   jpa:
     properties:
       hibernate:
-        show_sql: false
+        #show_sql: false
         format_sql: false
   pid:
     file: /home/opc/dev/boot.pid
@@ -124,6 +130,9 @@ server:
 logging:
   level:
     root: warn
+    org:
+      hibernate:
+        SQL: DEBUG
   file:
     name: /home/opc/dev/log/boot.log
 
