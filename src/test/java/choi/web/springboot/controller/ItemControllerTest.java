@@ -28,4 +28,19 @@ class ItemControllerTest {
 
         assertEquals(item, findItem);
     }
+
+    @Test
+    void update() {
+        Item findItem = itemService.findById(1L);
+
+        Item updateItem = new Item();
+        updateItem.setItemName("Item_update");
+        updateItem.setItemPrice(3000);
+        updateItem.setItemQuantity(3);
+        itemService.update(findItem.getItemId(), updateItem);
+
+        assertEquals(findItem.getItemName(), updateItem.getItemName());
+        assertEquals(findItem.getItemPrice(), updateItem.getItemPrice());
+        assertEquals(findItem.getItemQuantity(), updateItem.getItemQuantity());
+    }
 }
