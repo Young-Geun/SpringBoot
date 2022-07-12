@@ -31,13 +31,13 @@ class ItemControllerTest {
 
     @Test
     void update() {
-        Item findItem = itemService.findById(1L);
-
         Item updateItem = new Item();
-        updateItem.setItemName("Item_update");
-        updateItem.setItemPrice(3000);
-        updateItem.setItemQuantity(3);
-        itemService.update(findItem.getItemId(), updateItem);
+        updateItem.setItemName("MacBook");
+        updateItem.setItemPrice(20000);
+        updateItem.setItemQuantity(1);
+        itemService.update(1L, updateItem);
+
+        Item findItem = itemService.findById(1L);
 
         assertEquals(findItem.getItemName(), updateItem.getItemName());
         assertEquals(findItem.getItemPrice(), updateItem.getItemPrice());
