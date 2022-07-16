@@ -33,8 +33,17 @@ server:
 
 logging:
   level:
-    root: info
+    root: INFO
     org:
+      springframework:
+        transaction:
+          interceptor: DEBUG
+        jdbc:
+          datasource:
+            DataSourceTransactionManager: DEBUG
+        orm:
+          jpa:
+            JpaTransactionManager: DEBUG
       hibernate:
         SQL: DEBUG
   file:
@@ -81,8 +90,17 @@ server:
 
 logging:
   level:
-    root: info
+    root: INFO
     org:
+      springframework:
+        transaction:
+          interceptor: DEBUG
+        jdbc:
+          datasource:
+            DataSourceTransactionManager: DEBUG
+        orm:
+          jpa:
+            JpaTransactionManager: DEBUG
       hibernate:
         SQL: DEBUG
   file:
@@ -129,10 +147,19 @@ server:
 
 logging:
   level:
-    root: warn
+    root: INFO
     org:
+      springframework:
+        transaction:
+          interceptor: INFO
+        jdbc:
+          datasource:
+            DataSourceTransactionManager: INFO
+        orm:
+          jpa:
+            JpaTransactionManager: INFO
       hibernate:
-        SQL: DEBUG
+        SQL: INFO
   file:
     name: /home/opc/dev/log/boot.log
 
