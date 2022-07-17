@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.UnexpectedRollbackException;
 import org.springframework.transaction.interceptor.DefaultTransactionAttribute;
@@ -161,6 +162,37 @@ public class PropagationTest {
             --> 두 번째 트랜잭션은 새로운 트랜잭션을 생성하지 않고, 기존 트랜잭션에 참여한다.(Participating in existing transaction)
                 두 번째 트랜잭션은 rollback 마킹한다.(Participating transaction failed - marking existing transaction as rollback-only)
                 첫 번째 트랜잭션은 commit하려고 하지만 이전에 롤백 마킹에 의해 오류가 발생한다.
+         */
+    }
+
+    @Test
+    void inner_commit_rollback_with_require_new() {
+        log.debug("Tx_1 시작");
+        TransactionStatus status1 = txManager.getTransaction(new DefaultTransactionAttribute());
+
+        log.debug("Tx_2 시작");
+        DefaultTransactionAttribute attr = new DefaultTransactionAttribute();
+        attr.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRES_NEW);
+        TransactionStatus status2 = txManager.getTransaction(attr);
+        txManager.rollback(status2);
+        log.debug("Tx_2 종료");
+
+        txManager.commit(status1);
+        log.debug("Tx_1 종료");
+        /*
+            Tx_1 시작
+            Creating new transaction
+            Tx_2 시작
+            Suspending current transaction, creating new transaction
+            Initiating transaction rollback
+            Tx_2 종료
+            Initiating transaction commit
+            Tx_1 종료
+
+            --> 첫 번째 트랜잭션 생성
+                두 번째 트랜잭션 생성(첫 번째 트랜재션은 잠시 지연시킨다.) - Suspending current transaction, creating new transaction
+                두 번째 트랜잭션은 rollback 된다.
+                첫 번째 트랜잭션은 두 번째 트랜잭션의 롤백과 상관없이 commit된다.
          */
     }
 
