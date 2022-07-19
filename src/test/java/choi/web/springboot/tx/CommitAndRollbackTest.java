@@ -1,10 +1,9 @@
 package choi.web.springboot.tx;
 
 
+import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.TestConfiguration;
@@ -12,6 +11,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
 
+@Slf4j
 @SpringBootTest
 @ActiveProfiles(value = "mac")
 public class CommitAndRollbackTest {
@@ -58,8 +58,6 @@ public class CommitAndRollbackTest {
     }
 
     static class RollbackService {
-
-        private final static Logger log = LoggerFactory.getLogger(RollbackService.class);
 
         // 런타임예외 = 롤백
         @Transactional

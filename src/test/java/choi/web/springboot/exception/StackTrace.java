@@ -1,20 +1,17 @@
 package choi.web.springboot.exception;
 
 
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.sql.SQLException;
 
-
+@Slf4j
 @SpringBootTest
 @ActiveProfiles(value = "mac")
 class StackTrace {
-
-    private final static Logger log = LoggerFactory.getLogger(StackTrace.class);
 
     @Test
     void excute() {

@@ -1,8 +1,7 @@
 package choi.web.springboot.tx;
 
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.TestConfiguration;
@@ -13,6 +12,7 @@ import org.springframework.transaction.support.TransactionSynchronizationManager
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@Slf4j
 @SpringBootTest
 @ActiveProfiles(value = "mac")
 public class ActiveTest {
@@ -40,8 +40,6 @@ public class ActiveTest {
 
 
     static class TxService {
-
-        private final static Logger log = LoggerFactory.getLogger(TxService.class);
 
         @Transactional
         public boolean tx() {

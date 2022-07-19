@@ -1,10 +1,9 @@
 package choi.web.springboot.tx;
 
 
+import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.TestConfiguration;
@@ -19,11 +18,10 @@ import org.springframework.transaction.interceptor.DefaultTransactionAttribute;
 
 import javax.sql.DataSource;
 
+@Slf4j
 @SpringBootTest
 @ActiveProfiles(value = "mac")
 public class PropagationTest {
-
-    private final static Logger log = LoggerFactory.getLogger(PropagationTest.class);
 
     @Autowired
     PlatformTransactionManager txManager;
