@@ -52,19 +52,39 @@ class ItemControllerTest {
     void selectAllWithQueryDsl() {
         Item param = new Item();
         param.setItemName("MacBook");
-        assertEquals(itemQueryDslService.findAll(param).size(), 3);
+        assertEquals(3,itemQueryDslService.findAll(param).size());
 
         param = new Item();
         param.setItemPrice(2000);
-        assertEquals(itemQueryDslService.findAll(param).size(), 4);
+        assertEquals(4,itemQueryDslService.findAll(param).size());
 
         param = new Item();
         param.setItemQuantity(5);
-        assertEquals(itemQueryDslService.findAll(param).size(), 3);
+        assertEquals(3,itemQueryDslService.findAll(param).size());
 
         param = new Item();
         param.setItemName("MacBook");
         param.setItemPrice(5000);
-        assertEquals(itemQueryDslService.findAll(param).size(), 2);
+        assertEquals(2,itemQueryDslService.findAll(param).size());
+    }
+
+    @Test
+    void selectAllWithQueryDsl_V2() {
+        Item param = new Item();
+        param.setItemName("MacBook");
+        assertEquals(3, itemQueryDslService.findAll_V2(param).size());
+
+        param = new Item();
+        param.setItemPrice(2000);
+        assertEquals(4, itemQueryDslService.findAll_V2(param).size());
+
+        param = new Item();
+        param.setItemQuantity(5);
+        assertEquals(3, itemQueryDslService.findAll_V2(param).size());
+
+        param = new Item();
+        param.setItemName("MacBook");
+        param.setItemPrice(5000);
+        assertEquals(2, itemQueryDslService.findAll_V2(param).size());
     }
 }
