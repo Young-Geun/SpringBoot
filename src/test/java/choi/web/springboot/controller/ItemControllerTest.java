@@ -2,6 +2,7 @@ package choi.web.springboot.controller;
 
 import choi.web.springboot.domain.Item;
 import choi.web.springboot.service.ItemJpaService;
+import choi.web.springboot.service.ItemQueryDslService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -15,6 +16,9 @@ class ItemControllerTest {
 
     @Autowired
     private ItemJpaService itemJpaService;
+
+    @Autowired
+    private ItemQueryDslService itemQueryDslService;
 
     @Test
     void save() {
@@ -42,5 +46,25 @@ class ItemControllerTest {
         assertEquals(findItem.getItemName(), updateItem.getItemName());
         assertEquals(findItem.getItemPrice(), updateItem.getItemPrice());
         assertEquals(findItem.getItemQuantity(), updateItem.getItemQuantity());
+    }
+
+    @Test
+    void selectAllWithQueryDsl() {
+        Item param = new Item();
+        param.setItemName("MacBook");
+        assertEquals(itemQueryDslService.findAll(param).size(), 3);
+
+        param = new Item();
+        param.setItemPrice(2000);
+        assertEquals(itemQueryDslService.findAll(param).size(), 4);
+
+        param = new Item();
+        param.setItemQuantity(5);
+        assertEquals(itemQueryDslService.findAll(param).size(), 3);
+
+        param = new Item();
+        param.setItemName("MacBook");
+        param.setItemPrice(5000);
+        assertEquals(itemQueryDslService.findAll(param).size(), 2);
     }
 }
