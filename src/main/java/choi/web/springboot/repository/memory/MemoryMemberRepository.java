@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class MemoryMemberRepository {
 
-    /* ÀÏ¹İÀûÀÎ ÇÊµå »ç¿ë */
+    /* ì¼ë°˜ì ì¸ í•„ë“œ ì‚¬ìš© */
     String nameStorage;
 
     public void save(String name) {
@@ -19,7 +19,7 @@ public class MemoryMemberRepository {
 
 
 
-    /* ThreadLocal ÇÊµå »ç¿ë */
+    /* ThreadLocal í•„ë“œ ì‚¬ìš© */
     ThreadLocal<String> threadLocalNameStorage = new ThreadLocal<>();
 
     public void saveWithThreadLocal(String name) {

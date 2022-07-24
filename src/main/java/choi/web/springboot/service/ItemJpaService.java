@@ -26,8 +26,8 @@ public class ItemJpaService {
     @Transactional
     public void update(Long itemId, Item updateItem) {
         /*
-            º°µµÀÇ UPDATE¹® È£ÃâÀÌ ¾ø¾îµµ
-            Æ®·£Àè¼ÇÀÌ ³¡³ª´Â ½ÃÁ¡¿¡ °ª¿¡ ´ëÇÑ º¯È­°¡ ÀÖÀ¸¸é UPDATE¸¦ ½ÇÇàÇØÁØ´Ù.
+            ë³„ë„ì˜ UPDATEë¬¸ í˜¸ì¶œì´ ì—†ì–´ë„
+            íŠ¸ëœì­ì…˜ì´ ëë‚˜ëŠ” ì‹œì ì— ê°’ì— ëŒ€í•œ ë³€í™”ê°€ ìˆìœ¼ë©´ UPDATEë¥¼ ì‹¤í–‰í•´ì¤€ë‹¤.
          */
         Item item = em.find(Item.class, itemId);
         item.setItemName(updateItem.getItemName());
