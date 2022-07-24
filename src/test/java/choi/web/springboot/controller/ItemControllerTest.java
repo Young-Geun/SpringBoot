@@ -1,7 +1,7 @@
 package choi.web.springboot.controller;
 
 import choi.web.springboot.domain.Item;
-import choi.web.springboot.service.ItemService;
+import choi.web.springboot.service.ItemJpaService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class ItemControllerTest {
 
     @Autowired
-    private ItemService itemService;
+    private ItemJpaService itemJpaService;
 
     @Test
     void save() {
@@ -22,9 +22,9 @@ class ItemControllerTest {
         item.setItemName("Item_1");
         item.setItemPrice(1000);
         item.setItemQuantity(1);
-        itemService.save(item);
+        itemJpaService.save(item);
 
-        Item findItem = itemService.findById(item.getItemId());
+        Item findItem = itemJpaService.findById(item.getItemId());
 
         assertEquals(item, findItem);
     }
@@ -35,9 +35,9 @@ class ItemControllerTest {
         updateItem.setItemName("MacBook");
         updateItem.setItemPrice(20000);
         updateItem.setItemQuantity(1);
-        itemService.update(1L, updateItem);
+        itemJpaService.update(1L, updateItem);
 
-        Item findItem = itemService.findById(1L);
+        Item findItem = itemJpaService.findById(1L);
 
         assertEquals(findItem.getItemName(), updateItem.getItemName());
         assertEquals(findItem.getItemPrice(), updateItem.getItemPrice());

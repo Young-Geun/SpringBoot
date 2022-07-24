@@ -10,7 +10,7 @@ import javax.persistence.EntityManager;
 @RequiredArgsConstructor
 @Service
 @Transactional(readOnly = true)
-public class ItemService {
+public class ItemJpaService {
 
     private final EntityManager em;
 
