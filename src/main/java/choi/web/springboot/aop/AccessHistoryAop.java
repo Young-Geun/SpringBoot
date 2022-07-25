@@ -25,7 +25,13 @@ public class AccessHistoryAop {
 
     private final AccessHistoryService accessHistoryService;
 
-    @Around("execution(* choi.web.springboot.controller.*.*(..)) && !execution(* choi.web.springboot.controller.MemberController.profile(..))")
+    @Pointcut("execution(* choi.web.springboot.controller.*.*(..))")
+    public void allController() {}
+
+    @Pointcut("execution(* choi.web.springboot.controller.MemberController.profile(..))")
+    public void excludeProfile() {}
+
+    @Around("allController() && !excludeProfile()")
     public Object execute(ProceedingJoinPoint joinPoint) throws Throwable {
         try {
             return joinPoint.proceed();
