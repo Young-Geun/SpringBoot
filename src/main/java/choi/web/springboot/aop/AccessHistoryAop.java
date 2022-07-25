@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -24,7 +25,7 @@ public class AccessHistoryAop {
 
     private final AccessHistoryService accessHistoryService;
 
-    @Around("execution(* choi.web.springboot.controller.*.*(..))")
+    @Around("execution(* choi.web.springboot.controller.*.*(..)) && !execution(* choi.web.springboot.controller.MemberController.profile(..))")
     public Object execute(ProceedingJoinPoint joinPoint) throws Throwable {
         try {
             return joinPoint.proceed();
