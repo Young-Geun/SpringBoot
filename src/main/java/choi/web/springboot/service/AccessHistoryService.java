@@ -1,5 +1,6 @@
 package choi.web.springboot.service;
 
+import choi.web.springboot.domain.AccessHistory;
 import choi.web.springboot.repository.AccessHistoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,11 @@ public class AccessHistoryService {
 
     public List<Map<String, Object>> findLoginHist() {
         return accessHistoryRepository.findLoginHist();
+    }
+
+    @Transactional
+    public void save(AccessHistory accessHistory) {
+        accessHistoryRepository.save(accessHistory);
     }
 
 }
