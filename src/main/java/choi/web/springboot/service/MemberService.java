@@ -98,21 +98,9 @@ public class MemberService {
         return result;
     }
 
-    public void updateLastLoginDate(Member member, HttpServletRequest request) {
-        LocalDateTime nowDate = LocalDateTime.now();
-        
-        // 로그인시간 갱신
-        member.setLastLoginDate(nowDate);
+    public void updateLastLoginDate(Member member) {
+        member.setLastLoginDate(LocalDateTime.now());
         memberRepository.save(member);
-
-        // 접근이력 등록
-        AccessHistory accessHistory = AccessHistory.builder()
-                .accessMemberId(member.getMemberId())
-                .accessPath(request.getRequestURI())
-                .accessDate(nowDate)
-                .build();
-
-        accessHistoryRepository.save(accessHistory);        
     }
 
     public void updateStatus(Member member, String status) {

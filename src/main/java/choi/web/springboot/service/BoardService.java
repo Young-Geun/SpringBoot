@@ -74,23 +74,11 @@ public class BoardService {
     }
 
     @Transactional
-    public void insert(Board board, HttpServletRequest request, HttpSession session) throws Exception {
-        LocalDateTime regDate = LocalDateTime.now();
-
-        // 게시글 등록
+    public void insert(Board board, HttpSession session) throws Exception {
         Member loginMember = (Member) session.getAttribute("loginMember");
         board.setPoster(loginMember);
-        board.setRegDate(regDate);
+        board.setRegDate(LocalDateTime.now());
         boardRepository.save(board);
-
-        // 접근이력 등록
-        AccessHistory accessHistory = AccessHistory.builder()
-                .accessMemberId(loginMember.getMemberId())
-                .accessPath(request.getRequestURI())
-                .accessDate(regDate)
-                .build();
-
-        accessHistoryRepository.save(accessHistory);
     }
 
     @Transactional
