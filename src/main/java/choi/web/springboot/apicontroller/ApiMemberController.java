@@ -27,14 +27,4 @@ public class ApiMemberController {
         return memberService.findByMemberId(memberId);
     }
 
-    @GetMapping("/api/v1/save/{name}")
-    public @ResponseBody String insertV1(@PathVariable String name) {
-        return memberService.insertV1(name);
-    }
-
-    @GetMapping("/api/v2/save/{name}")
-    public @ResponseBody String insertV2(@PathVariable String name) {
-        return memberService.insertV2(name);
-    }
-
 }

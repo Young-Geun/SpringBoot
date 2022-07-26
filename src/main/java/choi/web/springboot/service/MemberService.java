@@ -1,17 +1,13 @@
 package choi.web.springboot.service;
 
 import choi.web.springboot.config.ConfigProp;
-import choi.web.springboot.domain.AccessHistory;
 import choi.web.springboot.domain.Member;
-import choi.web.springboot.repository.AccessHistoryRepository;
 import choi.web.springboot.repository.MemberRepository;
-import choi.web.springboot.repository.memory.MemoryMemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -24,10 +20,6 @@ public class MemberService {
     private final ConfigProp configProp;
 
     private final MemberRepository memberRepository;
-
-    private final MemoryMemberRepository memoryMemberRepository;
-
-    private final AccessHistoryRepository accessHistoryRepository;
 
     public List<Member> findAll() {
         return memberRepository.findAll();
@@ -106,30 +98,6 @@ public class MemberService {
     public void updateStatus(Member member, String status) {
         member.setMemberStatus(status);
         memberRepository.save(member);
-    }
-
-    public String insertV1(String  name) {
-        memoryMemberRepository.save(name);
-
-        try {
-            Thread.sleep(3000);
-        } catch (Exception e) {
-
-        }
-
-        return memoryMemberRepository.find();
-    }
-
-    public String insertV2(String  name) {
-        memoryMemberRepository.saveWithThreadLocal(name);
-
-        try {
-            Thread.sleep(3000);
-        } catch (Exception e) {
-
-        }
-
-        return memoryMemberRepository.findWithThreadLocal();
     }
 
 }
