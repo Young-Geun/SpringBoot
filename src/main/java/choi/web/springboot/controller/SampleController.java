@@ -1,10 +1,12 @@
 
 package choi.web.springboot.controller;
 
+import choi.web.springboot.aop.annotation.Retry;
 import choi.web.springboot.domain.Member;
 import choi.web.springboot.domain.Sample;
 import choi.web.springboot.domain.Test;
 import choi.web.springboot.service.MybatisService;
+import choi.web.springboot.service.SampleService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.MessageSource;
@@ -22,6 +24,7 @@ public class SampleController {
 
     private final MessageSource messageSource;
     private final MybatisService mybatisService;
+    private final SampleService sampleService;
 
     @GetMapping("/thymeleaf")
     public String thymeleaf(Model model) {
@@ -131,6 +134,17 @@ public class SampleController {
     public String multiDatasource(Model model) {
         model.addAttribute("result", mybatisService.multiDatasource());
         return "sample/multiDatasource";
+    }
+
+    @Retry(value = 3)
+    @GetMapping("/retry")
+    public String retry(Model model) throws Exception {
+        int result = sampleService.retry();
+        if (result % 5 == 0) {
+            throw new Exception("retry Failure!");
+        }
+        model.addAttribute("result", result);
+        return "sample/retry";
     }
 
 }
