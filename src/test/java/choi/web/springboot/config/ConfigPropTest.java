@@ -32,6 +32,9 @@ class ConfigPropTest {
     @Value("#{'${app.config.list-value}'.split(',')}")
     private List<String> listValue;
 
+    @Value("${app.config.not-exist:choi}") // ${키값:값이 없을 때 디폴트 값} 의 형태로 사용된다.
+    private String defaultValue;
+
     @Test
     void 설정값_가져오기() {
         // 결과비교
@@ -62,6 +65,11 @@ class ConfigPropTest {
         assertEquals("a", listValue.get(0));
         assertEquals("b", listValue.get(1));
         assertEquals("c", listValue.get(2));
+    }
+
+    @Test
+    void 디폴트_값으로_가져오기() {
+        assertEquals("choi", defaultValue);
     }
 
 }
