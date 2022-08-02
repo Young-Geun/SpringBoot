@@ -147,4 +147,9 @@ public class SampleController {
         return "sample/retry";
     }
 
+    @GetMapping("/form-reset")
+    public String formReset() {
+        return "sample/formReset";
+    }
+
 }
