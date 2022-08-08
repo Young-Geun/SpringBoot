@@ -1,27 +1,28 @@
 package choi.web.springboot.apicontroller;
 
 import choi.web.springboot.common.ResponseObject;
-import choi.web.springboot.repository.BoardRepository;
+import choi.web.springboot.domain.Board;
+import choi.web.springboot.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RequiredArgsConstructor
 @RestController
 public class ApiBoardController {
 
-    private final BoardRepository boardRepository;
+    private final BoardService boardService;
 
-    @GetMapping("/api/boards/{page}")
-    public ResponseEntity findAll(@PathVariable int page) {
+    @PostMapping("/api/boards")
+    public ResponseEntity findAll(Board board,
+                                  @RequestParam(required = false, defaultValue = "0", value = "page") int page,
+                                  @RequestParam(required = false, defaultValue = "1", value = "range") int range) {
         ResponseObject response = null;
         try {
-            Page boardList = boardRepository.findAll(PageRequest.of(page, 10, Sort.by(Sort.Direction.DESC, "boardId")));
+            Page<Board> boardList = boardService.findByKeyword(page, board);
             if (boardList == null) {
                 response = ResponseObject.builder()
                         .responseCode("9999")
