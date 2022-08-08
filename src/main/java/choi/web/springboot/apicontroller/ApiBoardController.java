@@ -6,9 +6,7 @@ import choi.web.springboot.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RestController
@@ -18,8 +16,7 @@ public class ApiBoardController {
 
     @PostMapping("/api/boards")
     public ResponseEntity findAll(Board board,
-                                  @RequestParam(required = false, defaultValue = "0", value = "page") int page,
-                                  @RequestParam(required = false, defaultValue = "1", value = "range") int range) {
+                                  @RequestParam(required = false, defaultValue = "0", value = "page") int page) {
         ResponseObject response = null;
         try {
             Page<Board> boardList = boardService.findByKeyword(page, board);
@@ -33,6 +30,33 @@ public class ApiBoardController {
                         .responseCode("0000")
                         .responseMsg("성공하였습니다.")
                         .responseData(boardList)
+                        .build();
+            }
+        } catch (Exception e) {
+            response = ResponseObject.builder()
+                    .responseCode("9999")
+                    .responseMsg("오류가 발생하였습니다.")
+                    .build();
+        }
+
+        return ResponseEntity.ok().body(response);
+    }
+
+    @GetMapping("/api/board/{boardId}")
+    public ResponseEntity findAll(@PathVariable long boardId) {
+        ResponseObject response = null;
+        try {
+            Board findBoard = boardService.findById(boardId);
+            if (findBoard == null) {
+                response = ResponseObject.builder()
+                        .responseCode("9999")
+                        .responseMsg("검색결과가 없습니다.")
+                        .build();
+            } else {
+                response = ResponseObject.builder()
+                        .responseCode("0000")
+                        .responseMsg("성공하였습니다.")
+                        .responseData(findBoard)
                         .build();
             }
         } catch (Exception e) {
