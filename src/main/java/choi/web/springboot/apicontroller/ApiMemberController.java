@@ -1,6 +1,7 @@
 package choi.web.springboot.apicontroller;
 
 import choi.web.springboot.common.ResponseObject;
+import choi.web.springboot.common.SystemCode;
 import choi.web.springboot.domain.Member;
 import choi.web.springboot.service.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -24,20 +25,20 @@ public class ApiMemberController {
             List<Member> findMembers = memberService.findAll();
             if (findMembers == null) {
                 response = ResponseObject.builder()
-                        .responseCode("9999")
-                        .responseMsg("검색결과가 없습니다.")
+                        .responseCode(SystemCode.FAIL_SEARCH.getCode())
+                        .responseMsg(SystemCode.FAIL_SEARCH.getMessage())
                         .build();
             } else {
                 response = ResponseObject.builder()
-                        .responseCode("0000")
-                        .responseMsg("성공하였습니다.")
+                        .responseCode(SystemCode.SUCCESS_COMMON.getCode())
+                        .responseMsg(SystemCode.SUCCESS_COMMON.getMessage())
                         .responseData(findMembers)
                         .build();
             }
         } catch (Exception e) {
             response = ResponseObject.builder()
-                    .responseCode("9999")
-                    .responseMsg("오류가 발생하였습니다.")
+                    .responseCode(SystemCode.ERROR_COMMON.getCode())
+                    .responseMsg(SystemCode.ERROR_COMMON.getMessage())
                     .build();
         }
 
@@ -51,21 +52,21 @@ public class ApiMemberController {
             Member findMember = memberService.findByMemberId(memberId);
             if (findMember == null) {
                 response = ResponseObject.builder()
-                        .responseCode("9999")
-                        .responseMsg("검색결과가 없습니다.")
+                        .responseCode(SystemCode.FAIL_SEARCH.getCode())
+                        .responseMsg(SystemCode.FAIL_SEARCH.getMessage())
                         .build();
 
             } else {
                 response = ResponseObject.builder()
-                        .responseCode("0000")
-                        .responseMsg("성공하였습니다.")
+                        .responseCode(SystemCode.SUCCESS_COMMON.getCode())
+                        .responseMsg(SystemCode.SUCCESS_COMMON.getMessage())
                         .responseData(findMember)
                         .build();
             }
         } catch (Exception e) {
             response = ResponseObject.builder()
-                    .responseCode("9999")
-                    .responseMsg("오류가 발생하였습니다.")
+                    .responseCode(SystemCode.ERROR_COMMON.getCode())
+                    .responseMsg(SystemCode.ERROR_COMMON.getMessage())
                     .build();
         }
 

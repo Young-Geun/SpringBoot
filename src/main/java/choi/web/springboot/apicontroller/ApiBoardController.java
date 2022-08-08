@@ -1,6 +1,7 @@
 package choi.web.springboot.apicontroller;
 
 import choi.web.springboot.common.ResponseObject;
+import choi.web.springboot.common.SystemCode;
 import choi.web.springboot.domain.Board;
 import choi.web.springboot.service.BoardService;
 import lombok.RequiredArgsConstructor;
@@ -22,20 +23,20 @@ public class ApiBoardController {
             Page<Board> boardList = boardService.findByKeyword(page, board);
             if (boardList == null) {
                 response = ResponseObject.builder()
-                        .responseCode("9999")
-                        .responseMsg("검색결과가 없습니다.")
+                        .responseCode(SystemCode.FAIL_SEARCH.getCode())
+                        .responseMsg(SystemCode.FAIL_SEARCH.getMessage())
                         .build();
             } else {
                 response = ResponseObject.builder()
-                        .responseCode("0000")
-                        .responseMsg("성공하였습니다.")
+                        .responseCode(SystemCode.SUCCESS_COMMON.getCode())
+                        .responseMsg(SystemCode.SUCCESS_COMMON.getMessage())
                         .responseData(boardList)
                         .build();
             }
         } catch (Exception e) {
             response = ResponseObject.builder()
-                    .responseCode("9999")
-                    .responseMsg("오류가 발생하였습니다.")
+                    .responseCode(SystemCode.ERROR_COMMON.getCode())
+                    .responseMsg(SystemCode.ERROR_COMMON.getMessage())
                     .build();
         }
 
@@ -49,20 +50,20 @@ public class ApiBoardController {
             Board findBoard = boardService.findById(boardId);
             if (findBoard == null) {
                 response = ResponseObject.builder()
-                        .responseCode("9999")
-                        .responseMsg("검색결과가 없습니다.")
+                        .responseCode(SystemCode.FAIL_SEARCH.getCode())
+                        .responseMsg(SystemCode.FAIL_SEARCH.getMessage())
                         .build();
             } else {
                 response = ResponseObject.builder()
-                        .responseCode("0000")
-                        .responseMsg("성공하였습니다.")
+                        .responseCode(SystemCode.SUCCESS_COMMON.getCode())
+                        .responseMsg(SystemCode.SUCCESS_COMMON.getMessage())
                         .responseData(findBoard)
                         .build();
             }
         } catch (Exception e) {
             response = ResponseObject.builder()
-                    .responseCode("9999")
-                    .responseMsg("오류가 발생하였습니다.")
+                    .responseCode(SystemCode.ERROR_COMMON.getCode())
+                    .responseMsg(SystemCode.ERROR_COMMON.getMessage())
                     .build();
         }
 
