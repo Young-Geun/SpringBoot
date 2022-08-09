@@ -5,12 +5,16 @@ import choi.web.springboot.common.SystemCode;
 import choi.web.springboot.domain.Member;
 import choi.web.springboot.service.MemberService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.hateoas.EntityModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RequiredArgsConstructor
 @RestController
@@ -46,7 +50,7 @@ public class ApiMemberController {
     }
 
     @GetMapping("/api/members/{memberId}")
-    public ResponseEntity findById(@PathVariable long memberId) {
+    public ResponseEntity<EntityModel<ResponseObject>> findById(@PathVariable long memberId) {
         ResponseObject response = null;
         try {
             Member findMember = memberService.findByMemberId(memberId);
@@ -55,7 +59,6 @@ public class ApiMemberController {
                         .responseCode(SystemCode.FAIL_SEARCH.getCode())
                         .responseMsg(SystemCode.FAIL_SEARCH.getMessage())
                         .build();
-
             } else {
                 response = ResponseObject.builder()
                         .responseCode(SystemCode.SUCCESS_COMMON.getCode())
@@ -70,7 +73,12 @@ public class ApiMemberController {
                     .build();
         }
 
-        return ResponseEntity.ok().body(response);
+        return ResponseEntity.ok().body(
+                EntityModel
+                        .of(response)
+                        .add(linkTo(methodOn(ApiMemberController.class).findById(memberId)).withRel("detail"))
+                        .add(linkTo(methodOn(ApiMemberController.class).findAll()).withRel("list"))
+        );
     }
 
 }
