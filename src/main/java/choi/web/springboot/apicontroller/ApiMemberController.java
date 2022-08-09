@@ -76,7 +76,8 @@ public class ApiMemberController {
         return ResponseEntity.ok().body(
                 EntityModel
                         .of(response)
-                        .add(linkTo(methodOn(ApiMemberController.class).findById(memberId)).withRel("detail"))
+                        // .add(linkTo(methodOn(ApiMemberController.class).findById(memberId)).withRel("detail"))
+                        .add(linkTo(methodOn(ApiMemberController.class).findById(memberId)).withSelfRel())
                         .add(linkTo(methodOn(ApiMemberController.class).findAll()).withRel("list"))
         );
     }
