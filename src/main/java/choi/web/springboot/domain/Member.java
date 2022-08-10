@@ -1,5 +1,6 @@
 package choi.web.springboot.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -28,6 +29,7 @@ public class Member {
     String memberEmail;
 
     // 사용자 비밀번호
+    @JsonIgnore
     @NotBlank(message = "비밀번호를 입력해주세요.")
     String memberPassword;
 
