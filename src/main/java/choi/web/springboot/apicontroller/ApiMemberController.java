@@ -23,7 +23,7 @@ public class ApiMemberController {
     private final MemberService memberService;
 
     @GetMapping("/api/members")
-    public ResponseEntity findAll() {
+    public ResponseEntity<EntityModel<ResponseObject>> findAll() {
         ResponseObject response = null;
         try {
             List<Member> findMembers = memberService.findAll();
@@ -46,7 +46,11 @@ public class ApiMemberController {
                     .build();
         }
 
-        return ResponseEntity.ok().body(response);
+        return ResponseEntity.ok().body(
+                EntityModel
+                        .of(response)
+                        .add(linkTo(methodOn(ApiMemberController.class).findAll()).withSelfRel())
+        );
     }
 
     @GetMapping("/api/members/{memberId}")
