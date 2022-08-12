@@ -152,4 +152,9 @@ public class SampleController {
         return "sample/formReset";
     }
 
+    @GetMapping("/css")
+    public String css() {
+        return "sample/css";
+    }
+
 }
