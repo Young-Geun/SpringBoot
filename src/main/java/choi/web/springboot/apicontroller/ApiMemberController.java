@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
@@ -26,7 +27,10 @@ public class ApiMemberController {
     public ResponseEntity<EntityModel<ResponseObject>> findAll() {
         ResponseObject response = null;
         try {
-            List<Member> findMembers = memberService.findAll();
+            List<EntityModel<Member>> findMembers = memberService.findAll().stream().map(member -> {
+                return EntityModel.of(member,
+                        linkTo(methodOn(ApiMemberController.class).findById(member.getMemberId())).withRel("detail"));
+            }).collect(Collectors.toList());
             if (findMembers == null) {
                 response = ResponseObject.builder()
                         .responseCode(SystemCode.FAIL_SEARCH.getCode())
