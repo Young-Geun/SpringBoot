@@ -49,6 +49,7 @@ public class MemberService {
         int result = 1;
         if (memberRepository.findByMemberEmail(member.getMemberEmail()) == null) {
             try {
+                member.setMemberStatus("Y");
                 memberRepository.save(member);
             } catch (Exception e) {
                 log.error(e.getMessage());
@@ -65,7 +66,7 @@ public class MemberService {
         int result = 1;
         try {
             // 프로필 저장
-            if (!files.isEmpty()) {
+            if (files != null && !files.isEmpty()) {
                 String profilePath = configProp.getFileDir() + "member_pic";
                 if (new File(profilePath).mkdirs()) {
                     throw new Exception("사진 업로드 실패");
