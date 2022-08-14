@@ -183,4 +183,39 @@ public class ApiMemberController {
         );
     }
 
+    @DeleteMapping("/api/members/{memberId}")
+    public ResponseEntity<EntityModel<ResponseObject>> delete(@PathVariable long memberId) {
+        ResponseObject response = null;
+        String resultCode;
+        String resultMsg;
+        Member findMember = null;
+        try {
+            findMember = memberService.findByMemberId(memberId);
+            if (findMember == null) {
+                resultCode = SystemCode.FAIL_SEARCH.getCode();
+                resultMsg = SystemCode.FAIL_SEARCH.getMessage();
+            } else {
+                memberService.updateStatus(findMember, "N");
+                resultCode = SystemCode.SUCCESS_COMMON.getCode();
+                resultMsg = SystemCode.SUCCESS_COMMON.getMessage();
+            }
+        } catch (Exception e) {
+            resultCode = SystemCode.ERROR_COMMON.getCode();
+            resultMsg = SystemCode.ERROR_COMMON.getMessage();
+        }
+
+        response = ResponseObject.builder()
+                .responseCode(resultCode)
+                .responseMsg(resultMsg)
+                .responseData(resultCode.equals(SystemCode.SUCCESS_COMMON.getCode()) ? findMember : null)
+                .build();
+
+        return ResponseEntity.ok().body(
+                EntityModel
+                        .of(response)
+                        .add(linkTo(methodOn(ApiMemberController.class).findById(memberId)).withRel("detail"))
+                        .add(linkTo(methodOn(ApiMemberController.class).findAll()).withRel("list"))
+        );
+    }
+
 }
