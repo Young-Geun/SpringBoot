@@ -136,4 +136,51 @@ public class ApiMemberController {
         );
     }
 
+    @PutMapping("/api/members/{memberId}")
+    public ResponseEntity<EntityModel<ResponseObject>> update(@PathVariable long memberId,
+            @RequestBody @Validated Member member, BindingResult bindingResult) {
+        ResponseObject response = null;
+        String resultCode;
+        String resultMsg;
+        try {
+            if (bindingResult.hasErrors()) {
+                log.error("member update Error - {}", bindingResult.getFieldError());
+                resultCode = SystemCode.FAIL_INVALID_VALUE.getCode();
+                resultMsg = SystemCode.FAIL_INVALID_VALUE.getMessage();
+            } else {
+                Member findMember = memberService.findByMemberId(memberId);
+                if (findMember == null) {
+                    resultCode = SystemCode.FAIL_SEARCH.getCode();
+                    resultMsg = SystemCode.FAIL_SEARCH.getMessage();
+                } else {
+                    member.setMemberId(memberId);
+                    int result = memberService.update(member, findMember, null);
+                    if (result == 0) {
+                        resultCode = SystemCode.FAIL_UPDATE.getCode();
+                        resultMsg = SystemCode.FAIL_UPDATE.getMessage();
+                    } else {
+                        resultCode = SystemCode.SUCCESS_COMMON.getCode();
+                        resultMsg = SystemCode.SUCCESS_COMMON.getMessage();
+                    }
+                }
+            }
+        } catch (Exception e) {
+            resultCode = SystemCode.ERROR_COMMON.getCode();
+            resultMsg = SystemCode.ERROR_COMMON.getMessage();
+        }
+
+        response = ResponseObject.builder()
+                .responseCode(resultCode)
+                .responseMsg(resultMsg)
+                .responseData(resultCode.equals(SystemCode.SUCCESS_COMMON.getCode()) ? member : null)
+                .build();
+
+        return ResponseEntity.ok().body(
+                EntityModel
+                        .of(response)
+                        .add(linkTo(methodOn(ApiMemberController.class).findById(memberId)).withRel("detail"))
+                        .add(linkTo(methodOn(ApiMemberController.class).findAll()).withRel("list"))
+        );
+    }
+
 }
