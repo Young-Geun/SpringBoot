@@ -27,66 +27,55 @@ public class ApiMemberController {
 
     @GetMapping("/api/members")
     public ResponseEntity<EntityModel<ResponseObject>> findAll() {
-        ResponseObject response = null;
+        List<EntityModel<Member>> findMembers = null;
+        String resultCode;
+        String resultMsg;
         try {
-            List<EntityModel<Member>> findMembers = memberService.findAll().stream().map(member -> {
+            findMembers = memberService.findAll().stream().map(member -> {
                 return EntityModel.of(member,
                         linkTo(methodOn(ApiMemberController.class).findById(member.getMemberId())).withRel("detail"));
             }).collect(Collectors.toList());
             if (findMembers == null) {
-                response = ResponseObject.builder()
-                        .responseCode(SystemCode.FAIL_SEARCH.getCode())
-                        .responseMsg(SystemCode.FAIL_SEARCH.getMessage())
-                        .build();
+                resultCode = SystemCode.FAIL_SEARCH.getCode();
+                resultMsg = SystemCode.FAIL_SEARCH.getMessage();
             } else {
-                response = ResponseObject.builder()
-                        .responseCode(SystemCode.SUCCESS_COMMON.getCode())
-                        .responseMsg(SystemCode.SUCCESS_COMMON.getMessage())
-                        .responseData(findMembers)
-                        .build();
+                resultCode = SystemCode.SUCCESS_COMMON.getCode();
+                resultMsg = SystemCode.SUCCESS_COMMON.getMessage();
             }
         } catch (Exception e) {
-            response = ResponseObject.builder()
-                    .responseCode(SystemCode.ERROR_COMMON.getCode())
-                    .responseMsg(SystemCode.ERROR_COMMON.getMessage())
-                    .build();
+            resultCode = SystemCode.ERROR_COMMON.getCode();
+            resultMsg = SystemCode.ERROR_COMMON.getMessage();
         }
 
         return ResponseEntity.ok().body(
                 EntityModel
-                        .of(response)
+                        .of(buildResponseObject(resultCode, resultMsg, findMembers))
                         .add(linkTo(methodOn(ApiMemberController.class).findAll()).withSelfRel())
         );
     }
 
     @GetMapping("/api/members/{memberId}")
     public ResponseEntity<EntityModel<ResponseObject>> findById(@PathVariable long memberId) {
-        ResponseObject response = null;
+        Member findMember = null;
+        String resultCode;
+        String resultMsg;
         try {
-            Member findMember = memberService.findByMemberId(memberId);
+            findMember = memberService.findByMemberId(memberId);
             if (findMember == null) {
-                response = ResponseObject.builder()
-                        .responseCode(SystemCode.FAIL_SEARCH.getCode())
-                        .responseMsg(SystemCode.FAIL_SEARCH.getMessage())
-                        .build();
+                resultCode = SystemCode.FAIL_SEARCH.getCode();
+                resultMsg = SystemCode.FAIL_SEARCH.getMessage();
             } else {
-                response = ResponseObject.builder()
-                        .responseCode(SystemCode.SUCCESS_COMMON.getCode())
-                        .responseMsg(SystemCode.SUCCESS_COMMON.getMessage())
-                        .responseData(findMember)
-                        .build();
+                resultCode = SystemCode.SUCCESS_COMMON.getCode();
+                resultMsg = SystemCode.SUCCESS_COMMON.getMessage();
             }
         } catch (Exception e) {
-            response = ResponseObject.builder()
-                    .responseCode(SystemCode.ERROR_COMMON.getCode())
-                    .responseMsg(SystemCode.ERROR_COMMON.getMessage())
-                    .build();
+            resultCode = SystemCode.ERROR_COMMON.getCode();
+            resultMsg = SystemCode.ERROR_COMMON.getMessage();
         }
 
         return ResponseEntity.ok().body(
                 EntityModel
-                        .of(response)
-                        // .add(linkTo(methodOn(ApiMemberController.class).findById(memberId)).withRel("detail"))
+                        .of(buildResponseObject(resultCode, resultMsg, findMember))
                         .add(linkTo(methodOn(ApiMemberController.class).findById(memberId)).withSelfRel())
                         .add(linkTo(methodOn(ApiMemberController.class).findAll()).withRel("list"))
         );
@@ -94,7 +83,6 @@ public class ApiMemberController {
 
     @PostMapping("/api/members")
     public ResponseEntity<EntityModel<ResponseObject>> save(@RequestBody @Validated Member member, BindingResult bindingResult) {
-        ResponseObject response = null;
         String resultCode;
         String resultMsg;
         try {
@@ -115,22 +103,14 @@ public class ApiMemberController {
                     resultMsg = SystemCode.SUCCESS_COMMON.getMessage();
                 }
             }
-
-            response = ResponseObject.builder()
-                    .responseCode(resultCode)
-                    .responseMsg(resultMsg)
-                    .build();
-
         } catch (Exception e) {
-            response = ResponseObject.builder()
-                    .responseCode(SystemCode.ERROR_COMMON.getCode())
-                    .responseMsg(SystemCode.ERROR_COMMON.getMessage())
-                    .build();
+            resultCode = SystemCode.ERROR_COMMON.getCode();
+            resultMsg = SystemCode.ERROR_COMMON.getMessage();
         }
 
         return ResponseEntity.ok().body(
                 EntityModel
-                        .of(response)
+                        .of(buildResponseObject(resultCode, resultMsg, member))
                         .add(linkTo(methodOn(ApiMemberController.class).findById(member.getMemberId())).withRel("detail"))
                         .add(linkTo(methodOn(ApiMemberController.class).findAll()).withRel("list"))
         );
@@ -138,8 +118,7 @@ public class ApiMemberController {
 
     @PutMapping("/api/members/{memberId}")
     public ResponseEntity<EntityModel<ResponseObject>> update(@PathVariable long memberId,
-            @RequestBody @Validated Member member, BindingResult bindingResult) {
-        ResponseObject response = null;
+                                                              @RequestBody @Validated Member member, BindingResult bindingResult) {
         String resultCode;
         String resultMsg;
         try {
@@ -169,15 +148,9 @@ public class ApiMemberController {
             resultMsg = SystemCode.ERROR_COMMON.getMessage();
         }
 
-        response = ResponseObject.builder()
-                .responseCode(resultCode)
-                .responseMsg(resultMsg)
-                .responseData(resultCode.equals(SystemCode.SUCCESS_COMMON.getCode()) ? member : null)
-                .build();
-
         return ResponseEntity.ok().body(
                 EntityModel
-                        .of(response)
+                        .of(buildResponseObject(resultCode, resultMsg, member))
                         .add(linkTo(methodOn(ApiMemberController.class).findById(memberId)).withRel("detail"))
                         .add(linkTo(methodOn(ApiMemberController.class).findAll()).withRel("list"))
         );
@@ -185,10 +158,9 @@ public class ApiMemberController {
 
     @DeleteMapping("/api/members/{memberId}")
     public ResponseEntity<EntityModel<ResponseObject>> delete(@PathVariable long memberId) {
-        ResponseObject response = null;
+        Member findMember = null;
         String resultCode;
         String resultMsg;
-        Member findMember = null;
         try {
             findMember = memberService.findByMemberId(memberId);
             if (findMember == null) {
@@ -204,18 +176,20 @@ public class ApiMemberController {
             resultMsg = SystemCode.ERROR_COMMON.getMessage();
         }
 
-        response = ResponseObject.builder()
-                .responseCode(resultCode)
-                .responseMsg(resultMsg)
-                .responseData(resultCode.equals(SystemCode.SUCCESS_COMMON.getCode()) ? findMember : null)
-                .build();
-
         return ResponseEntity.ok().body(
                 EntityModel
-                        .of(response)
+                        .of(buildResponseObject(resultCode, resultMsg, findMember))
                         .add(linkTo(methodOn(ApiMemberController.class).findById(memberId)).withRel("detail"))
                         .add(linkTo(methodOn(ApiMemberController.class).findAll()).withRel("list"))
         );
+    }
+
+    private ResponseObject buildResponseObject(String resultCode, String resultMsg, Object resultObj) {
+        return ResponseObject.builder()
+                .responseCode(resultCode)
+                .responseMsg(resultMsg)
+                .responseData(resultCode.equals(SystemCode.SUCCESS_COMMON.getCode()) ? resultObj : null)
+                .build();
     }
 
 }
