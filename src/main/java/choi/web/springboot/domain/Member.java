@@ -29,7 +29,8 @@ public class Member {
     String memberEmail;
 
     // 사용자 비밀번호
-    @JsonIgnore
+    // @JsonIgnore
+    // TODO: 8/14/22. 사용자 조회 API 응답 값에서 비밀번호를 제거하기위하여 사용했지만, 등록 API 호출 시에도 제외되어서 임시로 주석처리.
     @NotBlank(message = "비밀번호를 입력해주세요.")
     String memberPassword;
 
