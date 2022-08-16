@@ -10,11 +10,19 @@ import choi.web.springboot.service.SampleService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.MessageSource;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Locale;
 
 @RequiredArgsConstructor
 @Controller
@@ -155,6 +163,30 @@ public class SampleController {
     @GetMapping("/css")
     public String css() {
         return "sample/css";
+    }
+
+    @GetMapping("/pdf-to-image")
+    public String pdfToImage() {
+        return "sample/pdfToImage";
+    }
+
+    @PostMapping("/pdf-to-image")
+    public ResponseEntity<Resource> pdfToImage(@RequestParam("file") MultipartFile files) {
+        try {
+            String filePath = sampleService.convertPdfToImage(files);
+            Resource resource = new UrlResource("file:" + filePath);
+            if (resource.exists()) {
+                return ResponseEntity.ok()
+                        .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=convert.jpg")
+                        .body(resource);
+            } else {
+                log.debug("PDF File not Exist!");
+                return null;
+            }
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            return null;
+        }
     }
 
 }
