@@ -116,7 +116,7 @@ public class MemberController {
         }
     }
 
-    @GetMapping("/profileDownload")
+    @GetMapping("/profile-download")
     public ResponseEntity<Resource> profileDownload(@RequestParam("memberId") long memberId) throws Exception {
         // 사용자 조회
         Member member = findMember(memberId);
