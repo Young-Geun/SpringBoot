@@ -189,4 +189,9 @@ public class SampleController {
         }
     }
 
+    @GetMapping("/format")
+    public String format() {
+        return "sample/format";
+    }
+
 }
