@@ -17,6 +17,7 @@
                         <input type="text" id="result1" class="form-control">
                     </div>
                     <div class="text-right">
+                        <button type="button" class="btn btn-dark mr-2" th:onclick="resetValue('result1')">초기화</button>
                         <button type="button" class="btn btn-primary" onclick="async();">실행</button>
                     </div>
                 </div>
@@ -31,7 +32,25 @@
                         <input type="text" id="result2" class="form-control">
                     </div>
                     <div class="text-right">
+                        <button type="button" class="btn btn-dark mr-2" th:onclick="resetValue('result2')">초기화</button>
                         <button type="button" class="btn btn-primary" onclick="sync();">실행</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">비동기 실행(Promise 사용)</h4>
+                    <label class="col-sm-6 col-form-label">실행결과</label>
+                    <div class="col-sm-6">
+                        <input type="text" id="result3" class="form-control">
+                    </div>
+                    <div class="text-right">
+                        <button type="button" class="btn btn-dark mr-2" th:onclick="resetValue('result3')">초기화</button>
+                        <button type="button" class="btn btn-primary" onclick="promise();">실행</button>
                     </div>
                 </div>
             </div>
@@ -41,6 +60,7 @@
         var num1
         var num2
         var num3
+
         function async() {
             num1 = 0;
             num2 = 0;
@@ -62,6 +82,20 @@
             execute2(false);
             execute3(false);
             sumFn('result2', num1, num2, num3);
+        }
+
+        function promise() {
+            num1 = 0;
+            num2 = 0;
+            num3 = 0;
+
+            var ajax1 = $.ajax("/sample/execute-1");
+            var ajax2 = $.ajax("/sample/execute-2");
+            var ajax3 = $.ajax("/sample/execute-3");
+
+            $.when(ajax1, ajax2, ajax3).done(function(resp1, resp2, resp3) {
+                sumFn('result3', resp1[0], resp2[0], resp3[0]);
+            });
         }
 
         function execute1(async) {
@@ -108,6 +142,10 @@
 
         function sumFn(tagId, num1, num2, num3) {
             $('#' + tagId).val(num1 + num2 + num3);
+        }
+
+        function resetValue(tagId) {
+            $('#' + tagId).val('');
         }
     </script>
 </div>
