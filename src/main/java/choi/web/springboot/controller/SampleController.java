@@ -194,4 +194,39 @@ public class SampleController {
         return "sample/format";
     }
 
+    @GetMapping("/ajax-sync")
+    public String ajaxSync() {
+        return "sample/ajaxSync";
+    }
+
+    @GetMapping("/execute-1")
+    @ResponseBody
+    public String execute1() {
+        try {
+            Thread.sleep(3000);
+        } catch (Exception e) {
+            // ignore
+        }
+
+        return "1";
+    }
+
+    @GetMapping("/execute-2")
+    @ResponseBody
+    public String execute2() {
+        try {
+            Thread.sleep(2000);
+        } catch (Exception e) {
+            // ignore
+        }
+
+        return "2";
+    }
+
+    @GetMapping("/execute-3")
+    @ResponseBody
+    public String execute3() {
+        return "3";
+    }
+
 }

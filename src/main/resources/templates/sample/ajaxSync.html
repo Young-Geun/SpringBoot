@@ -1,0 +1,115 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout}">
+<body>
+<div class="content-wrapper" layout:fragment="content">
+    <div class="page-header">
+        <h3 class="page-title">동기 / 비동기 테스트</h3>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">비동기 실행</h4>
+                    <label class="col-sm-6 col-form-label">실행결과</label>
+                    <div class="col-sm-6">
+                        <input type="text" id="result1" class="form-control">
+                    </div>
+                    <div class="text-right">
+                        <button type="button" class="btn btn-primary" onclick="async();">실행</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">동기 실행</h4>
+                    <label class="col-sm-6 col-form-label">실행결과</label>
+                    <div class="col-sm-6">
+                        <input type="text" id="result2" class="form-control">
+                    </div>
+                    <div class="text-right">
+                        <button type="button" class="btn btn-primary" onclick="sync();">실행</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var num1
+        var num2
+        var num3
+        function async() {
+            num1 = 0;
+            num2 = 0;
+            num3 = 0;
+
+            execute1(true);
+            execute2(true);
+            execute3(true);
+
+            sumFn('result1', num1, num2, num3);
+        }
+
+        function sync() {
+            num1 = 0;
+            num2 = 0;
+            num3 = 0;
+
+            execute1(false);
+            execute2(false);
+            execute3(false);
+            sumFn('result2', num1, num2, num3);
+        }
+
+        function execute1(async) {
+            $.ajax({
+                type: "GET",
+                url: "/sample/execute-1",
+                async: async,
+                success: function (data) {
+                    num1 = parseInt(data);
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    num1 = -1;
+                }
+            });
+        }
+
+        function execute2(async) {
+            $.ajax({
+                type: "GET",
+                url: "/sample/execute-2",
+                async: async,
+                success: function (data) {
+                    num2 = parseInt(data);
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    num2 = -1;
+                }
+            });
+        }
+
+        function execute3(async) {
+            $.ajax({
+                type: "GET",
+                url: "/sample/execute-3",
+                async: async,
+                success: function (data) {
+                    num3 = parseInt(data);
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    num3 = -1;
+                }
+            });
+        }
+
+        function sumFn(tagId, num1, num2, num3) {
+            $('#' + tagId).val(num1 + num2 + num3);
+        }
+    </script>
+</div>
+</body>
+</html>
