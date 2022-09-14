@@ -60,6 +60,12 @@ app:
   config:
     file-dir: /Users/choi/dev/upload/
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info, metrics, logfile
+
 ---
 
 spring:
@@ -124,6 +130,12 @@ app:
   config:
     file-dir: C:\\dev\\upload\\
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info
+
 ---
 
 spring:
@@ -187,3 +199,9 @@ logging:
 app:
   config:
     file-dir: /home/opc/dev/upload/
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info
