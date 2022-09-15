@@ -1,4 +1,6 @@
 spring:
+  application:
+    name: choi
   profiles: mac
   datasource:
     driver-class-name: oracle.jdbc.OracleDriver
@@ -69,7 +71,12 @@ management:
           - info
           - metrics
           - logfile
-
+          - mappings
+          - prometheus
+  metrics:
+    tags:
+      application: ${spring.application.name}
+    
 ---
 
 spring:
