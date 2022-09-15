@@ -64,7 +64,11 @@ management:
   endpoints:
     web:
       exposure:
-        include: health, info, metrics, logfile
+        include:
+          - health
+          - info
+          - metrics
+          - logfile
 
 ---
 
@@ -134,7 +138,9 @@ management:
   endpoints:
     web:
       exposure:
-        include: health, info
+        include:
+          - health
+          - info
 
 ---
 
@@ -204,4 +210,6 @@ management:
   endpoints:
     web:
       exposure:
-        include: health, info
+        include:
+          - health
+          - info
