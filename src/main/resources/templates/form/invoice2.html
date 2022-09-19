@@ -1,0 +1,202 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>거래 명세서</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <style type="text/css">
+        body {
+            border-top: 10px solid lightgray;
+            border-bottom: 10px solid lightgray;
+            padding: 40px;
+            font-size: 16px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table tr td {
+            padding: 0;
+        }
+
+        table tr td:last-child {
+            text-align: right;
+        }
+
+        .bold {
+            font-weight: bold;
+        }
+
+        .center {
+            text-align: center;
+        }
+
+        .right {
+            text-align: right;
+        }
+
+        .large {
+            font-size: 1.75em;
+        }
+
+        .total {
+            font-weight: bold;
+            color: #fb7578;
+        }
+
+        .invoice-info-container {
+            font-size: 0.875em;
+        }
+
+        .invoice-info-container td {
+            padding: 4px 0;
+        }
+
+        .info {
+            font-size: 1.5em;
+            vertical-align: top;
+        }
+
+        .line-items-container {
+            margin: 70px 0;
+            font-size: 0.875em;
+        }
+
+        .line-items-container th {
+            text-align: left;
+            color: #999;
+            border-bottom: 2px solid #ddd;
+            padding: 10px 0 15px 0;
+            font-size: 0.75em;
+            text-transform: uppercase;
+        }
+
+        .line-items-container th:last-child {
+            text-align: right;
+        }
+
+        .line-items-container td {
+            padding: 15px 0;
+        }
+
+        .line-items-container tbody tr:first-child td {
+            padding-top: 25px;
+        }
+
+        .line-items-container.has-bottom-border tbody tr:last-child td {
+            padding-bottom: 25px;
+            border-bottom: 2px solid #ddd;
+        }
+
+        .line-items-container th.heading-quantity {
+            width: 50px;
+        }
+
+        .line-items-container th.heading-price {
+            text-align: right;
+            width: 100px;
+        }
+
+        .line-items-container th.heading-subtotal {
+            width: 100px;
+        }
+
+        .footer {
+            margin-top: 100px;
+        }
+
+        .footer-corp {
+            font-size: 1.125em;
+        }
+
+        .footer-info {
+            float: right;
+            margin-top: 5px;
+            font-size: 0.75em;
+            color: #ccc;
+        }
+
+        .footer-info span {
+            padding: 0 5px;
+            color: black;
+        }
+
+        .footer-info span:last-child {
+            padding-right: 0;
+        }
+    </style>
+</head>
+<body>
+<table class="invoice-info-container">
+    <tr>
+        <td class="info">
+            거래 명세서
+        </td>
+        <td>
+            고객명/업체명 : 홍길동
+        </td>
+    </tr>
+    <tr>
+        <td>
+            거래일자: <strong>0000.00.00</strong>
+        </td>
+        <td>
+            사업자번호 : 0000
+        </td>
+    </tr>
+    <tr>
+        <td>
+            명세서 번호: <strong>12345</strong>
+        </td>
+        <td>
+            이메일 : 0000@google.com
+        </td>
+    </tr>
+</table>
+<table class="line-items-container">
+    <thead>
+    <tr>
+        <th class="heading-description">상품명</th>
+        <th class="heading-quantity">수량</th>
+        <th class="heading-price">단가</th>
+        <th class="heading-subtotal">합계</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>아이템1</td>
+        <td>2</td>
+        <td class="right">$15.00</td>
+        <td class="bold">$30.00</td>
+    </tr>
+    <tr>
+        <td>아이템2</td>
+        <td>4</td>
+        <td class="right">$10.00</td>
+        <td class="bold">$40.00</td>
+    </tr>
+    <tr>
+        <td>아이템3</td>
+        <td>5</td>
+        <td class="right">$7.00</td>
+        <td class="bold">$35.00</td>
+    </tr>
+    <tr>
+        <td colspan="3" class="center large bold">총 합계</td>
+        <td class="large total">$105.00</td>
+    </tr>
+    </tbody>
+</table>
+<div class="footer">
+    <div class="footer-info">
+        <span>0000@google.com</span> |
+        <span>02-1234-5678</span> |
+        <span>corp.com</span>
+    </div>
+    <div class="footer-corp">
+        <span>0000 CORP.</span>
+    </div>
+</div>
+</body>
+</html>
