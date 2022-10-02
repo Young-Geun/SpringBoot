@@ -1,4 +1,4 @@
--- »ç¿ëÀÚ Å×ÀÌºí
+-- ì‚¬ìš©ì í…Œì´ë¸”
 DROP TABLE member;
 
 CREATE TABLE member
@@ -7,31 +7,32 @@ CREATE TABLE member
     member_email varchar2(100) NOT NULL,
     member_password varchar2(255) NOT NULL,
     member_name varchar2(100) NOT NULL,
+    member_gender varchar2(1) NOT NULL,
+    member_tel varchar2(15) NOT NULL,
+    member_birth varchar2(8) NOT NULL,
     member_profile varchar2(100),
     member_status varchar2(1),
     last_login_date date,
-
     PRIMARY KEY (member_id)
 );
 
 CREATE SEQUENCE MEMBER_SEQ
-INCREMENT BY 1 --Áõ°¨¼ıÀÚ 1
-START WITH 1 --½ÃÀÛ¼ıÀÚ 1
-MINVALUE 1 --ÃÖ¼Ò°ª 1
-MAXVALUE 100000 --ÃÖ´ë°ª 1000
-NOCYCLE --¼øÇÑÇÏÁö¾ÊÀ½
-NOCACHE; --¸Ş¸ğ¸®¿¡ ½ÃÄö½º°ª ¹Ì¸®ÇÒ´ç
+    INCREMENT BY 1 --ì¦ê°ìˆ«ì 1
+    START WITH 1 --ì‹œì‘ìˆ«ì 1
+    MINVALUE 1 --ìµœì†Œê°’ 1
+    MAXVALUE 100000 --ìµœëŒ€ê°’ 1000
+    NOCYCLE --ìˆœí•œí•˜ì§€ì•ŠìŒ
+NOCACHE; --ë©”ëª¨ë¦¬ì— ì‹œí€€ìŠ¤ê°’ ë¯¸ë¦¬í• ë‹¹
 
-INSERT INTO member (member_id, member_email, member_password, member_name, member_status)
-VALUES (MEMBER_SEQ.nextval, 'choi@naver.com', '1', 'ÃÖ¿µ±Ù', 'Y');
-INSERT INTO member (member_id, member_email, member_password, member_name, member_status)
-VALUES (MEMBER_SEQ.nextval, 'test1@naver.com', '1', 'Å×½ºÅÍ1', 'Y');
-
-
+INSERT INTO member (member_id, member_email, member_password, member_name, member_gender, member_tel, member_birth, member_status)
+VALUES (1, 'choi@naver.com', '1', 'ìµœì˜ê·¼', 'M', '010-1234-5678', '19920731', 'Y');
+INSERT INTO member (member_id, member_email, member_password, member_name, member_gender, member_tel, member_birth, member_status)
+VALUES (2, 'tester1@naver.com', '1', 'í…ŒìŠ¤í„°1', 'F', '010-1111-9999', '20021231', 'Y');
 
 
 
--- ¸Ş½ÃÁö
+
+-- ë©”ì‹œì§€
 DROP TABLE messages;
 
 CREATE TABLE messages
@@ -46,11 +47,11 @@ CREATE TABLE messages
 );
 
 CREATE SEQUENCE MESSAGES_SEQ
-INCREMENT BY 1
-START WITH 1
-MINVALUE 1
-MAXVALUE 100000
-NOCYCLE
+    INCREMENT BY 1
+    START WITH 1
+    MINVALUE 1
+    MAXVALUE 100000
+    NOCYCLE
 NOCACHE;
 
 INSERT INTO messages (messages_id, send_id, recv_id, messages, send_date)
@@ -58,13 +59,13 @@ VALUES (MESSAGES_SEQ.nextval, 2, 1, 'hi choi~', SYSDATE);
 INSERT INTO messages (messages_id, send_id, recv_id, messages, send_date)
 VALUES (MESSAGES_SEQ.nextval, 2, 1, 'hello', SYSDATE);
 INSERT INTO messages (messages_id, send_id, recv_id, messages, send_date)
-VALUES (MESSAGES_SEQ.nextval, 1, 2, '¾È³ç Å×½ºÅÍ1!', SYSDATE);
+VALUES (MESSAGES_SEQ.nextval, 1, 2, 'ì•ˆë…• í…ŒìŠ¤í„°1!', SYSDATE);
 
 
 
 
 
--- °Ô½ÃÆÇ
+-- ê²Œì‹œíŒ
 DROP TABLE board;
 
 CREATE TABLE board
@@ -79,17 +80,17 @@ CREATE TABLE board
 );
 
 CREATE SEQUENCE BOARD_SEQ
-INCREMENT BY 1
-START WITH 1
-MINVALUE 1
-MAXVALUE 100000
-NOCYCLE
+    INCREMENT BY 1
+    START WITH 1
+    MINVALUE 1
+    MAXVALUE 100000
+    NOCYCLE
 NOCACHE;
 
 INSERT INTO board (board_id, title, contents, reg_id, reg_date)
-VALUES (BOARD_SEQ.nextval, 'È¨ÆäÀÌÁö ¿ÀÇÂ', '¿ÀÇÂÇß½À´Ï´Ù', 1, SYSDATE);
+VALUES (BOARD_SEQ.nextval, 'í™ˆí˜ì´ì§€ ì˜¤í”ˆ', 'ì˜¤í”ˆí–ˆìŠµë‹ˆë‹¤', 1, SYSDATE);
 INSERT INTO board (board_id, title, contents, reg_id, reg_date)
-VALUES (BOARD_SEQ.nextval, '°øÁö»çÇ×', 'Å×½ºÆ®ÀÔ´Ï´Ù.', 1, SYSDATE);
+VALUES (BOARD_SEQ.nextval, 'ê³µì§€ì‚¬í•­', 'í…ŒìŠ¤íŠ¸ì…ë‹ˆë‹¤.', 1, SYSDATE);
 
 
 
@@ -109,23 +110,23 @@ CREATE TABLE todo
 );
 
 CREATE SEQUENCE TODO_SEQ
-INCREMENT BY 1
-START WITH 1
-MINVALUE 1
-MAXVALUE 100000
-NOCYCLE
+    INCREMENT BY 1
+    START WITH 1
+    MINVALUE 1
+    MAXVALUE 100000
+    NOCYCLE
 NOCACHE;
 
 INSERT INTO todo (todo_id, contents, reg_id, todo_status)
-VALUES (TODO_SEQ.nextval, 'Ä¿¹ÔÇÏ±â', 1, 'N');
+VALUES (TODO_SEQ.nextval, 'ì»¤ë°‹í•˜ê¸°', 1, 'N');
 INSERT INTO todo (todo_id, contents, reg_id, todo_status)
-VALUES (TODO_SEQ.nextval, '¿À·ù °íÄ¡±â', 1, 'N');
+VALUES (TODO_SEQ.nextval, 'ì˜¤ë¥˜ ê³ ì¹˜ê¸°', 1, 'N');
 
 
 
 
 
--- Á¢±ÙÀÌ·Â Å×ÀÌºí
+-- ì ‘ê·¼ì´ë ¥ í…Œì´ë¸”
 DROP TABLE access_history;
 
 CREATE TABLE access_history
@@ -139,18 +140,18 @@ CREATE TABLE access_history
 );
 
 CREATE SEQUENCE access_history_seq
-    INCREMENT BY 1 --Áõ°¨¼ıÀÚ 1
-    START WITH 1 --½ÃÀÛ¼ıÀÚ 1
-    MINVALUE 1 --ÃÖ¼Ò°ª 1
-    MAXVALUE 100000 --ÃÖ´ë°ª 1000
-    NOCYCLE --¼øÇÑÇÏÁö¾ÊÀ½
-NOCACHE; --¸Ş¸ğ¸®¿¡ ½ÃÄö½º°ª ¹Ì¸®ÇÒ´ç
+    INCREMENT BY 1 --ì¦ê°ìˆ«ì 1
+    START WITH 1 --ì‹œì‘ìˆ«ì 1
+    MINVALUE 1 --ìµœì†Œê°’ 1
+    MAXVALUE 100000 --ìµœëŒ€ê°’ 1000
+    NOCYCLE --ìˆœí•œí•˜ì§€ì•ŠìŒ
+NOCACHE; --ë©”ëª¨ë¦¬ì— ì‹œí€€ìŠ¤ê°’ ë¯¸ë¦¬í• ë‹¹
 
 
 
 
 
--- »ùÇÃ Å×ÀÌºí
+-- ìƒ˜í”Œ í…Œì´ë¸”
 DROP TABLE sample;
 
 CREATE TABLE sample
@@ -186,7 +187,7 @@ VALUES (SAMPLE_SEQ.nextval, 10, 10, 10);
 
 
 
--- ¾ÆÀÌÅÛ Å×ÀÌºí
+-- ì•„ì´í…œ í…Œì´ë¸”
 DROP TABLE item;
 
 CREATE TABLE item
@@ -201,7 +202,7 @@ CREATE TABLE item
 
 
 
--- °¡°èºÎ Å×ÀÌºí(MariaDB)
+-- ê°€ê³„ë¶€ í…Œì´ë¸”(MariaDB)
 DROP TABLE ledger;
 
 CREATE TABLE ledger

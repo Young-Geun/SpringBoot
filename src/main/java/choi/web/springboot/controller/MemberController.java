@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
 import java.io.File;
+import java.time.LocalDate;
 import java.util.List;
 
 @Slf4j
@@ -45,12 +46,14 @@ public class MemberController {
     }
 
     @GetMapping("/insert")
-    public String insert(Member member) {
+    public String insert(Member member, Model model) {
+        model.addAttribute("currentYear", LocalDate.now().getYear());
         return "member/insert";
     }
 
     @PostMapping("/insert")
     public String insert(@Validated Member member, BindingResult bindingResult, Model model) {
+        model.addAttribute("currentYear", LocalDate.now().getYear());
         if (bindingResult.hasErrors()) {
             return "member/insert";
         }
@@ -60,7 +63,7 @@ public class MemberController {
             model.addAttribute("result", "등록에 실패하였습니다.");
             return "member/insert";
         } else if (result == -1) {
-            model.addAttribute("result", "이미 가입된 아이디입니다.");
+            model.addAttribute("result", "이미 가입된 아이디(Email)입니다.");
             return "member/insert";
         } else {
             model.addAttribute("result", "가입이 완료되었습니다.");

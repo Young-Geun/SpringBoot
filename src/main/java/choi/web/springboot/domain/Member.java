@@ -1,6 +1,5 @@
 package choi.web.springboot.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
@@ -38,6 +37,29 @@ public class Member {
     // 사용자 이름
     @NotBlank(message = "사용자 이름을 입력해주세요.")
     String memberName;
+
+    // 사용자 생년월일
+    String memberBirth;
+
+    // 사용자 생년월일
+    @Transient
+    String memberBirthYyyy;
+
+    // 사용자 생년월일
+    @Transient
+    String memberBirthMm;
+
+    // 사용자 생년월일
+    @Transient
+    String memberBirthDd;
+
+    // 사용자 성별
+    @NotBlank(message = "사용자 성별을 선택해주세요.")
+    String memberGender;
+
+    // 사용자 전화번호
+    @NotBlank(message = "사용자 전화번호를 입력해주세요.")
+    String memberTel;
 
     // 사용자 프로필 경로
     String memberProfile;

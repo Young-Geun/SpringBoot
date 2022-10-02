@@ -50,6 +50,7 @@ public class MemberService {
         if (memberRepository.findByMemberEmail(member.getMemberEmail()) == null) {
             try {
                 member.setMemberStatus("Y");
+                member.setMemberBirth(member.getMemberBirthYyyy() + member.getMemberBirthMm() + member.getMemberBirthDd());
                 memberRepository.save(member);
             } catch (Exception e) {
                 log.error(e.getMessage());
