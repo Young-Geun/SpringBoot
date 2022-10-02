@@ -74,7 +74,12 @@ public class MemberController {
     @GetMapping("/update")
     public String update(Model model, HttpSession session) {
         Member loginMember = (Member) session.getAttribute("loginMember");
+        String memberBirth = loginMember.getMemberBirth();
+        loginMember.setMemberBirthYyyy(memberBirth.substring(0, 4));
+        loginMember.setMemberBirthMm(memberBirth.substring(4, 6));
+        loginMember.setMemberBirthDd(memberBirth.substring(6, 8));
         model.addAttribute("member", loginMember);
+        model.addAttribute("currentYear", LocalDate.now().getYear());
 
         return "member/update";
     }
@@ -83,6 +88,7 @@ public class MemberController {
     public String update(@Validated Member member, BindingResult bindingResult,
                          @RequestParam("file") MultipartFile files,
                          Model model, HttpSession session) {
+        model.addAttribute("currentYear", LocalDate.now().getYear());
         if (bindingResult.hasErrors()) {
             return "member/update";
         }

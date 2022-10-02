@@ -81,6 +81,7 @@ public class MemberService {
             } else {
                 member.setMemberProfile(loginMember.getMemberProfile());
             }
+            member.setMemberBirth(member.getMemberBirthYyyy() + member.getMemberBirthMm() + member.getMemberBirthDd());
             member.setLastLoginDate(loginMember.getLastLoginDate());
 
             memberRepository.save(member);
