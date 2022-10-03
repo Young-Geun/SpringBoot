@@ -13,7 +13,7 @@
                             <div>Sign Up</div>
                         </h3>
                         <p class="text-danger" th:text="${result}"></p>
-                        <form th:action="@{/member/insert}" th:object="${member}" th:method="post">
+                        <form id="memberInsertForm" th:action="@{/member/insert}" th:object="${member}" th:method="post">
                             <input type="hidden" name="memberStatus" value="Y">
                             <div class="form-group">
                                 <label>Email</label>
@@ -89,9 +89,10 @@
                                         </select>
                                     </div>
                                 </div>
+                                <p class="text-danger" th:if="${#fields.hasErrors('memberBirth')}" th:errors="*{memberBirth}"></p>
                             </div>
                             <div class="pt-4 text-center">
-                                <button type="submit" class="btn btn-primary btn-block enter-btn">등록</button>
+                                <button type="button" onclick="javascript: insert();" class="btn btn-primary btn-block enter-btn">등록</button>
                                 <button type="button" th:onclick="|location.href='@{/}'|" class="btn btn-dark btn-block enter-btn">뒤로</button>
                             </div>
                         </form>
@@ -101,5 +102,11 @@
         </div>
     </div>
 </div>
+<script>
+    function insert() {
+        $('#memberBirth').val($('#memberBirthYyyy').val() + $('#memberBirthMm').val() + $('#memberBirthDd').val());
+        $('#memberInsertForm').submit();
+    }
+</script>
 </body>
 </html>

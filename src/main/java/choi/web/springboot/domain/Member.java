@@ -1,5 +1,6 @@
 package choi.web.springboot.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
@@ -39,18 +40,22 @@ public class Member {
     String memberName;
 
     // 사용자 생년월일
+    @NotBlank(message = "사용자 생년월일을 입력해주세요.")
     String memberBirth;
 
     // 사용자 생년월일
     @Transient
+    @JsonIgnore
     String memberBirthYyyy;
 
     // 사용자 생년월일
     @Transient
+    @JsonIgnore
     String memberBirthMm;
 
     // 사용자 생년월일
     @Transient
+    @JsonIgnore
     String memberBirthDd;
 
     // 사용자 성별

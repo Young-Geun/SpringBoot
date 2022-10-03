@@ -9,7 +9,7 @@
             <div class="card-body">
                 <h4 class="card-title">회원정보 수정</h4>
                 <p class="text-danger" th:text="${result}"></p>
-                <form th:action="@{/member/update}" th:object="${member}" th:method="post" enctype="multipart/form-data">
+                <form id="memberUpdateForm" th:action="@{/member/update}" th:object="${member}" th:method="post" enctype="multipart/form-data">
                     <input th:field="*{memberId}" type="hidden">
                     <input th:field="*{memberStatus}" type="hidden">
                     <div class="form-group">
@@ -72,6 +72,7 @@
                     </div>
                     <div class="form-group">
                         <label>생년월일</label>
+                        <input th:field="*{memberBirth}" type="hidden">
                         <div class="form-group row">
                             <div class="col-sm-4">
                                 <select class="form-control" th:field="*{memberBirthYyyy}">
@@ -101,14 +102,21 @@
                                 </select>
                             </div>
                         </div>
+                        <p class="text-danger" th:if="${#fields.hasErrors('memberBirth')}" th:errors="*{memberBirth}"></p>
                     </div>
                     <div class="pt-4 text-center">
-                        <button type="submit" class="btn btn-primary btn-block enter-btn">수정</button>
+                        <button type="button" class="btn btn-primary btn-block enter-btn" onclick="javascript: update();">수정</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
+    <script>
+        function update() {
+            $('#memberBirth').val($('#memberBirthYyyy').val() + $('#memberBirthMm').val() + $('#memberBirthDd').val());
+            $('#memberUpdateForm').submit();
+        }
+    </script>
 </div>
 </body>
 </html>
