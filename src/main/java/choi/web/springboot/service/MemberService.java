@@ -1,5 +1,6 @@
 package choi.web.springboot.service;
 
+import choi.web.springboot.common.SecurityUtils;
 import choi.web.springboot.config.ConfigProp;
 import choi.web.springboot.domain.Member;
 import choi.web.springboot.repository.MemberRepository;
@@ -18,7 +19,7 @@ import java.util.List;
 public class MemberService {
 
     private final ConfigProp configProp;
-
+    private final SecurityUtils securityUtils;
     private final MemberRepository memberRepository;
 
     public List<Member> findAll() {
@@ -42,13 +43,21 @@ public class MemberService {
     }
 
     public Member findForLogin(String email, String password) {
-        return memberRepository.findByMemberEmailAndMemberPassword(email, password);
+        try {
+            String encPassword = securityUtils.encrypt(password);
+            return memberRepository.findByMemberEmailAndMemberPassword(email, encPassword);
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            return null;
+        }
     }
 
     public int insert(Member member) {
         int result = 1;
         if (memberRepository.findByMemberEmail(member.getMemberEmail()) == null) {
             try {
+
+                member.setMemberPassword(securityUtils.encrypt(member.getMemberPassword()));
                 member.setMemberStatus("Y");
                 memberRepository.save(member);
             } catch (Exception e) {
@@ -80,6 +89,7 @@ public class MemberService {
             } else {
                 member.setMemberProfile(loginMember.getMemberProfile());
             }
+            member.setMemberPassword(securityUtils.encrypt(member.getMemberPassword()));
             member.setLastLoginDate(loginMember.getLastLoginDate());
 
             memberRepository.save(member);
