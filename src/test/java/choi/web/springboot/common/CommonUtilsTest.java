@@ -23,4 +23,9 @@ class CommonUtilsTest {
         assertEquals("1,234.1", commonUtils.numberFormat(1234.10));
     }
 
+    @Test
+    void 메일발송_테스트() {
+        commonUtils.sendMail("younggeunn@naver.com", "test", "hi~");
+    }
+
 }
