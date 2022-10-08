@@ -64,12 +64,17 @@ public class CommonUtils {
 
         mailSender.setHost("smtp.gmail.com");
         mailSender.setUsername("younggeunnn@gmail.com");
+        /*
+            패스워드 발급 방법
+            1. Google 계정 메뉴 접근
+            2. 'Google에 로그인' 영역 > 앱 비밀번호
+            3. 앱 비밀번호 > 앱 선택(Selectbox) > 메일 선택
+         */
         mailSender.setPassword("1234");
         mailSender.setPort(587);
         mailSender.setJavaMailProperties(properties);
 
         mailSender.send(message);
-
     }
 
 }
