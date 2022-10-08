@@ -10,10 +10,11 @@ import org.springframework.test.context.ActiveProfiles;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 
 @SpringBootTest
-@ActiveProfiles(value = "window")
+@ActiveProfiles(value = "mac")
 class MemberControllerTest {
 
     @Autowired
@@ -43,6 +44,18 @@ class MemberControllerTest {
 
         // 결과비교
         assertEquals(7, list.size());
+    }
+
+    @Test
+    void 비밀번호_초기화() throws Exception {
+        // 임시비밀번호 발급
+        String initPassword = memberService.initPassword("enc_test@naver.com");
+
+        // 사용자 조회
+        Member LoginMember = memberService.findForLogin("enc_test@naver.com", initPassword);
+
+        // 결과비교
+        assertNotNull(LoginMember);
     }
 
 }

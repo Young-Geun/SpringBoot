@@ -1,5 +1,6 @@
 package choi.web.springboot.service;
 
+import choi.web.springboot.common.CommonUtils;
 import choi.web.springboot.common.SecurityUtils;
 import choi.web.springboot.config.ConfigProp;
 import choi.web.springboot.domain.Member;
@@ -19,6 +20,7 @@ import java.util.List;
 public class MemberService {
 
     private final ConfigProp configProp;
+    private final CommonUtils commonUtils;
     private final SecurityUtils securityUtils;
     private final MemberRepository memberRepository;
 
@@ -109,6 +111,21 @@ public class MemberService {
     public void updateStatus(Member member, String status) {
         member.setMemberStatus(status);
         memberRepository.save(member);
+    }
+
+    public String initPassword(String memberEmail) throws Exception {
+        String generatedString = "";
+
+        Member findMember = memberRepository.findByMemberEmail(memberEmail);
+        if (findMember != null) {
+            generatedString = commonUtils.generateRandomString(10);
+            findMember.setMemberPassword(securityUtils.encrypt(generatedString));
+            memberRepository.save(findMember);
+
+            commonUtils.sendMail(memberEmail, "임시 비밀번호", "임시 비밀번호 : " + generatedString);
+        }
+
+        return generatedString;
     }
 
 }
