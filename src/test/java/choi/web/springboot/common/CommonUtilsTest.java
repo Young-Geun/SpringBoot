@@ -28,4 +28,13 @@ class CommonUtilsTest {
         commonUtils.sendMail("younggeunn@naver.com", "test", "hi~");
     }
 
+    @Test
+    void 랜덤_문자열_생성() {
+        String randomString = commonUtils.generateRandomString(10);
+        assertEquals(10, randomString.length());
+
+        randomString = commonUtils.generateRandomString(20);
+        assertEquals(20, randomString.length());
+    }
+
 }

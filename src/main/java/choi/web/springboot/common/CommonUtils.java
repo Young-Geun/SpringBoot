@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 import java.text.DecimalFormat;
 import java.util.Properties;
+import java.util.Random;
 
 @Component
 public class CommonUtils {
@@ -75,6 +76,19 @@ public class CommonUtils {
         mailSender.setJavaMailProperties(properties);
 
         mailSender.send(message);
+    }
+
+    /**
+     * N 자릿수의 랜덤 문자열 만들기
+     *
+     * @param length
+     * @return
+     */
+    public String generateRandomString(int length) {
+        return new Random().ints(97, 123)
+                .limit(length)
+                .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
+                .toString();
     }
 
 }
