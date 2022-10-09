@@ -149,6 +149,29 @@ public class MemberController {
         }
     }
 
+    @GetMapping("/find-password")
+    public String findPassword(Model model) {
+        model.addAttribute("member", new Member());
+        return "member/findPassword";
+    }
+
+    @PostMapping("/find-password")
+    public String findPassword(Member member, Model model) {
+        Member findMember = memberService.findByMemberEmailAndMemberName(member.getMemberEmail(), member.getMemberName());
+        if (findMember == null) {
+            model.addAttribute("result", "등록된 계정이 아닙니다.");
+        } else {
+            try {
+                String initPassword = memberService.initPassword(member.getMemberEmail());
+                model.addAttribute("result", "".equals(initPassword) ? "임시 비밀번호 발급 실패" : "임시 비밀번호가 발급되었습니다. 이메일을 확인해주세요.");
+            } catch (Exception e) {
+                model.addAttribute("result", "오류가 발생하였습니다.");
+            }
+        }
+
+        return "member/findPassword";
+    }
+
     public Member findMember(long memberId) {
         return memberService.findByMemberId(memberId);
     }

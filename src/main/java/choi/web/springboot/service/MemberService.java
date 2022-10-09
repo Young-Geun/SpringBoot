@@ -44,6 +44,10 @@ public class MemberService {
         return memberRepository.findByMemberId(id);
     }
 
+    public Member findByMemberEmailAndMemberName(String email, String name) {
+        return memberRepository.findByMemberEmailAndMemberName(email, name);
+    }
+
     public Member findForLogin(String email, String password) {
         try {
             String encPassword = securityUtils.encrypt(password);
