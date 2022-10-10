@@ -2,6 +2,7 @@
 package choi.web.springboot.controller;
 
 import choi.web.springboot.aop.annotation.Retry;
+import choi.web.springboot.config.ConfigProp;
 import choi.web.springboot.domain.Member;
 import choi.web.springboot.domain.Sample;
 import choi.web.springboot.domain.Test;
@@ -9,6 +10,7 @@ import choi.web.springboot.service.MybatisService;
 import choi.web.springboot.service.SampleService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.context.MessageSource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -19,6 +21,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -30,6 +35,7 @@ import java.util.Locale;
 @Slf4j
 public class SampleController {
 
+    private final ConfigProp configProp;
     private final MessageSource messageSource;
     private final MybatisService mybatisService;
     private final SampleService sampleService;
@@ -227,6 +233,54 @@ public class SampleController {
     @ResponseBody
     public String execute3() {
         return "3";
+    }
+
+    @GetMapping("/img-to-base64")
+    public String imgToBase64(Model model) {
+        String fileDirPath = configProp.getFileDir();
+        String imgPath = fileDirPath + "sample" + File.separator + "test_img.png";
+        String base64Str = "";
+
+        FileInputStream inputStream = null;
+        ByteArrayOutputStream byteOutStream = null;
+
+        try {
+            File file = new File(imgPath);
+
+            if (file.exists()) {
+                inputStream = new FileInputStream(file);
+                byteOutStream = new ByteArrayOutputStream();
+
+                int len = 0;
+                byte[] buf = new byte[1024];
+                while ((len = inputStream.read(buf)) != -1) {
+                    byteOutStream.write(buf, 0, len);
+                }
+
+                byte[] fileArray = byteOutStream.toByteArray();
+                base64Str = new String(Base64.encodeBase64(fileArray));
+                base64Str = "data:image/png;base64, " + base64Str;
+            }
+        } catch (Exception e) {
+            log.error("imgToBase64 Err", e);
+        } finally {
+            if (inputStream != null) {
+                try {
+                    inputStream.close();
+                } catch (Exception e) {
+                }
+            }
+            if (byteOutStream != null) {
+                try {
+                    byteOutStream.close();
+                } catch (Exception e) {
+                }
+            }
+
+        }
+        model.addAttribute("base64Str", base64Str);
+
+        return "sample/imgToBase64";
     }
 
 }
