@@ -64,7 +64,7 @@ app:
 
 management:
   server:
-    port: 8888
+    port: 8084
   endpoints:
     web:
       exposure:
@@ -145,7 +145,7 @@ app:
 
 management:
   server:
-    port: 8888
+    port: 8084
   endpoints:
     web:
       exposure:
@@ -219,7 +219,7 @@ app:
 
 management:
   server:
-    port: 8888
+    port: 8084
   endpoints:
     web:
       exposure:
