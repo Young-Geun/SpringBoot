@@ -63,6 +63,8 @@ app:
     file-dir: /Users/choi/dev/upload/
 
 management:
+  server:
+    port: 8888
   endpoints:
     web:
       exposure:
@@ -76,7 +78,7 @@ management:
   metrics:
     tags:
       application: ${spring.application.name}
-    
+
 ---
 
 spring:
@@ -142,6 +144,8 @@ app:
     file-dir: C:\\dev\\upload\\
 
 management:
+  server:
+    port: 8888
   endpoints:
     web:
       exposure:
@@ -214,6 +218,8 @@ app:
     file-dir: /home/opc/dev/upload/
 
 management:
+  server:
+    port: 8888
   endpoints:
     web:
       exposure:
