@@ -113,8 +113,37 @@
     </div>
     <script>
         function update() {
-            $('#memberBirth').val($('#memberBirthYyyy').val() + $('#memberBirthMm').val() + $('#memberBirthDd').val());
-            $('#memberUpdateForm').submit();
+            if (isValid()) {
+                $('#memberBirth').val($('#memberBirthYyyy').val() + $('#memberBirthMm').val() + $('#memberBirthDd').val());
+                $('#memberUpdateForm').submit();
+            }
+        }
+
+        function isValid() {
+            var telRegExp = /^01(?:0|1|[6-9])-(?:\d{3}|\d{4})-\d{4}$/;
+
+            if ($('#memberPassword').val() == '') {
+                alert('패스워드를 입력해주세요.');
+                $('#memberPassword').focus();
+                return false;
+            } else if ($('#memberName').val() == '') {
+                alert('이름을 입력해주세요.');
+                $('#memberName').focus();
+                return false;
+            } else if ($('#memberTel').val() == '') {
+                alert('전화번호를 입력해주세요.');
+                $('#memberTel').focus();
+                return false;
+            } else if (!telRegExp.test($('#memberTel').val())) {
+                alert('전화번호 형식이 올바르지 않습니다.');
+                $('#memberTel').focus();
+                return false;
+            } else if ($('input[name="memberGender"]:checked').val() === undefined) {
+                alert('성별을 선택해주세요.');
+                return false;
+            }
+
+            return true;
         }
     </script>
 </div>

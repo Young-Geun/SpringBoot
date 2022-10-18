@@ -32,7 +32,7 @@
                             </div>
                             <div class="form-group">
                                 <label>전화번호</label>
-                                <input th:field="*{memberTel}" type="text" class="form-control p_input">
+                                <input th:field="*{memberTel}" type="text" class="form-control p_input" placeholder="-를 포함해서 입력해주세요.">
                                 <p class="text-danger" th:if="${#fields.hasErrors('memberTel')}" th:errors="*{memberTel}"></p>
                             </div>
                             <div class="form-group">
@@ -104,8 +104,46 @@
 </div>
 <script>
     function insert() {
-        $('#memberBirth').val($('#memberBirthYyyy').val() + $('#memberBirthMm').val() + $('#memberBirthDd').val());
-        $('#memberInsertForm').submit();
+        if (isValid()) {
+            $('#memberBirth').val($('#memberBirthYyyy').val() + $('#memberBirthMm').val() + $('#memberBirthDd').val());
+            $('#memberInsertForm').submit();
+        }
+    }
+
+    function isValid() {
+        var emailRegExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+        var telRegExp = /^01(?:0|1|[6-9])-(?:\d{3}|\d{4})-\d{4}$/;
+
+        if ($('#memberEmail').val() == '') {
+            alert('Email을 입력해주세요.');
+            $('#memberEmail').focus();
+            return false;
+        } else if (!emailRegExp.test($('#memberEmail').val())) {
+            alert('Email 형식이 올바르지 않습니다.');
+            $('#memberEmail').focus();
+            return false;
+        } else if ($('#memberPassword').val() == '') {
+            alert('패스워드를 입력해주세요.');
+            $('#memberPassword').focus();
+            return false;
+        } else if ($('#memberName').val() == '') {
+            alert('이름을 입력해주세요.');
+            $('#memberName').focus();
+            return false;
+        } else if ($('#memberTel').val() == '') {
+            alert('전화번호를 입력해주세요.');
+            $('#memberTel').focus();
+            return false;
+        } else if (!telRegExp.test($('#memberTel').val())) {
+            alert('전화번호 형식이 올바르지 않습니다.');
+            $('#memberTel').focus();
+            return false;
+        } else if ($('input[name="memberGender"]:checked').val() === undefined) {
+            alert('성별을 선택해주세요.');
+            return false;
+        }
+
+        return true;
     }
 </script>
 </body>
