@@ -89,7 +89,7 @@ public class ApiMemberController {
             if (bindingResult.hasErrors()) {
                 log.error("member save Error - {}", bindingResult.getFieldError());
                 resultCode = SystemCode.FAIL_INVALID_VALUE.getCode();
-                resultMsg = SystemCode.FAIL_INVALID_VALUE.getMessage();
+                resultMsg = bindingResult.getFieldError().getDefaultMessage();
             } else {
                 int result = memberService.insert(member);
                 if (result == 0) {
@@ -125,7 +125,7 @@ public class ApiMemberController {
             if (bindingResult.hasErrors()) {
                 log.error("member update Error - {}", bindingResult.getFieldError());
                 resultCode = SystemCode.FAIL_INVALID_VALUE.getCode();
-                resultMsg = SystemCode.FAIL_INVALID_VALUE.getMessage();
+                resultMsg = bindingResult.getFieldError().getDefaultMessage();
             } else {
                 Member findMember = memberService.findByMemberId(memberId);
                 if (findMember == null) {

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
@@ -74,5 +75,14 @@ public class Member {
 
     // 마지막 로그인
     LocalDateTime lastLoginDate;
+
+    @AssertTrue(message = "사용 불가능한 이름입니다.")
+    boolean isAvailableName() {
+        if ("choi".equalsIgnoreCase(memberName)) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 
 }
