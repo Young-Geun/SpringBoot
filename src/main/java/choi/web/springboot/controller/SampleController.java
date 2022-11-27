@@ -18,6 +18,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -281,6 +283,20 @@ public class SampleController {
         model.addAttribute("base64Str", base64Str);
 
         return "sample/imgToBase64";
+    }
+
+    @GetMapping("/validation-annotation")
+    public String validationTest(Sample sample) {
+        return "sample/validation";
+    }
+
+    @PostMapping("/validation-annotation")
+    public String validationTest(@Validated Sample sample, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            return "sample/validation";
+        }
+
+        return "sample/validation";
     }
 
 }
