@@ -49,6 +49,7 @@ dependencies {
     implementation "com.querydsl:querydsl-jpa:${queryDslVersion}"
     implementation "com.querydsl:querydsl-apt:${queryDslVersion}"
     implementation 'org.apache.pdfbox:pdfbox:2.0.20'
+    implementation 'com.github.vladimir-bukhtoyarov:bucket4j-core:7.1.0'
     runtimeOnly 'com.oracle.database.jdbc:ojdbc8'
     runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
