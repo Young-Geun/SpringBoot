@@ -16,15 +16,17 @@ public class BucketService {
 
     private final Map<String, Bucket> cache = new ConcurrentHashMap<>();
 
+    // 요청자 IP 추출
     private String getHost(HttpServletRequest httpServletRequest) {
         return httpServletRequest.getHeader("Host");
     }
 
-    /* ---------------------- 접속 제한! ----------------- */
+    // 버킷 가져오기
     public Bucket resolveBucket(HttpServletRequest httpServletRequest) {
         return cache.computeIfAbsent(getHost(httpServletRequest), this::newBucket);
     }
 
+    // 버킷 생성
     private Bucket newBucket(String apiKey) {
         return Bucket4j.builder()
                 // 버킷의 총 크기 = 5, 한 번에 충전되는 토큰 수  = 1, 10초마다 충전

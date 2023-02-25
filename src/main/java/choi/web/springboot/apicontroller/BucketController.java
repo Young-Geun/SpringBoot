@@ -24,9 +24,9 @@ public class BucketController {
         log.info("접근 IP = {}", request.getRemoteAddr());
 
         if (bucket.tryConsume(1)) { // 1개 사용 요청
-            return ResponseEntity.ok("잔여토큰 : " + bucket.getAvailableTokens());
+            return ResponseEntity.ok("[정상응답] 잔여토큰 : " + bucket.getAvailableTokens());
         } else {
-            return ResponseEntity.status(HttpStatus.TOO_MANY_REQUESTS).body("트래픽 초과");
+            return ResponseEntity.status(HttpStatus.TOO_MANY_REQUESTS).body("[비정상응답] 트래픽 초과");
         }
     }
 
